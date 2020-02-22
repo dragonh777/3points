@@ -871,7 +871,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 561564838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -590, y: -183, z: 0}
+  m_LocalPosition: {x: -434, y: -130, z: 0}
   m_LocalScale: {x: 350, y: 350, z: 72}
   m_Children:
   - {fileID: 1745817271}
@@ -940,7 +940,7 @@ MonoBehaviour:
   moveSpeed: 6
   ShortjumpPower: 10
   jumpPower: 14
-  checkRaius: 0.65
+  checkRaius: 0.3
   BulletPos: 1
   healthBarSlider: {fileID: 1250971768}
   jumpMax: 2
@@ -1002,7 +1002,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15.32, y: 0}
+  m_AnchoredPosition: {x: 15.320053, y: 0}
   m_SizeDelta: {x: -30.63, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1003318399
@@ -1599,6 +1599,7 @@ GameObject:
   - component: {fileID: 1142216526}
   - component: {fileID: 1142216525}
   - component: {fileID: 1142216524}
+  - component: {fileID: 1142216527}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1669,8 +1670,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1537795597}
-        m_MethodName: Skill1Active
+      - m_Target: {fileID: 1142216527}
+        m_MethodName: StartCoolTime
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1693,19 +1694,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.47058824}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78039217}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillClockwise: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1142216526
@@ -1716,6 +1717,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142216522}
   m_CullTransparentMesh: 0
+--- !u!114 &1142216527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142216522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22d1dbcce973144aa16a749e8e9ae0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletSpeed: 0
+  Skill: {fileID: 3131112024783455623, guid: 27c3c648b1af5df4aa17d9123916fceb, type: 3}
+  image: {fileID: 1142216525}
+  skillButton: {fileID: 1142216524}
+  coolTime: 10
+  isClicked: 0
 --- !u!1 &1150039223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1741,7 +1760,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150039223}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1766,13 +1785,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 3760709440285359671, guid: f526b670174bb054f90da2a0fbeced3e,
+    type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1944,8 +1964,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -529, y: 241}
-  m_SizeDelta: {x: 160, y: 46.88}
+  m_AnchoredPosition: {x: -528.8, y: 241}
+  m_SizeDelta: {x: 159.6, y: 46.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1250971768
 MonoBehaviour:
@@ -2637,13 +2657,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eBulletPosX: 8.5
   eBulletPosY: 4
-  eSkillPosX: 6
-  eSkillPosY: 0
   bulletDelay: 0.3
+  coolTime: 3
   healthBarSlider: {fileID: 402992357}
   EHpMax: 1000
   Bullet: {fileID: 8243151903053131115, guid: 9038fdcbb20b74b43bfc543940e98bf4, type: 3}
-  Skill: {fileID: 3131112024783455623, guid: 27c3c648b1af5df4aa17d9123916fceb, type: 3}
 --- !u!1 &1590325322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2774,7 +2792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1650975422
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2863,7 +2881,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
+  m_AnchoredPosition: {x: -4.993164, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1745817270
@@ -3156,8 +3174,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_AnchoredPosition: {x: 11.18, y: 0}
+  m_SizeDelta: {x: 2.4, y: -2.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1912509825
 MonoBehaviour:
@@ -3166,13 +3184,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912509823}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
