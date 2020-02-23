@@ -11,6 +11,8 @@ public class PlayerMove : MonoBehaviour
     public float checkRaius;
     public float BulletPos;
     public Slider healthBarSlider;
+    public GameObject bossPanel;
+    public GameObject startPanel;
 
     public int jumpMax;
     public int HpMax;
@@ -94,6 +96,11 @@ public class PlayerMove : MonoBehaviour
         {
             healthBarSlider.value--;
             Debug.Log("Hit");
+        }
+        if (collision.gameObject.tag == "Portal")
+        {
+            startPanel.gameObject.SetActive(false);
+            bossPanel.gameObject.SetActive(true);
         }
     }
 
