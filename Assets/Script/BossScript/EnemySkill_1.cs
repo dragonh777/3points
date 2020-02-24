@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class EnemySkill_1 : MonoBehaviour
 {
-    public float BulletSpeed;
+    public float bulletSpeed = 30f;
 
-    public GameObject Skill;
+    public GameObject skill;
     public Image image;
     public Button skillButton;
     public float coolTime = 10.0f;
-    public bool isClicked = false;
+    public static bool isClicked = false;
     float leftTime = 10.0f;
     float speed = 5.0f;
 
@@ -23,7 +23,7 @@ public class EnemySkill_1 : MonoBehaviour
     void Start()
     {
         transform = GetComponent<Transform>();
-        moveAmount = BulletSpeed * Vector3.left * Time.deltaTime;
+        moveAmount = bulletSpeed * Vector3.left * Time.deltaTime;
     }
 
     // Update is called once per frame
@@ -31,7 +31,7 @@ public class EnemySkill_1 : MonoBehaviour
     {
         transform.Translate(moveAmount);
 
-        if (isClicked)
+        if (isClicked && EnemyMove.Hp > 0)
         {
             if(leftTime > 0)
             {
@@ -52,11 +52,14 @@ public class EnemySkill_1 : MonoBehaviour
 
     public void StartCoolTime()
     {
-        Instantiate(Skill, new Vector3(6, 0, 0), Quaternion.identity);
-        leftTime = coolTime;
-        isClicked = true;
-        if (skillButton)
-            skillButton.enabled = false;
+        if (EnemyMove.Hp > 0)
+        {
+            Instantiate(skill, new Vector3(6, 0, 0), Quaternion.identity);
+            leftTime = coolTime;
+            isClicked = true;
+            if (skillButton)
+                skillButton.enabled = false;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)

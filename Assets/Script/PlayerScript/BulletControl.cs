@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class BulletControl : MonoBehaviour
 {
-    public float BulletSpeed;
-    public int BulletDamage;
+    public float bulletSpeed = 30f;
+    public int bulletDamage = 35;
 
     public static int bDamage;
 
@@ -17,14 +17,14 @@ public class BulletControl : MonoBehaviour
     void Start()
     {
         transform = GetComponent<Transform>();
-        bDamage = BulletDamage;
-        if (PlayerMove.Pleft)
+        bDamage = bulletDamage;
+        if (PlayerMove.pLeft)
         {
-            moveAmount = BulletSpeed * Vector3.left * Time.deltaTime;
+            moveAmount = bulletSpeed * Vector3.left * Time.deltaTime;
         }
-        else if (!PlayerMove.Pleft)
+        else if (!PlayerMove.pLeft)
         {
-            moveAmount = BulletSpeed * Vector3.right * Time.deltaTime;
+            moveAmount = bulletSpeed * Vector3.right * Time.deltaTime;
         }
 
     }

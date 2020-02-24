@@ -18,8 +18,8 @@ public class EnemyMove : MonoBehaviour
 
     public static int Hp;
 
-    private float BulletP;
-    private float Bspeed;
+    private float bulletP;
+    private float bSpeed;
 
     private float TimeLeft;
     private float nextTime = 0.0f;
@@ -27,15 +27,15 @@ public class EnemyMove : MonoBehaviour
     void Start()
     {
         TimeLeft = bulletDelay;
-        BulletP = eBulletPosX;
+        bulletP = eBulletPosX;
         Hp = EHpMax;
     }
 
     // Update is called once per frame
     void BulletLauncher ()
     {
-        Bspeed = Random.Range(-eBulletPosY, eBulletPosY);
-        Instantiate(Bullet, new Vector3(BulletP, Bspeed, 0), Quaternion.identity);
+        bSpeed = Random.Range(-eBulletPosY, eBulletPosY);
+        Instantiate(Bullet, new Vector3(bulletP, bSpeed, 0), Quaternion.identity);
     }
     void Update()
     {
@@ -47,6 +47,7 @@ public class EnemyMove : MonoBehaviour
         if (Hp <= 0)
         {
             Destroy(gameObject);
+            EnemySkill_1.isClicked = false;
         }
     }
     void OnCollisionEnter2D(Collision2D collision)

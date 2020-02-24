@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public float BulletSpeed;
+    public float bulletSpeed = 12f;
 
     private Transform transform;
     private float speed;
@@ -16,7 +16,7 @@ public class EnemyBullet : MonoBehaviour
     void Start()
     {
         transform = GetComponent<Transform>();
-        speed = Random.Range(1, BulletSpeed);
+        speed = Random.Range(1, bulletSpeed);
         moveAmount = speed * Vector3.left * Time.deltaTime;
     }
 

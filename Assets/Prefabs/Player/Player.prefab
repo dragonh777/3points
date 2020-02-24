@@ -100,15 +100,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
-  ShortjumpPower: 10
+  shortJumpPower: 10
   jumpPower: 14
   checkRaius: 0.3
-  BulletPos: 1
-  healthBarSlider: {fileID: 0}
   jumpMax: 2
-  HpMax: 3
-  Bullet: {fileID: 5102500943164983952, guid: 5acf002641611fb47b9666e242b4806a, type: 3}
   pos: {fileID: 5715384350126465101}
+  bullet: {fileID: 5102500943164983952, guid: 5acf002641611fb47b9666e242b4806a, type: 3}
+  bulletPos: 1
+  healthBarSlider: {fileID: 0}
+  hpMax: 3
+  bossPanel: {fileID: 0}
+  startPanel: {fileID: 0}
   isLayer:
     serializedVersion: 2
     m_Bits: 256
