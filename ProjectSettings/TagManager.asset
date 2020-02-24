@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Bullet
   - Portal
+  - RightWall
+  - LeftWall
   layers:
   - Default
   - TransparentFX
@@ -24,7 +26,7 @@ TagManager:
   - EnemyBullet
   - Enemy
   - Player
-  - Portal
+  - Hill
   - 
   - 
   - 

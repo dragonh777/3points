@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
 {
     //Move변수
     public float moveSpeed = 6f;
+    public float forceGravity = 1f;
     public static bool pLeft;
 
     //Jump변수
@@ -18,6 +19,8 @@ public class PlayerMove : MonoBehaviour
 
     private int jumpCnt;
     private float jumpTimeCounter;
+
+    private bool isHill;
     private bool isGround;
 
     //Skill변수
@@ -30,11 +33,13 @@ public class PlayerMove : MonoBehaviour
     public static int Hp;
     public int hpMax = 3;
 
-    public GameObject bossPanel;
-    public GameObject startPanel;
-    public LayerMask isLayer;
+    public GameObject currentPanel;
+    public GameObject nextPanel;
+    public LayerMask isFloor;
+    public LayerMask Hill;
 
-    Rigidbody2D rigid;
+    private Rigidbody2D rigid;
+    RaycastHit2D Hit;
     SpriteRenderer renderer;
     Animator anim;
 
@@ -71,10 +76,10 @@ public class PlayerMove : MonoBehaviour
             healthBarSlider.value--;
             Debug.Log("Hit");
         }
-        if (collision.gameObject.tag == "Portal")
+        if (collision.gameObject.tag == "RightWall")
         {
-            startPanel.gameObject.SetActive(false);
-            bossPanel.gameObject.SetActive(true);
+            currentPanel.gameObject.SetActive(false);
+            nextPanel.gameObject.SetActive(true);
         }
     }
 
@@ -110,7 +115,9 @@ public class PlayerMove : MonoBehaviour
 
     void Jump()
     {
-        isGround = Physics2D.OverlapCircle(pos.position, checkRaius, isLayer);
+        isGround = Physics2D.OverlapCircle(pos.position, checkRaius, isFloor);
+        //isGround = Physics2D.Raycast(transform.position, Vector3.down, 0.1f);
+        //Debug.DrawRay(transform.position, Vector3.down, Color.red, 0.1f);
         Vector2 jumpVelocity = new Vector2(0, jumpPower);
         if (!isGround)
         {

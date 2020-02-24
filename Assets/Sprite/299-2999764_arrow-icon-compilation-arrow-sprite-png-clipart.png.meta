@@ -1,0 +1,367 @@
+fileFormatVersion: 2
+guid: c292716dbd9c2014fbf857adda7817ae
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8386883286456591501
+    second: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_0
+  - first:
+      213: -5285732062186407785
+    second: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_1
+  - first:
+      213: -128777762128191089
+    second: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_2
+  - first:
+      213: 2776037427604741251
+    second: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_3
+  - first:
+      213: 8358795185665892717
+    second: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_4
+  - first:
+      213: 7407232514431234570
+    second: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_5
+  - first:
+      213: -6276258754113698545
+    second: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_6
+  - first:
+      213: 8785810515371226777
+    second: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_7
+  - first:
+      213: -4177578351919840704
+    second: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_8
+  - first:
+      213: 5731913915017871901
+    second: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_9
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 376
+        width: 120
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37b181a261ecb9b80800000000000000
+      internalID: -8386883286456591501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_1
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 380
+        width: 128
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7987c77c1be45a6b0800000000000000
+      internalID: -5285732062186407785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_2
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 376
+        width: 120
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f812161ce4d763ef0800000000000000
+      internalID: -128777762128191089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_3
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 192
+        width: 128
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38cd1931557768620800000000000000
+      internalID: 2776037427604741251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_4
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 190
+        width: 128
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d616cdf3fe7600470800000000000000
+      internalID: 8358795185665892717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_5
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 188
+        width: 124
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a02b5670ab6cbc660800000000000000
+      internalID: 7407232514431234570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_6
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 32
+        width: 43
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f050e9a8aef36e8a0800000000000000
+      internalID: -6276258754113698545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_7
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 0
+        width: 86
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 996f7905d187de970800000000000000
+      internalID: 8785810515371226777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_8
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 2
+        width: 128
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 042c4786f924606c0800000000000000
+      internalID: -4177578351919840704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 299-2999764_arrow-icon-compilation-arrow-sprite-png-clipart_9
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 0
+        width: 124
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1242c33659db8f40800000000000000
+      internalID: 5731913915017871901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

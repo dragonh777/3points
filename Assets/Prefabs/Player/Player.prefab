@@ -109,11 +109,14 @@ MonoBehaviour:
   bulletPos: 1
   healthBarSlider: {fileID: 0}
   hpMax: 3
-  bossPanel: {fileID: 0}
-  startPanel: {fileID: 0}
-  isLayer:
+  currentPanel: {fileID: 0}
+  nextPanel: {fileID: 0}
+  isFloor:
     serializedVersion: 2
     m_Bits: 256
+  Hill:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!61 &5715384348940345936
 BoxCollider2D:
   m_ObjectHideFlags: 0
