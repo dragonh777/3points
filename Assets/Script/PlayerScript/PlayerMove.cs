@@ -16,6 +16,9 @@ public class PlayerMove : MonoBehaviour
     public float checkRaius = 0.3f;
     public int jumpMax = 2;
     public Transform pos;
+    int layerMask;
+    private float rayAmount = 0.4f;
+    public float rayLength = 0.1f;
 
     private int jumpCnt;
     private float jumpTimeCounter;
@@ -46,6 +49,7 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        layerMask = 1 << LayerMask.NameToLayer("Floor");
         rigid = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -115,12 +119,13 @@ public class PlayerMove : MonoBehaviour
 
     void Jump()
     {
-        isGround = Physics2D.OverlapCircle(pos.position, checkRaius, isFloor);
-        //isGround = Physics2D.Raycast(transform.position, Vector3.down, 0.1f);
-        //Debug.DrawRay(transform.position, Vector3.down, Color.red, 0.1f);
+        //isGround = Physics2D.OverlapCircle(pos.position, checkRaius, isFloor);
+        Hit = Physics2D.Raycast(transform.position - new Vector3(0, rayAmount, 0), Vector3.down, rayLength);
+        Debug.DrawRay(transform.position - new Vector3(0, rayAmount, 0), Vector3.down * rayLength, Color.red, 0.1f);
         Vector2 jumpVelocity = new Vector2(0, jumpPower);
-        if (!isGround)
+        if (Hit.collider == null)
         {
+            Debug.Log("aa");
             anim.SetBool("isJump", true);
         }
         if (Input.GetKeyDown(KeyCode.C))
@@ -128,7 +133,7 @@ public class PlayerMove : MonoBehaviour
             jumpCnt--;
             if (jumpCnt > 0)
             {
-                if (!isGround)
+                if (Hit.collider == null)
                 {
                     jumpCnt--;
                     rigid.velocity = Vector2.zero;
@@ -138,10 +143,11 @@ public class PlayerMove : MonoBehaviour
                 rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
             }
         }
-        if (isGround)
+        if (Hit.collider != null)
         {
             jumpCnt = jumpMax;
             anim.SetBool("isJump", false);
+            Debug.Log("ss");
         }
     }
 }
