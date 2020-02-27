@@ -699,6 +699,16 @@ PrefabInstance:
       propertyPath: nextPanel
       value: 
       objectReference: {fileID: 1097458686}
+    - target: {fileID: 5715384348940345937, guid: 4c9a5c0acd9e7ff4fa3a6e4830b825dc,
+        type: 3}
+      propertyPath: rayParameter
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715384348940345937, guid: 4c9a5c0acd9e7ff4fa3a6e4830b825dc,
+        type: 3}
+      propertyPath: rayParameter2
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 5715384348940345938, guid: 4c9a5c0acd9e7ff4fa3a6e4830b825dc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -737,7 +747,7 @@ PrefabInstance:
     - target: {fileID: 5715384348940345938, guid: 4c9a5c0acd9e7ff4fa3a6e4830b825dc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5715384348940345938, guid: 4c9a5c0acd9e7ff4fa3a6e4830b825dc,
         type: 3}
@@ -753,6 +763,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715384348940345938, guid: 4c9a5c0acd9e7ff4fa3a6e4830b825dc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 5715384348940345948, guid: 4c9a5c0acd9e7ff4fa3a6e4830b825dc,
         type: 3}
@@ -2175,7 +2190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 0
-  skill: {fileID: 3131112024783455623, guid: 27c3c648b1af5df4aa17d9123916fceb, type: 3}
+  skill: {fileID: 0}
   image: {fileID: 1142216525}
   skillButton: {fileID: 1142216524}
   coolTime: 10
@@ -2949,12 +2964,12 @@ PrefabInstance:
     - target: {fileID: 2379688272295368039, guid: 2e33d2d7262895546b37d5bc8cd59722,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 420
+      value: 424.4
       objectReference: {fileID: 0}
     - target: {fileID: 2379688272295368039, guid: 2e33d2d7262895546b37d5bc8cd59722,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -190
+      value: -195.9
       objectReference: {fileID: 0}
     - target: {fileID: 2379688272295368039, guid: 2e33d2d7262895546b37d5bc8cd59722,
         type: 3}
@@ -3547,7 +3562,7 @@ PrefabInstance:
     - target: {fileID: 8776181033101281485, guid: 5a51fc4922da07c4fbbb7cee683fe558,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -255
+      value: -258.2
       objectReference: {fileID: 0}
     - target: {fileID: 8776181033101281485, guid: 5a51fc4922da07c4fbbb7cee683fe558,
         type: 3}

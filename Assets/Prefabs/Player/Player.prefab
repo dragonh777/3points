@@ -106,8 +106,11 @@ MonoBehaviour:
   checkRaius: 0.3
   jumpMax: 2
   pos: {fileID: 5715384350126465101}
+  rayAmount2: 0.35
   rayLength: 0.1
-  bullet: {fileID: 5102500943164983952, guid: 5acf002641611fb47b9666e242b4806a, type: 3}
+  rayParameter: 0.35
+  rayParameter2: 0.3
+  bullet: {fileID: 0}
   bulletPos: 1
   healthBarSlider: {fileID: 0}
   hpMax: 3
@@ -115,10 +118,10 @@ MonoBehaviour:
   nextPanel: {fileID: 0}
   isFloor:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   Hill:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 0
 --- !u!61 &5715384348940345936
 BoxCollider2D:
   m_ObjectHideFlags: 0

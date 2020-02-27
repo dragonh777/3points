@@ -18,13 +18,12 @@ public class PlayerMove : MonoBehaviour
     public Transform pos;
     int layerMask;
     private float rayAmount = 0.4f;
+    public float rayAmount2 = 0.3f;
     public float rayLength = 0.1f;
+    public float rayParameter = 0.3f;
+    public float rayParameter2 = 0.3f;
 
     private int jumpCnt;
-    private float jumpTimeCounter;
-
-    private bool isHill;
-    private bool isGround;
 
     //Skill변수
     public GameObject bullet;
@@ -42,7 +41,7 @@ public class PlayerMove : MonoBehaviour
     public LayerMask Hill;
 
     private Rigidbody2D rigid;
-    RaycastHit2D Hit;
+    RaycastHit2D HitL, HitR, fHitL, fHitR;
     SpriteRenderer renderer;
     Animator anim;
 
@@ -89,6 +88,14 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
+        fHitL = Physics2D.Raycast(transform.position - new Vector3(rayParameter2, rayAmount2, 0), Vector3.left, rayLength);
+        fHitR = Physics2D.Raycast(transform.position - new Vector3(-rayParameter2, rayAmount2, 0), Vector3.right, rayLength);
+
+        Debug.DrawRay(transform.position - new Vector3(rayParameter2, rayAmount2, 0), Vector3.left * rayLength, Color.red, 0.1f);
+        Debug.DrawRay(transform.position - new Vector3(-rayParameter2, rayAmount2, 0), Vector3.right * rayLength, Color.red, 0.1f);
+
+        float moves = Input.GetAxis("Horizontal");
+
         Vector3 moveVelocity = Vector3.zero;
 
         if (Input.GetAxisRaw("Horizontal") < 0)
@@ -113,17 +120,25 @@ public class PlayerMove : MonoBehaviour
         {
             anim.SetBool("isWalk", false);
         }
+        if (fHitL.collider == null && fHitR.collider == null)
+        {
+            transform.position += moveVelocity * moveSpeed * Time.deltaTime;
+        }
+        if (fHitL.collider != null || fHitR.collider != null)
+        {
+            rigid.velocity = new Vector2(moves * moveSpeed, rigid.velocity.y);
+        }
 
-        transform.position += moveVelocity * moveSpeed * Time.deltaTime;
     }
 
     void Jump()
     {
-        //isGround = Physics2D.OverlapCircle(pos.position, checkRaius, isFloor);
-        Hit = Physics2D.Raycast(transform.position - new Vector3(0, rayAmount, 0), Vector3.down, rayLength);
-        Debug.DrawRay(transform.position - new Vector3(0, rayAmount, 0), Vector3.down * rayLength, Color.red, 0.1f);
+        HitL = Physics2D.Raycast(transform.position - new Vector3(rayParameter, rayAmount, 0), Vector3.down, rayLength);
+        HitR = Physics2D.Raycast(transform.position - new Vector3(-rayParameter, rayAmount, 0), Vector3.down, rayLength);
+        Debug.DrawRay(transform.position - new Vector3(rayParameter, rayAmount, 0), Vector3.down * rayLength, Color.red, 0.1f);
+        Debug.DrawRay(transform.position - new Vector3(-rayParameter, rayAmount, 0), Vector3.down * rayLength, Color.red, 0.1f);
         Vector2 jumpVelocity = new Vector2(0, jumpPower);
-        if (Hit.collider == null)
+        if (HitL.collider == null|| HitR.collider == null)
         {
             Debug.Log("aa");
             anim.SetBool("isJump", true);
@@ -133,7 +148,7 @@ public class PlayerMove : MonoBehaviour
             jumpCnt--;
             if (jumpCnt > 0)
             {
-                if (Hit.collider == null)
+                if (HitL.collider == null|| HitR.collider == null)
                 {
                     jumpCnt--;
                     rigid.velocity = Vector2.zero;
@@ -143,11 +158,10 @@ public class PlayerMove : MonoBehaviour
                 rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
             }
         }
-        if (Hit.collider != null)
+        if (HitL.collider != null|| HitR.collider != null)
         {
             jumpCnt = jumpMax;
             anim.SetBool("isJump", false);
-            Debug.Log("ss");
         }
     }
 }
