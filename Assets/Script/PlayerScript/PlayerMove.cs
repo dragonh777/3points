@@ -17,11 +17,11 @@ public class PlayerMove : MonoBehaviour
     public int jumpMax = 2;
     public Transform pos;
     int layerMask;
-    private float rayAmount = 0.4f;
-    public float rayAmount2 = 0.3f;
+    public float rayAmount = 0.45f;
+    public float rayAmount2 = 0.45f;
     public float rayLength = 0.1f;
-    public float rayParameter = 0.3f;
-    public float rayParameter2 = 0.3f;
+    public float rayParameter = 0.35f;
+    public float rayParameter2 = 0.35f;
 
     private int jumpCnt;
 
@@ -120,14 +120,14 @@ public class PlayerMove : MonoBehaviour
         {
             anim.SetBool("isWalk", false);
         }
-        if (fHitL.collider == null && fHitR.collider == null)
-        {
+        //if (fHitL.collider == null && fHitR.collider == null)
+        //{
             transform.position += moveVelocity * moveSpeed * Time.deltaTime;
-        }
-        if (fHitL.collider != null || fHitR.collider != null)
-        {
-            rigid.velocity = new Vector2(moves * moveSpeed, rigid.velocity.y);
-        }
+        //}
+        //else if (fHitL.collider != null || fHitR.collider != null)
+        //{
+        //    rigid.velocity = new Vector2(moves * moveSpeed, rigid.velocity.y);
+        //}
 
     }
 

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5715384348940345949}
   - component: {fileID: 5715384348940345937}
   - component: {fileID: 5715384348940345936}
-  - component: {fileID: 5715384348940345939}
   - component: {fileID: 5715384348940345942}
+  - component: {fileID: 2722685537442021432}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -106,11 +106,12 @@ MonoBehaviour:
   checkRaius: 0.3
   jumpMax: 2
   pos: {fileID: 5715384350126465101}
-  rayAmount2: 0.35
+  rayAmount: 0.6
+  rayAmount2: 0.5
   rayLength: 0.1
-  rayParameter: 0.35
-  rayParameter2: 0.3
-  bullet: {fileID: 0}
+  rayParameter: 0.5
+  rayParameter2: 0.4
+  bullet: {fileID: 5102500943164983952, guid: 5acf002641611fb47b9666e242b4806a, type: 3}
   bulletPos: 1
   healthBarSlider: {fileID: 0}
   hpMax: 3
@@ -148,7 +149,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.13, y: 0.16}
   m_EdgeRadius: 0
---- !u!50 &5715384348940345939
+--- !u!95 &5715384348940345942
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5715384348940345948}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 935ca96b8b63130449ca28e47dc66465, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &2722685537442021432
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -169,25 +189,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!95 &5715384348940345942
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5715384348940345948}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 935ca96b8b63130449ca28e47dc66465, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5715384350126465100
 GameObject:
   m_ObjectHideFlags: 0
