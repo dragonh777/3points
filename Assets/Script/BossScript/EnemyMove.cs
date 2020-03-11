@@ -39,6 +39,7 @@ public class EnemyMove : MonoBehaviour
     }
     void Update()
     {
+
         if (Time.time > nextTime)
         {
             nextTime = Time.time + TimeLeft;
