@@ -45,6 +45,9 @@ public class PlayerMove : MonoBehaviour
     SpriteRenderer renderer;
     Animator anim;
 
+    private Vector3 moveAmount;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,19 +94,19 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        fHitL = Physics2D.Raycast(transform.position - new Vector3(rayParameter2, rayAmount2, 0), Vector3.left, rayLength);
-        fHitR = Physics2D.Raycast(transform.position - new Vector3(-rayParameter2, rayAmount2, 0), Vector3.right, rayLength);
+        //fHitL = Physics2D.Raycast(transform.position - new Vector3(rayParameter2, rayAmount2, 0), Vector3.left, rayLength);
+        //fHitR = Physics2D.Raycast(transform.position - new Vector3(-rayParameter2, rayAmount2, 0), Vector3.right, rayLength);
 
-        Debug.DrawRay(transform.position - new Vector3(rayParameter2, rayAmount2, 0), Vector3.left * rayLength, Color.red, 0.1f);
-        Debug.DrawRay(transform.position - new Vector3(-rayParameter2, rayAmount2, 0), Vector3.right * rayLength, Color.red, 0.1f);
+        //Debug.DrawRay(transform.position - new Vector3(rayParameter2, rayAmount2, 0), Vector3.left * rayLength, Color.red, 0.1f);
+        //Debug.DrawRay(transform.position - new Vector3(-rayParameter2, rayAmount2, 0), Vector3.right * rayLength, Color.red, 0.1f);
 
         float moves = Input.GetAxis("Horizontal");
 
-        Vector3 moveVelocity = Vector3.zero;
+        Vector3 dir = Vector3.zero;
 
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
-            moveVelocity = Vector3.left;
+            dir = Vector3.left;
             renderer.flipX = true;
             anim.SetBool("isWalk", true);
             pLeft = true;
@@ -112,7 +115,7 @@ public class PlayerMove : MonoBehaviour
 
         else if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            moveVelocity = Vector3.right;
+            dir = Vector3.right;
             renderer.flipX = false;
             anim.SetBool("isWalk", true);
             pLeft = false;
@@ -123,9 +126,12 @@ public class PlayerMove : MonoBehaviour
         {
             anim.SetBool("isWalk", false);
         }
+        
+        moveAmount = dir * moveSpeed * Time.deltaTime;
         //if (fHitL.collider == null && fHitR.collider == null)
         //{
-            transform.position += moveVelocity * moveSpeed * Time.deltaTime;
+        //transform.position += moveVelocity * moveSpeed * Time.deltaTime;
+        transform.Translate(moveAmount);
         //}
         //else if (fHitL.collider != null || fHitR.collider != null)
         //{
