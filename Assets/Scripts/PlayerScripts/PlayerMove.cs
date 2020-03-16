@@ -43,7 +43,7 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D rigid;
     RaycastHit2D HitL, HitR, fHitL, fHitR;
     SpriteRenderer renderer;
-    Animator anim;
+    //Animator anim;
 
     private Vector3 moveAmount;
     
@@ -54,7 +54,7 @@ public class PlayerMove : MonoBehaviour
         layerMask = 1 << LayerMask.NameToLayer("Floor");
         rigid = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         jumpCnt = jumpMax;
         bulletP = bulletPos;
         Hp = hpMax;
@@ -107,8 +107,8 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
             dir = Vector3.left;
-            renderer.flipX = true;
-            anim.SetBool("isWalk", true);
+            renderer.flipX = false;
+            //anim.SetBool("isWalk", true);
             pLeft = true;
             bulletP = -bulletPos;
         }
@@ -116,15 +116,15 @@ public class PlayerMove : MonoBehaviour
         else if (Input.GetAxisRaw("Horizontal") > 0)
         {
             dir = Vector3.right;
-            renderer.flipX = false;
-            anim.SetBool("isWalk", true);
+            renderer.flipX = true;
+            //anim.SetBool("isWalk", true);
             pLeft = false;
             bulletP = bulletPos;
         }
 
         else if (Input.GetAxisRaw("Horizontal") == 0)
         {
-            anim.SetBool("isWalk", false);
+            //anim.SetBool("isWalk", false);
         }
         
         moveAmount = dir * moveSpeed * Time.deltaTime;
@@ -150,7 +150,7 @@ public class PlayerMove : MonoBehaviour
         if (HitL.collider == null|| HitR.collider == null)
         {
             Debug.Log("aa");
-            anim.SetBool("isJump", true);
+            //anim.SetBool("isJump", true);
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -170,7 +170,7 @@ public class PlayerMove : MonoBehaviour
         if (HitL.collider != null|| HitR.collider != null)
         {
             jumpCnt = jumpMax;
-            anim.SetBool("isJump", false);
+            //anim.SetBool("isJump", false);
         }
     }
 }
