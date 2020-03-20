@@ -9,6 +9,10 @@ public class BossControl : MonoBehaviour
     public float bossSpeed = 5f;
     public int bossStep = 3;
 
+    public float radius = 1f;
+
+    public Transform bossPos;
+
     private int bStep;
 
     private float timeLeft;
@@ -18,8 +22,14 @@ public class BossControl : MonoBehaviour
     private float firstTime = 0.0f;
 
     private Transform transform;
+
     public Transform target;
+    public BoxCollider2D collider;
     SpriteRenderer renderer;
+
+    
+
+    bool rangeOn;
 
     private bool isMove = false;
 
@@ -32,7 +42,7 @@ public class BossControl : MonoBehaviour
         transform = GetComponent<Transform>();
         renderer = GetComponent<SpriteRenderer>();
         timeLeft = moveDelay;
-        
+        rangeOn = false;
     }
 
     // Update is called once per frame
@@ -44,6 +54,7 @@ public class BossControl : MonoBehaviour
     void Update()
     {
         BossStep();
+        rangeOn = Physics2D.OverlapCircle(bossPos.position, radius, 1 << LayerMask.NameToLayer("Player"));
     }
 
     void BossMove()
@@ -68,19 +79,30 @@ public class BossControl : MonoBehaviour
     void BossStep()
     {
         fTime += Time.deltaTime;
+        if (rangeOn)
+        {
+            bStep = 0;
+            isMove = false;
+            Debug.Log("rangeOn");
+        }
         if (Time.time > nextTime && bStep > 0)
         {
             nextTime = Time.time + timeLeft;
             isMove = true;
-            Debug.Log("moveon");
-            Debug.Log(fTime);
+            //Debug.Log("moveon");
+            //Debug.Log(fTime);
             if (fTime >= 2)
             {
                 isMove = false;
                 fTime = 0.0f;
-                Debug.Log("moveoff");
+                //Debug.Log("moveoff");
                 bStep--;
             }
         }
+    }
+
+    void Stomp()
+    {
+
     }
 }
