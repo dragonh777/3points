@@ -65,12 +65,12 @@ public class BossControl : MonoBehaviour
             if (dir < 0)
             {
                 moveAmount = bossSpeed * Vector3.left * Time.deltaTime;
-                renderer.flipX = false;
+                renderer.flipX = true;
             }
             else if (dir > 0)
             {
                 moveAmount = bossSpeed * Vector3.right * Time.deltaTime;
-                renderer.flipX = true;
+                renderer.flipX = false;
             }
             transform.Translate(moveAmount);
         }
