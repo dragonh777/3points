@@ -6,41 +6,41 @@ using UnityEngine.UI;
 public class PlayerMove : MonoBehaviour
 {
     //Move변수
-    public float moveSpeed = 6f;
-    public float forceGravity = 1f;
-    public static bool pLeft;
+    public float moveSpeed = 6f;            //이동속도
+    public float forceGravity = 1f;         //중력크기
+    public static bool pLeft;               //플레이어좌우판별
 
     //Jump변수
-    public float shortJumpPower = 10f;
-    public float jumpPower = 14f;
-    public float checkRaius = 0.3f;
-    public int jumpMax = 2;
-    public Transform pos;
-    int layerMask;
-    public float rayAmount = 0.45f;
+    public float shortJumpPower = 10f;      //숏점프크기
+    public float jumpPower = 14f;           //점프크기
+    public float checkRaius = 0.3f;         //충돌지름크기
+    public int jumpMax = 2;                 //점프횟수
+    public Transform pos;                   //위치
+    int layerMask;                          //레이어변수
+    public float rayAmount = 0.45f;         //레이캐스트 레이저 크기
     public float rayAmount2 = 0.45f;
-    public float rayLength = 0.1f;
-    public float rayParameter = 0.35f;
+    public float rayLength = 0.1f;          //레이캐스트 레이저 나타나는 시간
+    public float rayParameter = 0.35f;      //레이캐스트 레이저 길이
     public float rayParameter2 = 0.35f;
 
-    private int jumpCnt;
+    private int jumpCnt;                    //점프횟수 초기화변수
 
     //Skill변수
-    public GameObject bullet;
-    public float bulletPos = 1f;
-    private float bulletP;
+    public GameObject bullet;               //총알  
+    public float bulletPos = 1f;            //총알위치
+    private float bulletP;                  //총알위치 초기화변수
 
     //Hp변수
-    public Slider healthBarSlider;
-    public static int Hp;
-    public int hpMax = 3;
+    public Slider healthBarSlider;          //체력바
+    public static int Hp;                   //체력
+    public int hpMax = 3;                   //최대체력
 
-    public GameObject currentPanel;
-    public GameObject nextPanel;
-    public LayerMask isFloor;
-    public LayerMask Hill;
+    public GameObject currentPanel;         //현재 패널
+    public GameObject nextPanel;            //다음 패널
+    public LayerMask isFloor;               //바닥
+    public LayerMask Hill;                  //언덕
 
-    private Rigidbody2D rigid;
+    private Rigidbody2D rigid;              //
     RaycastHit2D HitL, HitR, fHitL, fHitR;
     SpriteRenderer renderer;
     //Animator anim;
