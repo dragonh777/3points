@@ -40,24 +40,24 @@ public class PlayerMove : MonoBehaviour
     public LayerMask isFloor;               //바닥
     public LayerMask Hill;                  //언덕
 
-    private Rigidbody2D rigid;              //
-    RaycastHit2D HitL, HitR, fHitL, fHitR;
-    SpriteRenderer renderer;
+    private Rigidbody2D rigid;              //리지드바디 변수
+    RaycastHit2D HitL, HitR, fHitL, fHitR;  //레이캐스트
+    SpriteRenderer renderer;                //스프라이트렌더러
     //Animator anim;
 
-    private Vector3 moveAmount;
+    private Vector3 moveAmount;             //움직인 양
     
 
     // Start is called before the first frame update
     void Start()
     {
-        layerMask = 1 << LayerMask.NameToLayer("Floor");
-        rigid = GetComponent<Rigidbody2D>();
-        renderer = GetComponent<SpriteRenderer>();
-        //anim = GetComponent<Animator>();
-        jumpCnt = jumpMax;
-        bulletP = bulletPos;
-        Hp = hpMax;
+        layerMask = 1 << LayerMask.NameToLayer("Floor");    //레이어변수에 바닥 넣음
+        rigid = GetComponent<Rigidbody2D>();                //자기자신 리지드바디
+        renderer = GetComponent<SpriteRenderer>();          //자기자신 렌더러
+        //anim = GetComponent<Animator>();                  //자기자신 애니메이터
+        jumpCnt = jumpMax;                                  //점프횟수 = 점프최대횟수
+        bulletP = bulletPos;                                //총알위치 초기화
+        Hp = hpMax;                                         //체력 = 최대체력
     }
 
     // Update is called once per frame
