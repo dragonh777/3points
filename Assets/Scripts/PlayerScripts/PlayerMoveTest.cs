@@ -44,12 +44,12 @@ public class PlayerMoveTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.C)) {   // 점프키 C키 누르면 isJump 참
+        if (Input.GetKeyDown(KeyCode.W)) {   // 점프키 W키 누르면 isJump 참
             isJump = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.V)) {   // 대쉬키 V
-            if (dashCheck) { 
+        if (Input.GetKeyDown(KeyCode.Space)) {   // 대쉬키 SpaceBar
+            if (dashCheck) {
                 isDash = true;
             }
         }
@@ -65,7 +65,7 @@ public class PlayerMoveTest : MonoBehaviour
             isJump = false; // 이거 안하면 3번눌렀을때 2단점프 하고 자동으로 점프함
             Jump();
         }
-        if(isDash) {
+        if (isDash) {
             isDash = false;
             Dash();
         }
@@ -81,18 +81,18 @@ public class PlayerMoveTest : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+
     }
 
     void Move()
     {
         Vector3 moveVelocity = Vector3.zero;
 
-        if(Input.GetAxisRaw("Horizontal") < 0) {    // 왼쪽 이동
+        if (Input.GetAxisRaw("Horizontal") < 0) {    // 왼쪽 이동
             moveVelocity = Vector3.left;
             renderer.flipX = false; // 스프라이트 플립
         }
-        else if(Input.GetAxisRaw("Horizontal") > 0) {   // 오른쪽 이동
+        else if (Input.GetAxisRaw("Horizontal") > 0) {   // 오른쪽 이동
             moveVelocity = Vector3.right;
             renderer.flipX = true;  // 스프라이트 플립
         }
@@ -112,6 +112,14 @@ public class PlayerMoveTest : MonoBehaviour
             jumpCount--;    // 점프카운트 감소
         }
     }
+
+    //IEnumerator CoroutineName()
+    //{
+    //    //할일
+    //    yield return new WaitForSeconds(2f);
+    //}
+
+    //StartCoroutine("CoroutineName");
 
     void Dash()
     {
