@@ -704,6 +704,20 @@ MonoBehaviour:
   maxDashTime: 1
   dashStoppingTime: 0.2
   jumpCount: 2
+--- !u!114 &115817254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115817247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f9e024650d1344c81f68132c108a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 5102500943164983952, guid: 5acf002641611fb47b9666e242b4806a,
+    type: 3}
 --- !u!1 &116559364
 GameObject:
   m_ObjectHideFlags: 0
@@ -3066,7 +3080,7 @@ GameObject:
   - component: {fileID: 1018204821}
   m_Layer: 0
   m_Name: New Terrain
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
