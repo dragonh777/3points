@@ -55,11 +55,11 @@ public class PlayerMoveTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump")) {   // 점프키 W키 누르면 isJump 참
+        if (Input.GetButtonDown("Jump")) {   // 점프키 space키 누르면 isJump 참
             isJump = true;
         }
 
-        if (Input.GetButtonDown("Dash") && dashCheck) {   // 대쉬키 SpaceBar
+        if (Input.GetButtonDown("Dash") && dashCheck) {   // 대쉬키 left shift
             isDash = true;
         }
     }
@@ -146,7 +146,7 @@ public class PlayerMoveTest : MonoBehaviour
     }
     IEnumerator DashCoroutine()
     {
-        yield return new WaitForSeconds(0.6f);  // 현재 0.6초딜레이
+        yield return new WaitForSeconds(1.5f);  // 현재 1.5초딜레이
         dashCheck = true;
     }
 
