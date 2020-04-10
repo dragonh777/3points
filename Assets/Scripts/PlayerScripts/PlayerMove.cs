@@ -63,32 +63,32 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move();
+        Move();                                             //물리 관련 함수는 FixedUpdate에, Move(움직임)함수 실행
     }
     private void Update()
     {
-        Jump();
-        if (Input.GetKeyDown(KeyCode.X))
+        Jump();                                             //점프 함수
+        if (Input.GetKeyDown(KeyCode.X))                    //x키를 눌렀을 때
         {
-            Instantiate(bullet, transform.position + new Vector3(bulletP, 0, 0), Quaternion.identity);
+            Instantiate(bullet, transform.position + new Vector3(bulletP, 0, 0), Quaternion.identity);      //Instantiate소환함수(생성할 총알오브젝트, 플레이어의 위치 + 캐릭터 가운데서 소환되지 않게 초기 총알생성위치 정해줌, 한번만 실행)
         }
-        if (Hp == 0)
+        if (Hp == 0)                                        //Hp가 0이면
         {
-            Destroy(gameObject);
+            Destroy(gameObject);                            //현재 오브젝트 파괴
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)          //현재 오브젝트의 콜라이더가 다른 콜라이더와 충돌 시 (collision에 다른 콜라이더 반환)
     {
-        if (collision.gameObject.tag == "Bullet" && healthBarSlider.value > 0)
+        if (collision.gameObject.tag == "Bullet" && healthBarSlider.value > 0)          //충돌한 콜라이더.(의) 게임오브젝트.(의) 태그가 Bullet이고, 체력슬라이더.(의) 값이 0보다 크면)
         {
-            healthBarSlider.value--;
-            Debug.Log("Hit");
+            healthBarSlider.value--;                        //체력값을 1 뺴줌
+            Debug.Log("Hit");                               //Hit 로그 표시
         }
-        if (collision.gameObject.tag == "RightWall")
+        if (collision.gameObject.tag == "RightWall")        //충돌한 오브젝트의 태그가 RightWall(오른쪽 벽)이면
         {
-            currentPanel.gameObject.SetActive(false);
-            nextPanel.gameObject.SetActive(true);
+            currentPanel.gameObject.SetActive(false);       //현재 패널을 끄고
+            nextPanel.gameObject.SetActive(true);           //다음 패널을 킴 (이 기능은 이제 필요없)
         }
     }
 
@@ -100,38 +100,38 @@ public class PlayerMove : MonoBehaviour
         //Debug.DrawRay(transform.position - new Vector3(rayParameter2, rayAmount2, 0), Vector3.left * rayLength, Color.red, 0.1f);
         //Debug.DrawRay(transform.position - new Vector3(-rayParameter2, rayAmount2, 0), Vector3.right * rayLength, Color.red, 0.1f);
 
-        float moves = Input.GetAxis("Horizontal");
+        //float moves = Input.GetAxis("Horizontal");          //moves 변수에 GetAxis("Horizontal"(왼쪽 방향일때 -1, 오른쪽일때 1 반환))를 통하여 -1 또는 1로 방향 나타냄
 
-        Vector3 dir = Vector3.zero;
+        Vector3 dir = Vector3.zero;                         //방향을 넣을 dir을 넣고 0으로 초기화
 
-        if (Input.GetAxisRaw("Horizontal") < 0)
+        if (Input.GetAxisRaw("Horizontal") < 0)             //방향입력이 0보다 작을때(-1일때, 즉 왼쪽일때)
         {
-            dir = Vector3.left;
-            renderer.flipX = false;
+            dir = Vector3.left;                             //왼쪽 방향을 넣어줌
+            renderer.flipX = false;                         //flipX를 꺼서 방향은 그대로
             //anim.SetBool("isWalk", true);
-            pLeft = true;
-            bulletP = -bulletPos;
+            pLeft = true;                                   //플레이어가 왼쪽인지 판별하는 bool 함수에 true 넣어줌
+            bulletP = -bulletPos;                           //총알위치를 -로 넣어 왼쪽으로 향하게 함
         }
 
-        else if (Input.GetAxisRaw("Horizontal") > 0)
+        else if (Input.GetAxisRaw("Horizontal") > 0)        //방향입력이 0보다 클때
         {
-            dir = Vector3.right;
-            renderer.flipX = true;
+            dir = Vector3.right;                            //오른쪽 방향
+            renderer.flipX = true;                          //flipX를 켜서 보는 방향을 바꿈
             //anim.SetBool("isWalk", true);
-            pLeft = false;
-            bulletP = bulletPos;
+            pLeft = false;                                  //오른쪽 판별을 위해 끔
+            bulletP = bulletPos;                            //총알 위치 그대로하여 오른쪽으로 향하게 함
         }
 
-        else if (Input.GetAxisRaw("Horizontal") == 0)
+        else if (Input.GetAxisRaw("Horizontal") == 0)       //방향 입력이 없을 때
         {
             //anim.SetBool("isWalk", false);
         }
         
-        moveAmount = dir * moveSpeed * Time.deltaTime;
+        moveAmount = dir * moveSpeed * Time.deltaTime;      //움직이는양 = 방향 * 속도 * 시간
         //if (fHitL.collider == null && fHitR.collider == null)
         //{
         //transform.position += moveVelocity * moveSpeed * Time.deltaTime;
-        transform.Translate(moveAmount);
+        transform.Translate(moveAmount);                    //플레이어의 위치(transform) = 위치(transform) + 움직이는 양(moveAmount)
         //}
         //else if (fHitL.collider != null || fHitR.collider != null)
         //{
