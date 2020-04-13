@@ -1,10 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
+    //Spine변수
+    public SkeletonAnimation skeletonAnimation;
+    public AnimationReferenceAsset[] AnimClip;
+
+    //애니메이션에 대한 enum
+    public enum AnimState
+    {
+        idle, run
+    }
+
+    private AnimState _AnimState;
+
+    private string CurrentAnimation;
+
+
     //Move변수
     public float moveSpeed = 6f;            //이동속도
     public float forceGravity = 1f;         //중력크기
@@ -44,6 +60,7 @@ public class PlayerMove : MonoBehaviour
     RaycastHit2D HitL, HitR, fHitL, fHitR;  //레이캐스트
     SpriteRenderer renderer;                //스프라이트렌더러
     //Animator anim;
+    private Transform transform;
 
     private Vector3 moveAmount;             //움직인 양
     
@@ -58,6 +75,7 @@ public class PlayerMove : MonoBehaviour
         jumpCnt = jumpMax;                                  //점프횟수 = 점프최대횟수
         bulletP = bulletPos;                                //총알위치 초기화
         Hp = hpMax;                                         //체력 = 최대체력
+        transform = GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -76,6 +94,18 @@ public class PlayerMove : MonoBehaviour
         {
             Destroy(gameObject);                            //현재 오브젝트 파괴
         }
+
+        if (Input.GetAxisRaw("Horizontal") == 0f)
+        {
+            _AnimState = AnimState.idle;
+        }
+        else
+        {
+            _AnimState = AnimState.run;
+            transform.localScale = new Vector2(Input.GetAxisRaw("Horizontal"), 1);
+        }
+
+        SetCurrentAnimation(_AnimState);
     }
 
     void OnCollisionEnter2D(Collision2D collision)          //현재 오브젝트의 콜라이더가 다른 콜라이더와 충돌 시 (collision에 다른 콜라이더 반환)
@@ -104,11 +134,13 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 dir = Vector3.zero;                         //방향을 넣을 dir을 넣고 0으로 초기화
 
+
+
         if (Input.GetAxisRaw("Horizontal") < 0)             //방향입력이 0보다 작을때(-1일때, 즉 왼쪽일때)
         {
             dir = Vector3.left;                             //왼쪽 방향을 넣어줌
             renderer.flipX = false;                         //flipX를 꺼서 방향은 그대로
-            //anim.SetBool("isWalk", true);
+            //_AnimState = AnimState.run;
             pLeft = true;                                   //플레이어가 왼쪽인지 판별하는 bool 함수에 true 넣어줌
             bulletP = -bulletPos;                           //총알위치를 -로 넣어 왼쪽으로 향하게 함
         }
@@ -117,16 +149,18 @@ public class PlayerMove : MonoBehaviour
         {
             dir = Vector3.right;                            //오른쪽 방향
             renderer.flipX = true;                          //flipX를 켜서 보는 방향을 바꿈
-            //anim.SetBool("isWalk", true);
+            //_AnimState = AnimState.run;
             pLeft = false;                                  //오른쪽 판별을 위해 끔
             bulletP = bulletPos;                            //총알 위치 그대로하여 오른쪽으로 향하게 함
         }
 
-        else if (Input.GetAxisRaw("Horizontal") == 0)       //방향 입력이 없을 때
+        else if (Input.GetAxisRaw("Horizontal") == 0f)       //방향 입력이 없을 때
         {
-            //anim.SetBool("isWalk", false);
+            //_AnimState = AnimState.idle;
         }
+
         
+
         moveAmount = dir * moveSpeed * Time.deltaTime;      //움직이는양 = 방향 * 속도 * 시간
         //if (fHitL.collider == null && fHitR.collider == null)
         //{
@@ -172,5 +206,38 @@ public class PlayerMove : MonoBehaviour
             jumpCnt = jumpMax;
             //anim.SetBool("isJump", false);
         }
+    }
+
+    private void _AsyncAnimation(AnimationReferenceAsset animClip, bool loop, float timeScale)
+    {
+
+        //동일한 애니메이션을 재생하려고 한다면 아래 코드 구문 실행 X
+        if (animClip.name.Equals(CurrentAnimation))
+            return;
+
+        //해당 애니메이션으로 변경한다.
+        skeletonAnimation.state.SetAnimation(0, animClip, loop).TimeScale = timeScale;
+        skeletonAnimation.loop = loop;
+        skeletonAnimation.timeScale = timeScale;
+
+
+        //현재 재생되고 있는 애니메이션 값을 변경
+        CurrentAnimation = animClip.name;
+    }
+
+    private void SetCurrentAnimation(AnimState _state)
+    {
+        switch (_state)
+        {
+            case AnimState.idle:
+                _AsyncAnimation(AnimClip[(int)AnimState.idle], true, 1f);
+                break;
+                _AsyncAnimation(AnimClip[(int)AnimState.run], true, 1f);
+            case AnimState.run:
+                break;
+        }
+
+        //짧게 작성한다면 요렇게..
+        //_AsyncAnimation(AnimClip[(int)_state], true, 1f);
     }
 }

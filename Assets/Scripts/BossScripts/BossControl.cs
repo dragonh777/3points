@@ -27,7 +27,7 @@ public class BossControl : MonoBehaviour
     public BoxCollider2D collider;
     SpriteRenderer renderer;
 
-    
+    private float aa;
 
     bool rangeOn;
 
@@ -49,6 +49,8 @@ public class BossControl : MonoBehaviour
     void FixedUpdate()
     {
         BossMove();
+
+        
     }
 
     void Update()
