@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(playerT.position.x + 1, playerT.position.y + 2.5f, playerT.position.z - 10);
+        transform.position = new Vector3(playerT.position.x, playerT.position.y + 2.5f, playerT.position.z - 10);
 
         float clampedX = Mathf.Clamp(this.transform.position.x, minBound.x + halfWidth, maxBound.x - halfWidth);  //Clamp('값', '최솟값', '최댓값') 값이 무조건 최솟값 최댓값 사이만 나옴
         float clampedY = Mathf.Clamp(this.transform.position.y, minBound.y + halfHeight, maxBound.y - halfHeight);
