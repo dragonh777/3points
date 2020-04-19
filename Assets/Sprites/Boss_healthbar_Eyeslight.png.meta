@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 50349a3c2fcc4b24f897492414ce917b
+guid: c0d690160be5bce429592916e8eff33d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3457048095024082990
-    second: Flying_0
+      213: 7490012185303851418
+    second: Boss_healthbar_Eyeslight_0
+  - first:
+      213: 5534676793774793116
+    second: Boss_healthbar_Eyeslight_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -60,7 +63,7 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -114,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Flying_0
+      name: Boss_healthbar_Eyeslight_0
       rect:
         serializedVersion: 2
-        x: 699
-        y: 411
-        width: 382
-        height: 510
+        x: 1552
+        y: 277
+        width: 70
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2df06a4e2191600d0800000000000000
-      internalID: -3457048095024082990
+      spriteID: a912264166ed1f760800000000000000
+      internalID: 7490012185303851418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_healthbar_Eyeslight_1
+      rect:
+        serializedVersion: 2
+        x: 1690
+        y: 276
+        width: 70
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c916b8f483f1fcc40800000000000000
+      internalID: 5534676793774793116
       vertices: []
       indices: 
       edges: []

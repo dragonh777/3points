@@ -1,0 +1,139 @@
+
+golem.png
+size: 973,1050
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+golem_abdomen
+  rotate: true
+  xy: 717, 334
+  size: 181, 185
+  orig: 183, 188
+  offset: 1, 2
+  index: -1
+golem_back_shell
+  rotate: true
+  xy: 2, 192
+  size: 494, 241
+  orig: 494, 241
+  offset: 0, 0
+  index: -1
+golem_back_shell2
+  rotate: false
+  xy: 2, 688
+  size: 449, 360
+  orig: 451, 363
+  offset: 1, 1
+  index: -1
+golem_chest
+  rotate: true
+  xy: 245, 258
+  size: 428, 252
+  orig: 432, 254
+  offset: 2, 1
+  index: -1
+golem_head
+  rotate: false
+  xy: 499, 332
+  size: 216, 195
+  orig: 218, 197
+  offset: 1, 1
+  index: -1
+golem_l_arm
+  rotate: false
+  xy: 499, 529
+  size: 260, 304
+  orig: 260, 304
+  offset: 0, 0
+  index: -1
+golem_l_foot
+  rotate: true
+  xy: 453, 835
+  size: 213, 503
+  orig: 241, 507
+  offset: 25, 2
+  index: -1
+golem_l_forearm
+  rotate: true
+  xy: 2, 2
+  size: 188, 231
+  orig: 188, 231
+  offset: 0, 0
+  index: -1
+golem_l_knee
+  rotate: true
+  xy: 904, 427
+  size: 88, 59
+  orig: 90, 61
+  offset: 1, 1
+  index: -1
+golem_l_shoulder
+  rotate: true
+  xy: 696, 183
+  size: 147, 139
+  orig: 149, 142
+  offset: 1, 2
+  index: -1
+golem_l_thigh
+  rotate: true
+  xy: 499, 183
+  size: 147, 195
+  orig: 151, 198
+  offset: 3, 1
+  index: -1
+golem_l_wrist
+  rotate: false
+  xy: 589, 47
+  size: 134, 134
+  orig: 136, 137
+  offset: 1, 2
+  index: -1
+golem_r_arm
+  rotate: false
+  xy: 761, 517
+  size: 200, 316
+  orig: 202, 318
+  offset: 1, 1
+  index: -1
+golem_r_foot
+  rotate: false
+  xy: 837, 182
+  size: 121, 150
+  orig: 123, 153
+  offset: 1, 2
+  index: -1
+golem_r_forearm
+  rotate: false
+  xy: 421, 20
+  size: 166, 161
+  orig: 169, 164
+  offset: 1, 2
+  index: -1
+golem_r_knee
+  rotate: true
+  xy: 904, 345
+  size: 80, 62
+  orig: 83, 64
+  offset: 2, 1
+  index: -1
+golem_r_shoulder
+  rotate: false
+  xy: 725, 33
+  size: 110, 148
+  orig: 112, 150
+  offset: 1, 1
+  index: -1
+golem_r_thigh
+  rotate: true
+  xy: 245, 106
+  size: 150, 174
+  orig: 153, 177
+  offset: 1, 1
+  index: -1
+golem_r_wrist
+  rotate: false
+  xy: 837, 46
+  size: 134, 134
+  orig: 136, 137
+  offset: 1, 2
+  index: -1

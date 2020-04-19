@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 50349a3c2fcc4b24f897492414ce917b
+guid: 0c09dfae36a0d5d4a9bcfafdc8bdcaf6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3457048095024082990
-    second: Flying_0
+      213: 8445494307488983621
+    second: Boss_healthbar_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -60,7 +60,7 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -114,13 +114,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Flying_0
+      name: Boss_healthbar_0
       rect:
         serializedVersion: 2
-        x: 699
-        y: 411
-        width: 382
-        height: 510
+        x: 168
+        y: 69
+        width: 2976
+        height: 342
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2df06a4e2191600d0800000000000000
-      internalID: -3457048095024082990
+      spriteID: 54ae676935c643570800000000000000
+      internalID: 8445494307488983621
       vertices: []
       indices: 
       edges: []

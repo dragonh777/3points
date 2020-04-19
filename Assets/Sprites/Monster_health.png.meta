@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 50349a3c2fcc4b24f897492414ce917b
+guid: 69a8291a9630509409e355df3c0eb12a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3457048095024082990
-    second: Flying_0
+      213: 8947797777373593918
+    second: Monster_health_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -60,7 +60,7 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -114,13 +114,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Flying_0
+      name: Monster_health_0
       rect:
         serializedVersion: 2
-        x: 699
-        y: 411
-        width: 382
-        height: 510
+        x: 141
+        y: 196
+        width: 364
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2df06a4e2191600d0800000000000000
-      internalID: -3457048095024082990
+      spriteID: e31026acba6fc2c70800000000000000
+      internalID: 8947797777373593918
       vertices: []
       indices: 
       edges: []

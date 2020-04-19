@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 50349a3c2fcc4b24f897492414ce917b
+guid: c8927921b141a364db77bd62949f01e5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3457048095024082990
-    second: Flying_0
+      213: -1888211119583968190
+    second: Map_ui_0
+  - first:
+      213: 8048997795084040526
+    second: Map_ui_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -60,7 +63,7 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -114,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Flying_0
+      name: Map_ui_0
       rect:
         serializedVersion: 2
-        x: 699
-        y: 411
-        width: 382
-        height: 510
+        x: 39
+        y: 57
+        width: 968
+        height: 703
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2df06a4e2191600d0800000000000000
-      internalID: -3457048095024082990
+      spriteID: 244414cadf9bbc5e0800000000000000
+      internalID: -1888211119583968190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map_ui_1
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 62
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e49f2e569d8c3bf60800000000000000
+      internalID: 8048997795084040526
       vertices: []
       indices: 
       edges: []
