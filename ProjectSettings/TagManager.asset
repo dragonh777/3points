@@ -45,6 +45,30 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 335384087
+    locked: 0
+  - name: Background_1
+    uniqueID: 3944478707
+    locked: 0
+  - name: Background_2
+    uniqueID: 231386475
+    locked: 0
+  - name: Background_3
+    uniqueID: 3532666189
+    locked: 0
+  - name: Background_4
+    uniqueID: 4084043683
+    locked: 0
+  - name: Background_5
+    uniqueID: 4248601535
+    locked: 0
+  - name: Background_6
+    uniqueID: 1845754399
+    locked: 0
+  - name: Background_7
+    uniqueID: 115624195
+    locked: 0
   - name: Hp
     uniqueID: 2932575985
     locked: 0
