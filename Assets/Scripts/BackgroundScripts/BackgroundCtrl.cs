@@ -5,16 +5,18 @@ using UnityEngine.UI;
 
 public class BackgroundCtrl : MonoBehaviour
 {
-    public float scrollSpeed = 0.5f;
+    public float xScrollSpeed = 0.5f;
+    public float yScrollSpeed = 0.01f;
     public Transform transform;
     Material material;
 
-    private float dir;
-    private float tr1;
+    private float trX;
+    private float trY;
 
     private Vector3 previousCamPos;
 
     private float OffsetX;
+    private float OffsetY;
     void Awake()
     {
         material = GetComponent<Renderer>().material;
@@ -23,7 +25,8 @@ public class BackgroundCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tr1 = transform.position.x;
+        trX = transform.position.x;
+        trY = transform.position.y;
         previousCamPos = transform.position;
     }
 
@@ -31,21 +34,32 @@ public class BackgroundCtrl : MonoBehaviour
     void Update()
     {
 
-        float paral = (previousCamPos.x - transform.position.x) * -scrollSpeed;
+        float paralX = (previousCamPos.x - transform.position.x) * -xScrollSpeed;
+        float paralY = (previousCamPos.y - transform.position.y) * -yScrollSpeed;
 
-        dir = Input.GetAxisRaw("Horizontal");
-        if (transform.position.x > tr1)
+        if (transform.position.x > trX)
         {
-            tr1 = transform.position.x;
-            OffsetX = material.mainTextureOffset.x + paral * Time.deltaTime;
+            trX = transform.position.x;
+            OffsetX = material.mainTextureOffset.x + paralX * Time.deltaTime;
         }
-        else if (transform.position.x < tr1)
+        else if (transform.position.x < trX)
         {
-            tr1 = transform.position.x;
-            OffsetX = material.mainTextureOffset.x + paral * Time.deltaTime;
+            trX = transform.position.x;
+            OffsetX = material.mainTextureOffset.x + paralX * Time.deltaTime;
         }
 
-        Vector2 Offset = new Vector2(OffsetX, 0);
+        if (transform.position.y > trY)
+        {
+            trY = transform.position.y;
+            OffsetY = material.mainTextureOffset.y + paralY * Time.deltaTime;
+        }
+        else if (transform.position.y < trY)
+        {
+            trY = transform.position.y;
+            OffsetY = material.mainTextureOffset.y + paralY * Time.deltaTime;
+        }
+
+        Vector2 Offset = new Vector2(OffsetX, OffsetY);
 
         material.mainTextureOffset = Offset;
 
