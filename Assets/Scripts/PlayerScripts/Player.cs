@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Spine;
 using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +26,8 @@ public class Player : MonoBehaviour
     private bool isJump = false;
     private bool isDash = false;
     private bool dashCheck = true;
+
+    public static bool isMove = true;
 
     //방향 관련
     private float dir1;
@@ -78,6 +81,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+           
 
         if (isJump)
         {
@@ -168,9 +172,12 @@ public class Player : MonoBehaviour
             dir = new Vector3(dir1, 0, 0);                  //방향에 좌우 따라 맞춤
             transform.localScale = new Vector2(dir1, 1);
         }
-
-        moveAmount = dir * moveSpeed * Time.deltaTime;
-        transform.Translate(moveAmount);
+        //if (isMove)
+        //{
+            moveAmount = dir * moveSpeed * Time.deltaTime;
+            transform.Translate(moveAmount);
+        //}
+        
     }
 
     void Jump()

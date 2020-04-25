@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 50349a3c2fcc4b24f897492414ce917b
+guid: 492dbb71e4bc9044787b45b5bc7983d3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3457048095024082990
-    second: Flying_0
-  - first:
-      213: 6742213690970526076
-    second: Flying_0
+      213: -1792052382153678245
+    second: Wheelgu_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -63,7 +60,7 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -117,22 +114,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Flying_0
+      name: Wheelgu_0
       rect:
         serializedVersion: 2
-        x: 699
-        y: 411
-        width: 351
-        height: 510
+        x: 238
+        y: 270
+        width: 888
+        height: 848
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c71d21251a7219d50800000000000000
-      internalID: 6742213690970526076
+      spriteID: b5266d66ad95127e0800000000000000
+      internalID: -1792052382153678245
       vertices: []
       indices: 
       edges: []
