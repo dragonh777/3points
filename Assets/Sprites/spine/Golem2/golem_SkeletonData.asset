@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-  m_Name: mainchara__SkeletonData
+  m_Name: golem_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: d5392062795066540987481fe0a03b0e, type: 2}
+  - {fileID: 11400000, guid: a04c3bcd37010eb4591e760631d95080, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 962fd6629dbd1ac49a41c178c035eaf6, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: cc5c030f4c96f4a48816e483eeb0eb69, type: 3}
   skeletonDataModifiers: []
   fromAnimation: []
   toAnimation: []
   duration: []
   defaultMix: 0.2
-  controller: {fileID: 9100000, guid: e8b791c4b17f49541936b1b7dc8cdf40, type: 2}
+  controller: {fileID: 0}

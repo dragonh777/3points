@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e3e95a05e4c9774397eeeb7bdee8ccb, type: 3}
-  m_Name: stop_or_landing
+  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
+  m_Name: golem_Atlas
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: bc3d1e12f60943540956a41e10c4f0d5, type: 2}
-  animationName: stop_or_landing
+  atlasFile: {fileID: 4900000, guid: c403f1ae630f5034482dd95ef03062ea, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 5b902d626216cfa498214bc90724813f, type: 2}
