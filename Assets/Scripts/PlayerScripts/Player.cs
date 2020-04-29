@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     private bool isDash = false;
     private bool dashCheck = true;
 
-    public static bool isMove = true;
+    public static bool canMove = true;
 
     //방향 관련
     private float dir1;
@@ -98,21 +98,21 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "Bottom")
         {
             jumpCount = 2;
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "Bottom")
         {
             isGround = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "Bottom")
         {
             isGround = false;
         }
@@ -141,6 +141,11 @@ public class Player : MonoBehaviour
 
     void Move()
     {
+        if(!canMove) {
+            Stun();
+            return;
+        }
+
         Vector3 dir = Vector3.zero;
         
         if (dir1 == 0f)                         //방향이 0이면(움직이지 않으면)
@@ -172,16 +177,18 @@ public class Player : MonoBehaviour
             dir = new Vector3(dir1, 0, 0);                  //방향에 좌우 따라 맞춤
             transform.localScale = new Vector2(dir1, 1);
         }
-        //if (isMove)
-        //{
-            moveAmount = dir * moveSpeed * Time.deltaTime;
-            transform.Translate(moveAmount);
-        //}
         
+        moveAmount = dir * moveSpeed * Time.deltaTime;
+        transform.Translate(moveAmount);
     }
 
     void Jump()
     {
+        if (!canMove) {
+            Stun();
+            return;
+        }
+
         if (jumpCount > 0)
         {
             rigid.velocity = Vector2.zero;
@@ -194,6 +201,11 @@ public class Player : MonoBehaviour
 
     void Dash()
     {
+        if (!canMove) {
+            Stun();
+            return;
+        }
+
         rigid.velocity = Vector2.zero;
         currentDashTime = 0f;
         dashCheck = false;
@@ -223,5 +235,10 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);  // 현재 1.5초딜레이
         dashCheck = true;
+    }
+
+    void Stun() // 차후 피격애니메이션 넣으면 됨
+    {
+        _AnimState = AnimState.idle;
     }
 }
