@@ -43,14 +43,17 @@ public class MonsterHealthCtrl : MonoBehaviour
 
     void Death()
     {
-        rigid.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
-        coll.enabled = false;   // 해당 몬스터의 콜라이더 삭제(왜 안되지?)
+        rigid.constraints = RigidbodyConstraints2D.None;    // 두1지기전에 프리즈포지션, 로테이션 다 해제
 
-        Invoke("AfterDeath", 1.5f);
+        rigid.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);  // 튀어오르기
+        coll.enabled = false;   // 해당 몬스터의 콜라이더 삭제
+
+        Invoke("AfterDeath", 1.5f); // 1.5초후 죽은 후처리
     }
     void AfterDeath()
     {
         Destroy(monsterObject); // 해당 몬스터 삭제
         Destroy(gameObject);    // 해당 몬스터의 체력바 삭제
     }
+    
 }

@@ -8,6 +8,7 @@ public class BombSeed : MonoBehaviour
     public float Speed = 150f;
 
     public Transform player;
+    public GameObject hpBar;
 
     private Transform transform;
     private Rigidbody2D rigid;
@@ -152,5 +153,12 @@ public class BombSeed : MonoBehaviour
         rigid.constraints = RigidbodyConstraints2D.FreezeAll;
 
         Debug.Log("Attack");
+        Invoke("AttackDestroy", 2);
+    }
+    // 공격 후 destroy
+    void AttackDestroy()
+    {
+        Destroy(gameObject);
+        Destroy(hpBar);
     }
 }
