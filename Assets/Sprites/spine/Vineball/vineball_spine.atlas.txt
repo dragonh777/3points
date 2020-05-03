@@ -1,0 +1,27 @@
+
+vineball_spine.png
+size: 1128,854
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: true
+  xy: 2, 2
+  size: 850, 852
+  orig: 881, 855
+  offset: 0, 0
+  index: -1
+eye
+  rotate: true
+  xy: 856, 476
+  size: 103, 102
+  orig: 105, 104
+  offset: 1, 1
+  index: -1
+eye_2
+  rotate: true
+  xy: 856, 581
+  size: 271, 270
+  orig: 273, 272
+  offset: 1, 1
+  index: -1

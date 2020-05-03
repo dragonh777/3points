@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Spine;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BombSeed : MonoBehaviour
 {
+    public SkeletonAnimation skeletonAnimation;
+    public AnimationReferenceAsset[] AnimClip;
+
     public float Speed = 150f;
 
     public Transform player;

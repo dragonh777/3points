@@ -1,0 +1,20 @@
+
+vine_spine.png
+size: 1139,213
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: true
+  xy: 2, 2
+  size: 209, 1034
+  orig: 209, 1034
+  offset: 0, 0
+  index: -1
+seed
+  rotate: true
+  xy: 1038, 32
+  size: 179, 99
+  orig: 179, 216
+  offset: 0, 29
+  index: -1
