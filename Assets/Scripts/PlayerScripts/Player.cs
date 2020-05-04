@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
             isDash = true;
         }
         //애니메이션 적용
-        SetCurrentAnimaion(_AnimState);
+        SetCurrentAnimation(_AnimState);
     }
 
     private void FixedUpdate()
@@ -133,7 +133,7 @@ public class Player : MonoBehaviour
         CurrentAnimation = animCip.name;
     }
 
-    private void SetCurrentAnimaion(AnimState _state)
+    private void SetCurrentAnimation(AnimState _state)
     {
         _AsyncAnimation(AnimClip[(int)_state], true, 1f);
     }
