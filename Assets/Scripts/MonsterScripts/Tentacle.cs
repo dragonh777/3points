@@ -10,7 +10,7 @@ public class Tentacle : MonoBehaviour
     public SkeletonAnimation skeletonAnimation; // SkeletonAnimation 스크립트
     public AnimationReferenceAsset[] AnimClip;
     public Transform player;    // 플레이어 위치받기위함
-
+    public GameObject HPbar;   // HP바 캔버스 받기
     private GameObject tentacle; // 스파인오브젝트 받기
 
     // 애니메이션 관련 선언
@@ -22,6 +22,7 @@ public class Tentacle : MonoBehaviour
     // 기능관련 선언
     private bool isCollide = false; // 캐릭터와 충돌시 true 아니면 false
     private bool canStun = true;   // true시 최초 1회 스턴가능, 스턴 한번 하면(false시) 공격모드로 바뀜
+    public static float HP = 100.0f;    // 체력, hp바에서 참조함(MonsterHPCtrl.cs)
 
     void Awake()
     {
@@ -40,9 +41,17 @@ public class Tentacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 테스트용임, 나중에 지울거
+        if (isAppear && Input.GetKeyDown(KeyCode.X)) {
+            Debug.Log("Tentacle Hit!");
+            Tentacle.HP -= 10;   // X버튼 누를시 체력 10닳게함
+        }
+        // 여기까지 테스트용
+
         if (isCollide && canStun) {
             Appear();
         }
+
         // 애니메이션 적용
         if (isAppear) {
             SetCurrentAnimation(_AnimState);
@@ -52,6 +61,10 @@ public class Tentacle : MonoBehaviour
         }
         else if(isAppear && !isCollide) {
             _AnimState = AnimState.idle;
+        }
+
+        if(HP <= 0) {   // HP값이 0밑으로 떨어지면 Dead호출
+            Dead();
         }
     }
 
@@ -106,6 +119,7 @@ public class Tentacle : MonoBehaviour
     }
     void Idle()   // 어택모드로 바뀌어서 공격대기상태
     {
+        HPbar.SetActive(true);  // 튀어나온 뒤 HP바 활성화
         _AnimState = AnimState.idle;
         isAppear = true;
         Debug.Log("AttackMode");
@@ -121,6 +135,16 @@ public class Tentacle : MonoBehaviour
         Debug.Log("Attack");
     }
 
+    void Dead()
+    {
+        _AnimState = AnimState.die;
+
+        Invoke("AfterDead", 0.5f);
+    }
+    void AfterDead()
+    {
+        Destroy(gameObject);    // 스크립트 들어있는 게임오브젝트(텐타클)삭제
+    }
 
     private void SetCurrentAnimation(AnimState _state)
     {
