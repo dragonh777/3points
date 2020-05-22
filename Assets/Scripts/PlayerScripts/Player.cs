@@ -8,8 +8,47 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     //스파인 애니메이션을 위한 것
+    [Header("References")]
     public SkeletonAnimation skeletonAnimation;
-    public AnimationReferenceAsset[] AnimClip;
+    public Transform graphicsRoot;
+    public SkeletonUtilityBone aimPivotBone;
+
+    //public AnimationReferenceAsset[] AnimClip;
+    public enum ActionState { IDLE, WALK, RUN, JUMP, FALL}
+
+    public ActionState state
+    {
+        get
+        {
+            return _state;
+        }
+        set
+        {
+            if (_state != value)
+            {
+                _state = value;
+            }
+        }
+    }
+
+    private ActionState _state;
+
+    [Header("Animations")]
+    [SpineAnimation]
+    public string walkAnim;
+    [SpineAnimation]
+    public string walkBackwardAnim;
+    [SpineAnimation]
+    public string runAnim;
+    [SpineAnimation]
+    public string idleAnim;
+    [SpineAnimation]
+    public string jumpAnim;
+    [SpineAnimation]
+    public string fallAnim;
+
+
+    //public SkeletonUtilityBone aimPivot;
 
     //움직임 관련
     public float moveSpeed = 6f;
@@ -32,17 +71,33 @@ public class Player : MonoBehaviour
     //방향 관련
     private float dir1;
 
+
     //애니메이션에 대한 Enum
-    public enum AnimState
-    {
-        idle, run, jump, fall, stop, dash
-    }
+    //public enum AnimState
+    //{
+    //    idle, run, jump, fall, stop, dash
+    //}
 
-    //현재 애니메이션 처리가 무엇인지에 대한 변수
-    private AnimState _AnimState;
+    //public AnimState state
+    //{
+    //    get
+    //    {
+    //        return _AnimState;
+    //    }
+    //    set
+    //    {
+    //        if (_AnimState != value)
+    //        {
+    //            _AnimState = value;
+    //        }
+    //    }
+    //}
 
-    //현재 어떤 애니메이션이 재생되고 있는지에 대한 변수
-    private string CurrentAnimation;
+    ////현재 애니메이션 처리가 무엇인지에 대한 변수
+    //private AnimState _AnimState;
+
+    ////현재 어떤 애니메이션이 재생되고 있는지에 대한 변수
+    //private string CurrentAnimation;
 
     //무브처리
     private Rigidbody2D rigid;
@@ -61,6 +116,7 @@ public class Player : MonoBehaviour
         currentDashTime = 0f;
     }
 
+
     // Update is called once per frame
     void Update()
     {
@@ -75,7 +131,7 @@ public class Player : MonoBehaviour
             isDash = true;
         }
         //애니메이션 적용
-        SetCurrentAnimation(_AnimState);
+        //SetCurrentAnimation(_AnimState);
     }
 
     private void FixedUpdate()
@@ -118,25 +174,25 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void _AsyncAnimation(AnimationReferenceAsset animCip, bool loop, float timeScale)
-    {
-        //동일한 애니메이션을 재생하려고 한다면 아래 코드 구문 실행 x
-        if (animCip.name.Equals(CurrentAnimation))
-            return;
+    //private void _AsyncAnimation(AnimationReferenceAsset animCip, bool loop, float timeScale)
+    //{
+    //    //동일한 애니메이션을 재생하려고 한다면 아래 코드 구문 실행 x
+    //    if (animCip.name.Equals(CurrentAnimation))
+    //        return;
 
-        //해당 애니메이션으로 변경한다.
-        skeletonAnimation.state.SetAnimation(0, animCip, loop).TimeScale = timeScale;
-        skeletonAnimation.loop = loop;
-        skeletonAnimation.timeScale = timeScale;
+    //    //해당 애니메이션으로 변경한다.
+    //    skeletonAnimation.state.SetAnimation(0, animCip, loop).TimeScale = timeScale;
+    //    skeletonAnimation.loop = loop;
+    //    skeletonAnimation.timeScale = timeScale;
 
-        //현재 재생되고 있는 애니메이션 값을 변경
-        CurrentAnimation = animCip.name;
-    }
+    //    //현재 재생되고 있는 애니메이션 값을 변경
+    //    CurrentAnimation = animCip.name;
+    //}
 
-    private void SetCurrentAnimation(AnimState _state)
-    {
-        _AsyncAnimation(AnimClip[(int)_state], true, 1f);
-    }
+    //private void SetCurrentAnimation(AnimState _state)
+    //{
+    //    _AsyncAnimation(AnimClip[(int)_state], true, 1f);
+    //}
 
 
     void Move()
@@ -150,30 +206,30 @@ public class Player : MonoBehaviour
         
         if (dir1 == 0f)                         //방향이 0이면(움직이지 않으면)
         {
-            if (isGround)                       //애니메이션 재생
-                _AnimState = AnimState.idle;
-            else if (rigid.velocity.x != 0)
-                _AnimState = AnimState.dash;
-            else if (rigid.velocity.y > 0)
-                _AnimState = AnimState.jump;
-            else
-                _AnimState = AnimState.fall;
+            //if (isGround)                       //애니메이션 재생
+            //    _AnimState = AnimState.idle;
+            //else if (rigid.velocity.x != 0)
+            //    _AnimState = AnimState.dash;
+            //else if (rigid.velocity.y > 0)
+            //    _AnimState = AnimState.jump;
+            //else
+            //    _AnimState = AnimState.fall;
         }
         else
         {
-            if (isGround)
-            {
-                _AnimState = AnimState.run;
-                if (rigid.velocity.x != 0)
-                    _AnimState = AnimState.dash;
-            }
-            else if (rigid.velocity.x != 0)
-                _AnimState = AnimState.dash;
-            else if (rigid.velocity.y > 0)
-                _AnimState = AnimState.jump;
-            else
-                _AnimState = AnimState.fall;
-                
+            //if (isGround)
+            //{
+            //    _AnimState = AnimState.run;
+            //    if (rigid.velocity.x != 0)
+            //        _AnimState = AnimState.dash;
+            //}
+            //else if (rigid.velocity.x != 0)
+            //    _AnimState = AnimState.dash;
+            //else if (rigid.velocity.y > 0)
+            //    _AnimState = AnimState.jump;
+            //else
+            //    _AnimState = AnimState.fall;
+
             dir = new Vector3(dir1, 0, 0);                  //방향에 좌우 따라 맞춤
             transform.localScale = new Vector2(dir1, 1);
         }
@@ -237,8 +293,66 @@ public class Player : MonoBehaviour
         dashCheck = true;
     }
 
+    //void UpdateAnim()
+    //{
+    //    switch (state)
+    //    {
+    //        case ActionState.IDLE:
+    //            if (CenterOnGround)
+    //            {
+    //                skeletonAnimation.AnimationName = idleAnim;
+    //            }
+    //            else
+    //            {
+    //                //TODO:  deal with edge animations for this character rig
+    //                if (onIncline)
+    //                    skeletonAnimation.AnimationName = idleAnim;
+    //                else if (BackOnGround)
+    //                {
+    //                    skeletonAnimation.AnimationName = idleAnim;
+    //                }
+    //                else if (ForwardOnGround)
+    //                {
+    //                    skeletonAnimation.AnimationName = idleAnim;
+    //                }
+    //            }
+    //            break;
+    //        case ActionState.WALK:
+    //            if (aiming)
+    //            {
+    //                if (Mathf.Sign(aimStick.x) != Mathf.Sign(moveStick.x))
+    //                    skeletonAnimation.AnimationName = walkBackwardAnim;
+    //                else
+    //                    skeletonAnimation.AnimationName = walkAnim;
+    //            }
+    //            else
+    //            {
+    //                skeletonAnimation.AnimationName = walkAnim;
+    //            }
+
+    //            break;
+    //        case ActionState.RUN:
+    //            skeletonAnimation.AnimationName = runAnim;
+    //            break;
+    //        case ActionState.JUMP:
+    //            skeletonAnimation.AnimationName = jumpAnim;
+    //            break;
+    //        case ActionState.FALL:
+    //            skeletonAnimation.AnimationName = fallAnim;
+    //            break;
+    //        case ActionState.JETPACK:
+    //            if (moveStick.x > deadZone)
+    //                skeletonAnimation.AnimationName = flipped ? jetpackBackwardAnim : jetpackForwardAnim;
+    //            else if (moveStick.x < -deadZone)
+    //                skeletonAnimation.AnimationName = flipped ? jetpackForwardAnim : jetpackBackwardAnim;
+    //            else
+    //                skeletonAnimation.AnimationName = jetpackNeutralAnim;
+    //            break;
+    //    }
+    //}
+
     void Stun() // 차후 피격애니메이션 넣으면 됨
     {
-        _AnimState = AnimState.idle;
+        //_AnimState = AnimState.idle;
     }
 }
