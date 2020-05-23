@@ -22,6 +22,7 @@ public class Tentacle : MonoBehaviour
     // 기능관련 선언
     private bool isCollide = false; // 캐릭터와 충돌시 true 아니면 false
     private bool canStun = true;   // true시 최초 1회 스턴가능, 스턴 한번 하면(false시) 공격모드로 바뀜
+    private float currentHP;    // 현재 hp, 이 값으로 맞았는지 아닌지 확인 or 추후 캐릭터 총알 collide시 hit로 바꿀 수 있음!!!!
     public static float HP = 100.0f;    // 체력, hp바에서 참조함(MonsterHPCtrl.cs)
 
     void Awake()
@@ -36,6 +37,8 @@ public class Tentacle : MonoBehaviour
         skeletonAnimation.state.SetAnimation(0, "vine_appear", false).TimeScale = 0f;
         skeletonAnimation.loop = false;
         skeletonAnimation.timeScale = 0f;
+
+        currentHP = HP; // 최초 HP값을 currentHP로 저장
     }
 
     // Update is called once per frame
@@ -56,6 +59,7 @@ public class Tentacle : MonoBehaviour
         if (isAppear) {
             SetCurrentAnimation(_AnimState);
         }
+
         if(isAppear && isCollide) {
             Attack();
         }
@@ -65,6 +69,9 @@ public class Tentacle : MonoBehaviour
 
         if(HP <= 0) {   // HP값이 0밑으로 떨어지면 Dead호출
             Dead();
+        }
+        if(HP != currentHP) {   // 총 HP와 현재 HP값이 차이가 난다면(맞았을 때)
+            Hit();
         }
     }
 
@@ -133,6 +140,15 @@ public class Tentacle : MonoBehaviour
             _AnimState = AnimState.attack_left;
         }
         Debug.Log("Attack");
+    }
+
+    void Hit()
+    {
+        currentHP = HP; // currentHP값 다시 맞춰주고
+        // 애니메이션 변경(캐릭터가 쏘는 방향에 따라 좌우반전 나중에 추가할것!!!!)
+        skeletonAnimation.state.SetAnimation(0, "vine_hit", false).TimeScale = 1f;
+        skeletonAnimation.loop = false;
+        skeletonAnimation.timeScale = 1f;   
     }
 
     void Dead()

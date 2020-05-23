@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MonsterHPCtrl : MonoBehaviour
 {
     public Image hpbar;
+    public Transform monster;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class MonsterHPCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.position = new Vector3(monster.position.x, monster.position.y + 1f, monster.position.z);
+        transform.position = new Vector3(monster.position.x, monster.position.y + 1f, monster.position.z);
 
         TentacleHPbar();
     }
