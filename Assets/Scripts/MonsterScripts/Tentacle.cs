@@ -10,7 +10,8 @@ public class Tentacle : MonoBehaviour
     public SkeletonAnimation skeletonAnimation; // SkeletonAnimation 스크립트
     public AnimationReferenceAsset[] AnimClip;
     public Transform player;    // 플레이어 위치받기위함
-    public GameObject HPbar;   // HP바 캔버스 받기
+    public GameObject HPbarCanvas;   // HP바 캔버스 받기
+    public Image HPBar; // HPBar 받기
     private GameObject tentacle; // 스파인오브젝트 받기
 
     // 애니메이션 관련 선언
@@ -47,7 +48,7 @@ public class Tentacle : MonoBehaviour
         // 테스트용임, 나중에 지울거
         if (isAppear && Input.GetKeyDown(KeyCode.X)) {
             Debug.Log("Tentacle Hit!");
-            Tentacle.HP -= 10;   // X버튼 누를시 체력 10닳게함
+            HP -= 10;   // X버튼 누를시 체력 10닳게함
         }
         // 여기까지 테스트용
 
@@ -71,6 +72,7 @@ public class Tentacle : MonoBehaviour
             Dead();
         }
         if(HP != currentHP) {   // 총 HP와 현재 HP값이 차이가 난다면(맞았을 때)
+            HPBar.fillAmount = HP / 100f;   // hp바 조정
             Hit();
         }
     }
@@ -126,7 +128,7 @@ public class Tentacle : MonoBehaviour
     }
     void Idle()   // 어택모드로 바뀌어서 공격대기상태
     {
-        HPbar.SetActive(true);  // 튀어나온 뒤 HP바 활성화
+        HPbarCanvas.SetActive(true);  // 튀어나온 뒤 HP바 활성화
         _AnimState = AnimState.idle;
         isAppear = true;
         Debug.Log("AttackMode");
