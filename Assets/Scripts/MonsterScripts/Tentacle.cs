@@ -113,13 +113,13 @@ public class Tentacle : MonoBehaviour
         }
 
         Debug.Log("stun");
-        Player.canMove = false;
+        //Player.canMove = false;
         Invoke("StunExit", 1f); // 1초뒤 스턴해제
     }
     void StunExit()
     {
         Debug.Log("stunExit");
-        Player.canMove = true;
+        //Player.canMove = true;
     }
     void TransformSetting()
     {
