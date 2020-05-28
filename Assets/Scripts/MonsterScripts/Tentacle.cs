@@ -123,7 +123,7 @@ public class Tentacle : MonoBehaviour
     }
     void TransformSetting()
     {
-        tentacle.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+        tentacle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         transform.position = new Vector3(transform.position.x, transform.position.y - 0.23f, 0f);
     }
     void Idle()   // 어택모드로 바뀌어서 공격대기상태
