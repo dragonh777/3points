@@ -8,20 +8,20 @@ using System.Collections.Generic;
 /// </summary>
 public class GameCharacter : MonoBehaviour
 {
-	public static List<GameCharacter> All = new List<GameCharacter>();
+	//public static List<GameCharacter> All = new List<GameCharacter>();
 
-	public virtual void Register()
-	{
-		All.Add(this);
-	}
+	//public virtual void Register()
+	//{
+	//	All.Add(this);
+	//}
 
-	public virtual void Unregister()
-	{
-		All.Remove(this);
-	}
+	//public virtual void Unregister()
+	//{
+	//	All.Remove(this);
+	//}
 
-	public virtual void IgnoreCollision(Collider2D collider, bool ignore)
-	{
-		Physics2D.IgnoreCollision(GetComponentInChildren<Collider2D>(), collider, ignore);
-	}
+	//public virtual void IgnoreCollision(Collider2D collider, bool ignore)
+	//{
+	//	Physics2D.IgnoreCollision(GetComponentInChildren<Collider2D>(), collider, ignore);
+	//}
 }
