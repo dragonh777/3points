@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Players : MonoBehaviour
 {
 
-    public enum ActionState { IDLE, WALK, RUN, JUMP, DASH, FALL }
+    public enum ActionState { IDLE, RUN, JUMP, DASH, FALL }
 
     public ActionState state
     {
@@ -25,6 +25,7 @@ public class Players : MonoBehaviour
         }
     }
 
+
     private ActionState _state;
 
 
@@ -39,9 +40,7 @@ public class Players : MonoBehaviour
 
     [Header("Animations")]
     [SpineAnimation]
-    public string walkAnim;
-    [SpineAnimation]
-    public string walkBackwardAnim;
+    public string runBackwardAnim;
     [SpineAnimation]
     public string runAnim;
     [SpineAnimation]
@@ -50,6 +49,10 @@ public class Players : MonoBehaviour
     public string jumpAnim;
     [SpineAnimation]
     public string fallAnim;
+    [SpineAnimation]
+    public string shootAnim;
+    //[SpineAnimation]
+    //public string dashAnim;
 
 
     [SpineBone(dataField: "skeletonAnimation")]
@@ -113,8 +116,8 @@ public class Players : MonoBehaviour
             //    state = ActionState.DASH;
             else if (rb.velocity.y > 0)
                 state = ActionState.JUMP;
-            else
-                state = ActionState.FALL;
+            //else
+            //    state = ActionState.FALL;
         }
         else
         {
@@ -128,8 +131,8 @@ public class Players : MonoBehaviour
             //    state = ActionState.DASH;
             else if (rb.velocity.y > 0)
                 state = ActionState.JUMP;
-            else
-                state = ActionState.FALL;
+            //else
+            //    state = ActionState.FALL;
 
             dir = new Vector3(dir1, 0, 0);                  //방향에 좌우 따라 맞춤
             transform.localScale = new Vector2(dir1, 1);
@@ -137,6 +140,7 @@ public class Players : MonoBehaviour
 
         moveAmount = dir * moveSpeed * Time.deltaTime;
         transform.Translate(moveAmount);
+        //Debug.Log("a");
     }
 
     void UpdateAnim()
@@ -144,10 +148,7 @@ public class Players : MonoBehaviour
         switch (state)
         {
             case ActionState.IDLE:
-                if (isGround)
-                {
-                    skeletonAnimation.AnimationName = idleAnim;
-                }
+                skeletonAnimation.AnimationName = idleAnim;
                 break;
             //case ActionState.WALK:
             //    if (aiming)
@@ -169,14 +170,16 @@ public class Players : MonoBehaviour
             case ActionState.JUMP:
                 skeletonAnimation.AnimationName = jumpAnim;
                 break;
-            case ActionState.FALL:
-                skeletonAnimation.AnimationName = fallAnim;
-                break;
+            //case ActionState.FALL:
+            //    skeletonAnimation.AnimationName = fallAnim;
+            //    break;
         }
     }
 
     void ChaseMouse()
     {
+        bool flip = false;
+
         //float h = Input.GetAxis("Horizontal");
         //float v = Input.GetAxis("Vertical");
 
@@ -189,12 +192,35 @@ public class Players : MonoBehaviour
 
         //Vector3 fixedPosition = new Vector3(0, 0, position.x);
         //transform.Rotate(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        aimPivotBone.transform.localRotation = Quaternion.RotateTowards(aimPivotBone.transform.localRotation, Quaternion.AngleAxis(180, Vector3.forward), 300 * Time.deltaTime);
+        skeletonAnimation.state.SetAnimation(1, shootAnim, false);
+        
+        //position = 
+
+        float a = Mathf.Atan2(position.y, position.x) * Mathf.Rad2Deg;
+        if (a < 0)
+            a += 360;
+
+        if (a < 270 && a > 90)
+            flip = true;
+        else
+            flip = false;
+
+        flipped = flip;
+
+        float minAngle = -120;
+        float maxAngle = 120;
+
+        a = flip ? 180 + Mathf.Clamp(Mathf.DeltaAngle(0, a - 180), -maxAngle, -minAngle) : Mathf.Clamp(Mathf.DeltaAngle(0, a), minAngle, maxAngle);
+
+        aimPivotBone.transform.localRotation = Quaternion.RotateTowards(aimPivotBone.transform.localRotation, Quaternion.AngleAxis(flip ? 180 - a : a, Vector3.forward), 300 * Time.deltaTime);
+
     }
     // Update is called once per frame
     void Update()
     {
+        Move();
         
         ChaseMouse();
+        UpdateAnim();
     }
 }
