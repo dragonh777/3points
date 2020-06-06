@@ -145,9 +145,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6804721}
-  m_LocalRotation: {x: 0, y: 0, z: -0.4177878, w: 0.90854466}
+  m_LocalRotation: {x: 0, y: 0, z: -0.42103583, w: 0.90704405}
   m_LocalPosition: {x: 0.2228, y: 0.0061, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.006, y: 1.006, z: 1}
   m_Children:
   - {fileID: 259691639}
   m_Father: {fileID: 762468279}
@@ -2680,7 +2680,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: aim_shot
+  _animationName: idle
   loop: 1
   timeScale: 1
 --- !u!23 &648705579
@@ -3647,7 +3647,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930637386}
   m_LocalRotation: {x: 0, y: 0, z: 0.00052359875, w: 0.9999999}
-  m_LocalPosition: {x: 0.1322, y: 1.7772999, z: 0}
+  m_LocalPosition: {x: 0.0847, y: 1.6575999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 261690559}
@@ -5891,7 +5891,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276109024}
   m_LocalRotation: {x: 0, y: 0, z: -0.0056722895, w: 0.9999839}
-  m_LocalPosition: {x: 1.1754, y: -0.21329999, z: 0}
+  m_LocalPosition: {x: 1.7271, y: -0.24879998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 36170056}
@@ -5943,7 +5943,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294952041}
   m_LocalRotation: {x: -0, y: -0, z: -0.0056722895, w: 0.9999839}
-  m_LocalPosition: {x: 0.0031000078, y: -0.25059998, z: 0}
+  m_LocalPosition: {x: 0.0847, y: -0.3119, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 36170056}
@@ -6667,20 +6667,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
-  jumpSpeed: 1
+  jumpSpeed: 15
   dashSpeed: 1
+  aimDuration: 1
   jumpDuration: 0.5
-  maxJumps: 1
-  runBackwardAnim: run_back
-  runAnim: run
-  idleAnim: idle
-  jumpAnim: jump
-  fallAnim: fall
+  maxJumps: 2
+  idleAnim: to_head_side
   shootAnim: aim_shot
-  graphicsRoot: {fileID: 0}
+  graphicsRoot: {fileID: 565803210}
   aimPivotBone: {fileID: 2123022527}
-  primaryCollider: {fileID: 0}
   skeletonAnimation: {fileID: 648705578}
+  AnimClip:
+  - {fileID: 11400000, guid: 673f40e2ec4a4ff4f90c1413b8005103, type: 2}
+  - {fileID: 11400000, guid: caf58d5fe99cb9e4dbf49aefe56c77c5, type: 2}
+  - {fileID: 11400000, guid: da9d8a1f48f00784d8c04336697ccf3d, type: 2}
+  - {fileID: 11400000, guid: 661d7647f31917b45b02fdd049ffb971, type: 2}
+  - {fileID: 11400000, guid: 0f914e13c5749b543901b8a3e3c8d316, type: 2}
+  - {fileID: 11400000, guid: 3d30185def42e51488fb92f2ea9fc9fe, type: 2}
 --- !u!4 &1471722019
 Transform:
   m_ObjectHideFlags: 0
@@ -7706,7 +7709,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850638394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.27879998, y: 2.6714, z: 0}
+  m_LocalPosition: {x: 0.26219997, y: 2.5147002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 36170056}
