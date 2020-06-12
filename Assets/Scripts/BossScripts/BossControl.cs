@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class BossControl : MonoBehaviour
 {
+
+
+
     public float moveDelay = 1.5f;
     public float bossSpeed = 5f;
     public int bossStep = 3;

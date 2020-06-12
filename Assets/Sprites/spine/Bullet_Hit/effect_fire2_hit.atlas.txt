@@ -1,0 +1,41 @@
+
+effect_fire2_hit.png
+size: 660,615
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+back_flare
+  rotate: true
+  xy: 159, 267
+  size: 346, 192
+  orig: 346, 192
+  offset: 0, 0
+  index: -1
+fire
+  rotate: true
+  xy: 2, 240
+  size: 373, 155
+  orig: 373, 155
+  offset: 0, 0
+  index: -1
+flare
+  rotate: true
+  xy: 353, 309
+  size: 304, 305
+  orig: 304, 305
+  offset: 0, 0
+  index: -1
+particle1
+  rotate: false
+  xy: 362, 2
+  size: 228, 305
+  orig: 228, 305
+  offset: 0, 0
+  index: -1
+particle2
+  rotate: true
+  xy: 2, 6
+  size: 232, 358
+  orig: 232, 358
+  offset: 0, 0
+  index: -1

@@ -18,21 +18,46 @@ public class BulletControl : MonoBehaviour
 
     public static int bDamage;
 
-    Vector2 dir;
+    public Transform pdir;
+
+    bool left = false;
 
     // Start is called before the first frame update
     void Start()    // Bullet프리팹 생성시 초기화
     {
         bDamage = bulletDamage;
-        dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.transform.position);
+        if (pdir.localScale.x > 0f)
+        {
+            this.transform.localScale = new Vector3(1, 1, 1);
+            left = false;
+        }
+        else if (pdir.localScale.x < 0f)
+        {
+            this.transform.localScale = new Vector3(-1, 1, 1);
+            //
+            left = true;
+        }
     }
 
+    private void Update()
+    {
+    }
     // Update is called once per frame
     void FixedUpdate()  // Bullet프리팹 생성 후 날아가게 하기
     {
-        GetComponent<Transform>().transform.Translate(dir.normalized * bulletSpeed * Time.deltaTime);
+        //Debug.Log(a);
+        if (left)
+        {
+            GetComponent<Transform>().transform.Translate(new Vector3(-1, 0, 0) * bulletSpeed * Time.deltaTime);
+        }
+        else if (!left)
+        {
+            GetComponent<Transform>().transform.Translate(new Vector3(1, 0, 0) * bulletSpeed * Time.deltaTime);
+        }
 
-        Destroy(gameObject, 5); // 5초 후 자동 Destroy
+
+
+        //Destroy(gameObject, 5); // 5초 후 자동 Destroy
     }
 
     void OnCollisionEnter2D(Collision2D collision)  // 날아가다 충돌시
@@ -46,6 +71,14 @@ public class BulletControl : MonoBehaviour
             Debug.Log("Hit");
             Destroy(gameObject);
             EnemyMove.Hp -= bDamage;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
         }
     }
 }

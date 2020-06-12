@@ -15,6 +15,7 @@ public class WheelGooo : MonoBehaviour
     public Transform player;    // 플레이어 위치받기
     public GameObject wheelgooSprite;    // 휠구 스프라이트 받기
     public GameObject wheelgooGFX;  // 스켈레톤 데이터 받기
+    public GameObject hitEffect;
     public Image HPBar;
     private Rigidbody2D rigid;
     private Transform transform;    // 자신 위치받기
@@ -28,6 +29,8 @@ public class WheelGooo : MonoBehaviour
     private float currentHP;
     private int statement = 0;  // 0: idle(GFX off Sprite On), 1: hit, 2: Die(GFX on Sprite Off)
     private bool doAnimation = false;
+
+    bool hit = false;
 
     private void Awake()
     {
@@ -53,8 +56,19 @@ public class WheelGooo : MonoBehaviour
             statement = 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.X) && doAnimation == false) {
+        if (hit && doAnimation == false) {
             HP -= 10;
+            hit = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Instantiate(hitEffect, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+
+            hit = true;
         }
     }
 

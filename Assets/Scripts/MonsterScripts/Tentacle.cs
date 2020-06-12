@@ -11,6 +11,7 @@ public class Tentacle : MonoBehaviour
     public AnimationReferenceAsset[] AnimClip;
     public Transform player;    // 플레이어 위치받기위함
     public GameObject HPbarCanvas;   // HP바 캔버스 받기
+    public GameObject hitEffect;
     public Image HPBar; // HPBar 받기
     private GameObject tentacle; // 스파인오브젝트 받기
 
@@ -25,6 +26,8 @@ public class Tentacle : MonoBehaviour
     private bool canStun = true;   // true시 최초 1회 스턴가능, 스턴 한번 하면(false시) 공격모드로 바뀜
     private float currentHP;    // 현재 hp, 이 값으로 맞았는지 아닌지 확인 or 추후 캐릭터 총알 collide시 hit로 바꿀 수 있음!!!!
     public static float HP = 100.0f;    // 체력, hp바에서 참조함(MonsterHPCtrl.cs)
+
+    bool hit = false;
 
     void Awake()
     {
@@ -42,13 +45,15 @@ public class Tentacle : MonoBehaviour
         currentHP = HP; // 최초 HP값을 currentHP로 저장
     }
 
+
     // Update is called once per frame
     void Update()
     {
         // 테스트용임, 나중에 지울거
-        if (isAppear && Input.GetKeyDown(KeyCode.X)) {
+        if (isAppear && hit) {
             Debug.Log("Tentacle Hit!");
             HP -= 10;   // X버튼 누를시 체력 10닳게함
+            hit = false;
         }
         // 여기까지 테스트용
 
@@ -82,6 +87,12 @@ public class Tentacle : MonoBehaviour
         if (collision.gameObject.tag == "Player") {
             isCollide = true;
             Debug.Log("collide T");
+        }
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Instantiate(hitEffect, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+
+            hit = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

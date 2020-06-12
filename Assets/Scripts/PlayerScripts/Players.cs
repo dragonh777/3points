@@ -31,7 +31,7 @@ public class Players : MonoBehaviour
 
     public enum AnimState
     {
-        IDLE, RUB, RUN, JUMP, DASH, FALL
+        IDLE, RUB, RUN, JUMP, JUMPD, DASH, FALL
     }
 
     private AnimState _AnimState;
@@ -41,10 +41,12 @@ public class Players : MonoBehaviour
 
     [Header("Speeds & Timings")]
     public float moveSpeed = 6f;
+    public float backmoveSpeed = 3f;
     public float jumpSpeed = 1f;
     public float dashSpeed = 1f;
     public float aimDuration = 1f;
     public float jumpDuration = 0.5f;
+    public float attackDelay = 0.5f;
     [Range(1, 3)]
     public int maxJumps = 1;
 
@@ -68,12 +70,15 @@ public class Players : MonoBehaviour
 
 
     //[SpineBone(dataField: "skeletonAnimation")]
-    
+
     public Transform graphicsRoot;
+    public Transform aimPivot;
     public SkeletonUtilityBone aimPivotBone;
 
 
     [Header("References")]
+    public GameObject bulletEffect;
+    public GameObject bulletPrefab;
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset[] AnimClip;
 
@@ -102,10 +107,20 @@ public class Players : MonoBehaviour
     private bool isDash = false;
     private bool dashCheck = true;
     private bool flipped;
+    private bool flip = false;
     private bool aiming = false;
     private float dir1;
     private float aTime = 0f;
+    private float atTime;
+    private float movetmp = 0f;
+    private float a = 0f;
+    private float b = 0f;
+    private float atd = 0f;
 
+    Quaternion vec;
+
+    float minAngle = -180;
+    float maxAngle = 180;
 
     float rotSpeed = 20f;
     float speed = 5f;
@@ -123,6 +138,10 @@ public class Players : MonoBehaviour
         target = transform.position;
         right = new Vector3(1, 1, 1);
         left = new Vector3(-1, 1, 1);
+
+        movetmp = moveSpeed;
+
+        atTime = attackDelay;
 
         mouseCastPlane = new Plane(Vector3.forward, transform.position);
 
@@ -190,7 +209,12 @@ public class Players : MonoBehaviour
             //else if (rb.velocity.x != 0)
             //    _AnimState = AnimState.DASH;
             else if (rb.velocity.y > 0)
-                _AnimState = AnimState.JUMP;
+            {
+                if (maxJumps == 0)
+                    _AnimState = AnimState.JUMPD;
+                else
+                    _AnimState = AnimState.JUMP;
+            }
             else
                 _AnimState = AnimState.FALL;
         }
@@ -198,10 +222,24 @@ public class Players : MonoBehaviour
         {
             if (isGround)
             {
-                if ((aimStick.x > 0 && dir1 > 0) || (aimStick.x < 0 && dir1 < 0))
+                if (aiming)
+                {
+                    if ((aimStick.x > 0 && dir1 > 0) || (aimStick.x < 0 && dir1 < 0))
+                    {
+                        moveSpeed = movetmp;
+                        _AnimState = AnimState.RUN;
+                    }
+                    else if ((aimStick.x > 0 && dir1 < 0) || (aimStick.x < 0 && dir1 > 0))
+                    {
+                        moveSpeed = backmoveSpeed;
+                        _AnimState = AnimState.RUB;
+                    }
+                }
+                else
+                {
+                    moveSpeed = movetmp;
                     _AnimState = AnimState.RUN;
-                else if ((aimStick.x > 0 && dir1 < 0) || (aimStick.x < 0 && dir1 > 0))
-                    _AnimState = AnimState.RUB;
+                }
 
                 //if (rb.velocity.x != 0)
                 //    _AnimState = AnimState.DASH;
@@ -209,12 +247,17 @@ public class Players : MonoBehaviour
             //else if (rb.velocity.x != 0)
             //    _AnimState = AnimState.DASH;
             else if (rb.velocity.y > 0)
-                _AnimState = AnimState.JUMP;
+            {
+                if (maxJumps == 0)
+                    _AnimState = AnimState.JUMPD;
+                else
+                    _AnimState = AnimState.JUMP;
+            }
             else
                 _AnimState = AnimState.FALL;
-
-            dir = new Vector3(dir1, 0, 0);                  //방향에 좌우 따라 맞춤
-                                                            //transform.localScale = new Vector2(dir1, 1);
+            //방향에 좌우 따라 맞춤
+            dir = new Vector3(dir1, 0, 0);
+            transform.localScale = new Vector2(dir1, 1);
         }
 
         moveAmount = dir * moveSpeed * Time.deltaTime;
@@ -240,63 +283,8 @@ public class Players : MonoBehaviour
         }
     }
 
-    void UpdateAnim()
+    void fire()
     {
-        //switch (state)
-        //{
-        //    case ActionState.IDLE:
-        //        skeletonAnimation.AnimationName = idleAnim;
-        //        break;
-        //    //case ActionState.WALK:
-        //    //    if (aiming)
-        //    //    {
-        //    //        if (Mathf.Sign(aimStick.x) != Mathf.Sign(moveStick.x))
-        //    //            skeletonAnimation.AnimationName = walkBackwardAnim;
-        //    //        else
-        //    //            skeletonAnimation.AnimationName = walkAnim;
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        skeletonAnimation.AnimationName = walkAnim;
-        //    //    }
-
-        //    //    break;
-        //    case ActionState.RUN:
-        //        skeletonAnimation.AnimationName = runAnim;
-        //        break;
-        //    case ActionState.RUB:
-        //        skeletonAnimation.AnimationName = jumpAnim;
-        //        break;
-        //    case ActionState.JUMP:
-        //        skeletonAnimation.AnimationName = jumpAnim;
-        //        break;
-        //    //case ActionState.FALL:
-        //    //    skeletonAnimation.AnimationName = fallAnim;
-        //    //    break;
-        
-    }
-
-    void ChaseMouse()
-    {
-        if(Input.GetButtonDown("BasicAttack"))
-        {
-            skeletonAnimation.state.SetAnimation(1, shootAnim, false);
-            aTime = 0f;
-            aiming = true;
-            
-        }
-
-        if (aimDuration < aTime)
-        {
-            skeletonAnimation.state.SetAnimation(1, idleAnim, false);
-            aTime = 0f;
-            aiming = false;
-        }
-
-
-
-        bool flip = false;
-
         float dist = 0;
         var aimRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -306,6 +294,35 @@ public class Players : MonoBehaviour
             Vector2 targetPos = aimRay.GetPoint(dist);
             aimStick = (targetPos - aimPivotPos).normalized;
         }
+
+        if (a < 0)
+            a += 360;
+
+        if (a < 270 && a > 90)
+            flip = true;
+        else
+            flip = false;
+        flipped = flip;
+
+
+
+
+
+        mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        angle = Mathf.Atan2(mouse.y - target.y, mouse.x - target.x) * Mathf.Rad2Deg;
+
+        a = Mathf.Atan2(aimStick.y, aimStick.x) * Mathf.Rad2Deg;
+        b = Mathf.Atan2(aimStick.y, aimStick.x) * Mathf.Rad2Deg;
+
+        a = flip ? 180 + Mathf.Clamp(Mathf.DeltaAngle(0, a - 180), -maxAngle, -minAngle) : Mathf.Clamp(Mathf.DeltaAngle(0, a), minAngle, maxAngle);
+        b = flip ? 180 + Mathf.Clamp(Mathf.DeltaAngle(0, b - 180), -maxAngle, -minAngle) : Mathf.Clamp(Mathf.DeltaAngle(0, b), minAngle, maxAngle);
+
+        aimPivotBone.transform.localRotation = Quaternion.RotateTowards(aimPivotBone.transform.localRotation, Quaternion.AngleAxis(flip ? 180 - a : a, Vector3.forward), 300 * Time.deltaTime);
+        vec = Quaternion.RotateTowards(vec, Quaternion.AngleAxis(flip ? 180 + b : b, Vector3.forward), 300 * Time.deltaTime);
+    }
+
+    void ChaseMouse()
+    {
 
 
         
@@ -319,63 +336,62 @@ public class Players : MonoBehaviour
             this.transform.localScale = right;
         }
 
-        
+        if (Input.GetButtonDown("BasicAttack"))
+        {
+            //Debug.Log(aimPivotBone.transform.localRotation.z);
+            
+        }
 
-        mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        angle = Mathf.Atan2(mouse.y - target.y, mouse.x - target.x) * Mathf.Rad2Deg;
-
-        //float a = angle - 90;
-
-        //if (a < -90)
+        //if (aimDuration < aTime)
         //{
-        //    this.transform.localScale = new Vector3(-1, 1, 1);
+        //    skeletonAnimation.state.SetAnimation(1, idleAnim, false);
+        //    aTime = 0f;
+        //    aiming = false;
         //}
-        //else if (a > 90)
-        //{
-        //    this.transform.localScale = new Vector3(-1, 1, 1);
-        //}
-
-        //aimPivotBone.transform.localRotation = Quaternion.AngleAxis(a, Vector3.forward);
-
-
-
-
-
-        float a = Mathf.Atan2(aimStick.y, aimStick.x) * Mathf.Rad2Deg;
-        if (a < 0)
-            a += 360;
-
-        if (a < 270 && a > 90)
-            flip = true;
-        else
-            flip = false;
-
-        flipped = flip;
-
-        
-        //aimPivotBone.transform.localRotation = Quaternion.AngleAxis(a, Vector3.forward);
-        //aimPivotBone.transform.localRotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-
-        float minAngle = -180;
-        float maxAngle = 180;
-
-        a = flip ? 180 + Mathf.Clamp(Mathf.DeltaAngle(0, a - 180), -maxAngle, -minAngle) : Mathf.Clamp(Mathf.DeltaAngle(0, a), minAngle, maxAngle);
-
-        aimPivotBone.transform.localRotation = Quaternion.RotateTowards(aimPivotBone.transform.localRotation, Quaternion.AngleAxis(flip ? 180 - a : a, Vector3.forward), 300 * Time.deltaTime);
-
     }
     // Update is called once per frame
     void Update()
     {
+
+        fire();
+
         if (Input.GetButtonDown("Jump"))
         {
             isJump = true;
         }
-        if (aiming)
-            aTime += Time.deltaTime;
+        if (Input.GetButtonDown("BasicAttack"))
+        {
+            //Instantiate(bulletPrefab, aimPivotBone.transform.position, aimPivotBone.transform.rotation);
+            //skeletonAnimation.state.SetAnimation(1, shootAnim, false);
+            //aTime = 0f;
+            if (attackDelay < atTime)
+            {
+                skeletonAnimation.state.SetAnimation(1, shootAnim, false);
+                Instantiate(bulletPrefab, aimPivot.transform.position, vec);
+                Instantiate(bulletEffect, aimPivot.transform.position, vec);
+                atTime = 0f;
+            }
+            aTime = 0f;
+            aiming = true;
 
-        ChaseMouse();
-        UpdateAnim();
+        }
+        //Debug.Log(aimPivotBone.transform.position.x);
+        if (aimDuration < aTime)
+        {
+            skeletonAnimation.state.SetAnimation(1, idleAnim, false);
+            aTime = 0f;
+            aiming = false;
+        }
+
+        if (aiming)
+        {
+            aTime += Time.deltaTime;
+            ChaseMouse();
+        }
+
+        //ChaseMouse();
+        atTime += Time.deltaTime;
+        
 
         SetCurrentAnimation(_AnimState);
     }
