@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class ButtonControl : MonoBehaviour
 {
     public Button Btn;
+    public GameObject backBtn;
     public GameObject Monster;
+    public SpriteRenderer Monster1;
     public Image image;
     public TextMeshProUGUI spText;
     public Slider spS;
@@ -41,6 +43,7 @@ public class ButtonControl : MonoBehaviour
             regen = 0f;
         }
 
+
         if (isClicked && sp > 0)
         {
             if (leftTime > 0)
@@ -48,16 +51,28 @@ public class ButtonControl : MonoBehaviour
                 leftTime -= Time.deltaTime;
                 if (leftTime < 0)
                 {
+                    
                     leftTime = 0;
                     if (Btn)
                         Btn.enabled = true;
+
                     isClicked = true;
                 }
-                float ratio = 1.0f - (leftTime / coolTime);
+                float ratio = 0f + (leftTime / coolTime);
+                float ratio1 = 1f - (leftTime / coolTime);
+                Monster1.color = new Color(ratio1, ratio1, ratio1);
                 if (image)
+                {
                     image.fillAmount = ratio;
+                    
+                }
+                    
+                if (image.fillAmount == 0)
+                    backBtn.SetActive(false);
             }
         }
+
+        
     }
 
     public void Summon1()
@@ -65,6 +80,7 @@ public class ButtonControl : MonoBehaviour
         if (sp >= 10)
         {
             Instantiate(Monster, new Vector3(0, 0, 0), Quaternion.identity);
+            backBtn.SetActive(true);
             leftTime = coolTime;
             isClicked = true;
             sp -= 10;
