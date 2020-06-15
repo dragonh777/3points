@@ -131,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 28715407}
   - component: {fileID: 28715406}
+  - component: {fileID: 28715405}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -138,6 +139,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &28715405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28715404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49afdd34c9ca754d9fe56aac314d110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spText: {fileID: 1342397832}
+  spS: {fileID: 1244009509}
+  regenPerSecond: 2
 --- !u!212 &28715406
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -777,7 +793,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015258789, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &735802381
@@ -873,7 +889,6 @@ GameObject:
   - component: {fileID: 917266719}
   - component: {fileID: 917266718}
   - component: {fileID: 917266717}
-  - component: {fileID: 917266720}
   m_Layer: 5
   m_Name: Button1
   m_TagString: Untagged
@@ -945,7 +960,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 917266720}
+      - m_Target: {fileID: 1791198954}
         m_MethodName: Summon1
         m_Mode: 1
         m_Arguments:
@@ -994,27 +1009,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 917266715}
   m_CullTransparentMesh: 0
---- !u!114 &917266720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 917266715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c512b8bb4ee0764998255e3ffafcc3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Btn: {fileID: 917266717}
-  backBtn: {fileID: 735802379}
-  Monster: {fileID: 375819231}
-  Monster1: {fileID: 2132263825}
-  image: {fileID: 735802382}
-  spText: {fileID: 1342397832}
-  spS: {fileID: 1244009509}
-  regenPerSecond: 2
-  coolTime: 1
 --- !u!1 &944295193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,8 +1334,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: Summon1
+      - m_Target: {fileID: 1791198954}
+        m_MethodName: Summon2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1592,7 +1586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -300, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1338289102
@@ -2087,7 +2081,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1471215826}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1791198954}
+        m_MethodName: Summon3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1471215826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2549,6 +2554,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1791198953}
+  - component: {fileID: 1791198954}
   m_Layer: 5
   m_Name: MonsterBt
   m_TagString: Untagged
@@ -2578,6 +2584,44 @@ RectTransform:
   m_AnchoredPosition: {x: 700, y: -470}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1791198954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791198952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c512b8bb4ee0764998255e3ffafcc3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Btn:
+  - {fileID: 917266717}
+  - {fileID: 1040070092}
+  - {fileID: 1471215825}
+  backBtn:
+  - {fileID: 735802379}
+  - {fileID: 1855655821}
+  - {fileID: 1338289100}
+  monster:
+  - {fileID: 375819231}
+  - {fileID: 0}
+  - {fileID: 0}
+  monsterRenderer:
+  - {fileID: 2132263825}
+  - {fileID: 1059089564}
+  - {fileID: 588363312}
+  image:
+  - {fileID: 735802382}
+  - {fileID: 1855655824}
+  - {fileID: 1338289103}
+  spS: {fileID: 1244009509}
+  coolTime:
+  - 1
+  - 2
+  - 3
+  cost: 0a000000140000001e000000
 --- !u!1 &1836442248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2715,7 +2759,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -149.99998, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1855655823

@@ -1,111 +1,129 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BossControl : MonoBehaviour
 {
+    public TextMeshProUGUI spText;
+    public Slider spS;
 
+    public static int sp = 100;
 
+    public float regenPerSecond = 2f;
 
-    public float moveDelay = 1.5f;
-    public float bossSpeed = 5f;
-    public int bossStep = 3;
+    float regen = 0f;
+    int maxSp = 100;
 
-    public float radius = 1f;
+    //public float moveDelay = 1.5f;
+    //public float bossSpeed = 5f;
+    //public int bossStep = 3;
 
-    public Transform bossPos;
+    //public float radius = 1f;
 
-    private int bStep;
+    //public Transform bossPos;
 
-    private float timeLeft;
-    private float nextTime = 0.0f;
+    //private int bStep;
 
-    private float fTime = 0.0f;
-    private float firstTime = 0.0f;
+    //private float timeLeft;
+    //private float nextTime = 0.0f;
 
-    private Transform transform;
+    //private float fTime = 0.0f;
+    //private float firstTime = 0.0f;
 
-    public Transform target;
-    public BoxCollider2D collider;
-    SpriteRenderer renderer;
+    //private Transform transform;
+
+    //public Transform target;
+    //public BoxCollider2D collider;
+    //SpriteRenderer renderer;
 
     
 
-    bool rangeOn;
+    //bool rangeOn;
 
-    private bool isMove = false;
+    //private bool isMove = false;
 
-    Vector3 moveAmount;
+    //Vector3 moveAmount;
 
     // Start is called before the first frame update
     void Start()
     {
-        bStep = Random.Range(2, 5);
-        transform = GetComponent<Transform>();
-        renderer = GetComponent<SpriteRenderer>();
-        timeLeft = moveDelay;
-        rangeOn = false;
+        //bStep = Random.Range(2, 5);
+        //transform = GetComponent<Transform>();
+        //renderer = GetComponent<SpriteRenderer>();
+        //timeLeft = moveDelay;
+        //rangeOn = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        BossMove();
+        //BossMove();
     }
 
     void Update()
     {
-        BossStep();
-        rangeOn = Physics2D.OverlapCircle(bossPos.position, radius, 1 << LayerMask.NameToLayer("Player"));
-    }
-
-    void BossMove()
-    {
-        if (isMove)
+        regen += regenPerSecond * Time.deltaTime;
+        spS.value += regenPerSecond * Time.deltaTime;
+        spText.text = sp + "/" + maxSp;
+        if (regen > 1.0f)
         {
-            float dir = target.position.x - transform.position.x;
-            if (dir < 0)
-            {
-                moveAmount = bossSpeed * Vector3.left * Time.deltaTime;
-                renderer.flipX = true;
-            }
-            else if (dir > 0)
-            {
-                moveAmount = bossSpeed * Vector3.right * Time.deltaTime;
-                renderer.flipX = false;
-            }
-            transform.Translate(moveAmount);
+            if (sp < maxSp)
+                sp += 1;
+            regen = 0f;
         }
+
+        //BossStep();
+        //rangeOn = Physics2D.OverlapCircle(bossPos.position, radius, 1 << LayerMask.NameToLayer("Player"));
     }
 
-    void BossStep()
-    {
-        fTime += Time.deltaTime;
-        if (rangeOn)
-        {
-            bStep = 0;
-            isMove = false;
-            Debug.Log("rangeOn");
-        }
-        if (Time.time > nextTime && bStep > 0)
-        {
-            nextTime = Time.time + timeLeft;
-            isMove = true;
-            //Debug.Log("moveon");
-            //Debug.Log(fTime);
-            if (fTime >= 2)
-            {
-                isMove = false;
-                fTime = 0.0f;
-                //Debug.Log("moveoff");
-                bStep--;
-            }
-        }
-    }
+    //void BossMove()
+    //{
+    //    if (isMove)
+    //    {
+    //        float dir = target.position.x - transform.position.x;
+    //        if (dir < 0)
+    //        {
+    //            moveAmount = bossSpeed * Vector3.left * Time.deltaTime;
+    //            renderer.flipX = true;
+    //        }
+    //        else if (dir > 0)
+    //        {
+    //            moveAmount = bossSpeed * Vector3.right * Time.deltaTime;
+    //            renderer.flipX = false;
+    //        }
+    //        transform.Translate(moveAmount);
+    //    }
+    //}
 
-    void Stomp()
-    {
+    //void BossStep()
+    //{
+    //    fTime += Time.deltaTime;
+    //    if (rangeOn)
+    //    {
+    //        bStep = 0;
+    //        isMove = false;
+    //        Debug.Log("rangeOn");
+    //    }
+    //    if (Time.time > nextTime && bStep > 0)
+    //    {
+    //        nextTime = Time.time + timeLeft;
+    //        isMove = true;
+    //        //Debug.Log("moveon");
+    //        //Debug.Log(fTime);
+    //        if (fTime >= 2)
+    //        {
+    //            isMove = false;
+    //            fTime = 0.0f;
+    //            //Debug.Log("moveoff");
+    //            bStep--;
+    //        }
+    //    }
+    //}
 
-    }
+    //void Stomp()
+    //{
+
+    //}
 }
