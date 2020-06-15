@@ -11,10 +11,12 @@ public class BossControl : MonoBehaviour
 
     public static int sp = 100;
 
+    public int SP;
+
     public float regenPerSecond = 2f;
 
-    float regen = 0f;
-    int maxSp = 100;
+    private float regen = 0f;
+    private int maxSp;
 
     //public float moveDelay = 1.5f;
     //public float bossSpeed = 5f;
@@ -49,6 +51,10 @@ public class BossControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sp = SP;
+        maxSp = SP;
+        spS.maxValue = (float)SP;
+        spS.value = (float)SP;
         //bStep = Random.Range(2, 5);
         //transform = GetComponent<Transform>();
         //renderer = GetComponent<SpriteRenderer>();

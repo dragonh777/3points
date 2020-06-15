@@ -9,26 +9,6 @@ using UnityEngine.UIElements;
 public class Players : MonoBehaviour
 {
 
-    //public enum ActionState { IDLE, RUB, RUN, JUMP, DASH, FALL }
-
-    //public ActionState state
-    //{
-    //    get
-    //    {
-    //        return _state;
-    //    }
-    //    set
-    //    {
-    //        if (_state != value)
-    //        {
-    //            _state = value;
-    //        }
-    //    }
-    //}
-
-
-    //private ActionState _state;
-
     public enum AnimState
     {
         IDLE, RUB, RUN, JUMP, JUMPD, DASH, FALL
@@ -53,32 +33,18 @@ public class Players : MonoBehaviour
     
 
     [Header("Animations")]
-    //[SpineAnimation]
-    //public string runBackwardAnim;
-    //[SpineAnimation]
-    //public string runAnim;
     [SpineAnimation]
     public string idleAnim;
-    //[SpineAnimation]
-    //public string jumpAnim;
-    //[SpineAnimation]
-    //public string fallAnim;
     [SpineAnimation]
     public string shootAnim;
-    //[SpineAnimation]
-    //public string dashAnim;
 
-
-    //[SpineBone(dataField: "skeletonAnimation")]
-
-    public Transform graphicsRoot;
-    public Transform aimPivot;
-    public SkeletonUtilityBone aimPivotBone;
-
+    
 
     [Header("References")]
+    public SkeletonUtilityBone aimPivotBone;
     public GameObject bulletEffect;
     public GameObject bulletPrefab;
+    public Transform aimPivot;
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset[] AnimClip;
 
@@ -98,9 +64,15 @@ public class Players : MonoBehaviour
         }
     }
 
+    private Plane mouseCastPlane;
+
+    private Vector2 target, mouse;
+    private Vector2 aimStick = Vector2.zero;
+
     private Vector3 moveAmount;
     private Vector3 right;
     private Vector3 left;
+
     private Rigidbody2D rb;
     private bool isGround = false;
     private bool isJump = false;
@@ -109,28 +81,21 @@ public class Players : MonoBehaviour
     private bool flipped;
     private bool flip = false;
     private bool aiming = false;
+
     private float dir1;
     private float aTime = 0f;
     private float atTime;
     private float movetmp = 0f;
     private float a = 0f;
     private float b = 0f;
-    private float atd = 0f;
+    private float minAngle = -180;
+    private float maxAngle = 180;
+    private float rotSpeed = 20f;
+    private float angle;
 
-    Quaternion vec;
+    private Quaternion vec;
 
-    float minAngle = -180;
-    float maxAngle = 180;
-
-    float rotSpeed = 20f;
-    float speed = 5f;
-
-    float angle;
-    Vector2 target, mouse;
-    Vector2 aimStick = Vector2.zero;
-
-    Plane mouseCastPlane;
-
+    
     // Start is called before the first frame update
     void Start()
     {
