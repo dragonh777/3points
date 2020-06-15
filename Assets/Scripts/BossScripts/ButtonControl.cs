@@ -6,18 +6,19 @@ using UnityEngine.UI;
 
 public class ButtonControl : MonoBehaviour
 {
+    [Header("Summon Button & Cool Button")]
     public Button[] Btn;
     public GameObject[] backBtn;
+    public Image[] image;
+
+    [Header("Summon Monster & image")]
     public GameObject[] monster;
     public SpriteRenderer[] monsterRenderer;
-    public Image[] image;
-    //public TextMeshProUGUI spText;
-    public Slider spS;
 
-    //public float regenPerSecond = 2f;
-
+    [Header("CoolTime(sec) & SpCost")]
     public float[] coolTime;
     public int[] cost;
+    public Slider spS;
 
     float leftTime = 0.0f;
     float leftTime1 = 0.0f;
