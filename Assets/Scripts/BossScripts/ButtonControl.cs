@@ -26,6 +26,7 @@ public class ButtonControl : MonoBehaviour
     bool isClicked1 = false;
     bool isClicked2 = false;
     bool isClicked3 = false;
+    int cnt = 0;
 
     //float regen = 0f;
 
@@ -141,13 +142,31 @@ public class ButtonControl : MonoBehaviour
     {
         if (BossControl.sp >= cost[0])
         {
-            Instantiate(monster[0], new Vector3(0, 0, 0), Quaternion.identity);
+            if (cnt == 0)
+                Instantiate(monster[0], new Vector3(7, -7, 0), Quaternion.identity);
             backBtn[0].SetActive(true);
             leftTime = coolTime[0];
             isClicked1 = true;
             BossControl.sp -= cost[0];
             spS.value -= (float)cost[0];
-            
+            cnt++;
+            if (Btn[0])
+                Btn[0].enabled = false;
+        }
+
+    }
+
+    public void Skill1()
+    {
+        if (BossControl.sp >= cost[0])
+        {
+            //Instantiate(monster[0], new Vector3(7, -7, 0), Quaternion.identity);
+            backBtn[0].SetActive(true);
+            leftTime = coolTime[0];
+            isClicked1 = true;
+            BossControl.sp -= cost[0];
+            spS.value -= (float)cost[0];
+
             if (Btn[0])
                 Btn[0].enabled = false;
         }

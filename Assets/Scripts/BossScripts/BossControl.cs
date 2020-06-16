@@ -37,12 +37,16 @@ public class BossControl : MonoBehaviour
     [Header("References")]
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset[] AnimClip;
+
+    public BoxCollider2D main;
+    public CircleCollider2D rollRange;
     public BoxCollider2D attackRange;
 
     private AnimState _AnimState;
     private string CurrentAnimation;
     public float moveDelay = 1f;
 
+    public float rollSpeed = 100f;
     //public float moveDelay = 1.5f;
     public float bossSpeed = 5f;
     //public int bossStep = 3;
@@ -64,19 +68,23 @@ public class BossControl : MonoBehaviour
     //public Transform target;
     //public BoxCollider2D collider;
     //SpriteRenderer renderer;
+    Rigidbody2D rigid;
+    Transform transform;
 
+    bool mHit = false;
+    bool rollOn = false;
 
+    float dir1;
 
-    //bool rangeOn;
-
-    private bool isDelay = true;
+    private bool isMove = true;
     private float sTime = 0f;
-    private bool isMove = false;
+    private float rollTime = 0f;
     int step = 0;
     float skTime = 0f;
     bool skill1Range = false;
 
     Vector3 moveAmount;
+    Vector3 dir;
 
     // Start is called before the first frame update
     void Start()
@@ -95,6 +103,8 @@ public class BossControl : MonoBehaviour
         //renderer = GetComponent<SpriteRenderer>();
         //timeLeft = moveDelay;
         //rangeOn = false;
+        rigid = GetComponent<Rigidbody2D>();
+        transform = GetComponent<Transform>();
     }
 
     private void _AsyncAnimation(AnimationReferenceAsset animCip, bool loop, float timeScale)
@@ -124,19 +134,50 @@ public class BossControl : MonoBehaviour
         _AsyncAnimation(AnimClip[(int)_state], loop, 1f);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (rollOn)
+            {
+                WheelGooo.hit = true;
+            }
+            if (!rollOn)
+            {
+                hpS.value -= 10f;
+                hp -= 10;
+            }
+            
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (skill1Range)
+        {
+            if (collision.gameObject.tag == "Enemy")
+            {
+                if (mHit && skTime > 0.85f)
+                {
+                    WheelGooo.hit = true;
+                    Debug.Log("hit");
+                    mHit = false;
+                }
+            }
+        }
+    }
+
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        BossMove();
+        if (isMove)
+            BossMove();
     }
 
     void Update()
     {
         
-
-        sTime += Time.deltaTime;
-        skTime += Time.deltaTime;
+        skillManager();
         regen();
         //BossStep();
         //rangeOn = Physics2D.OverlapCircle(bossPos.position, radius, 1 << LayerMask.NameToLayer("Player"));
@@ -147,26 +188,7 @@ public class BossControl : MonoBehaviour
         SetCurrentAnimation(_AnimState);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            hpS.value -= 10f;
-            hp -= 10;
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if(skill1Range)
-        {
-            if (collision.gameObject.tag == "Enemy")
-            {
-                WheelGooo.hit = true;
-                Debug.Log("hit");
-            }
-            skill1Range = false;
-        }
-    }
+    
 
     void regen()
     {
@@ -194,21 +216,10 @@ public class BossControl : MonoBehaviour
     }
     void BossMove()
     {
-        float dir1 = Input.GetAxisRaw("Horizontal");
+        dir1 = Input.GetAxisRaw("Horizontal");
 
-        Vector3 dir = Vector3.zero;
+        dir = Vector3.zero;
 
-        if (dir1 > 0)
-            attackRange.offset = new Vector2(2f, 1.75f);
-
-        else if (dir1 < 0)
-            attackRange.offset = new Vector2(2f, 1.75f);
-
-        if (skill1Range)
-        {
-            _AnimState = AnimState.ATTACK;
-            SetCurrentAnimation(_AnimState, false);
-        }
         if (dir1 == 0f)
         {
             _AnimState = AnimState.IDLE;
@@ -237,31 +248,91 @@ public class BossControl : MonoBehaviour
                     sTime = 0f;
                 }
             }
-            
-
-        }
-        if (isMove)
-        {
-            //float dir = target.position.x - transform.position.x;
-            //if (dir < 0)
-            //{
-            //    moveAmount = bossSpeed * Vector3.left * Time.deltaTime;
-            //    renderer.flipX = true;
-            //}
-            //else if (dir > 0)
-            //{
-            //    moveAmount = bossSpeed * Vector3.right * Time.deltaTime;
-            //    renderer.flipX = false;
-            //}
-            //moveAmount = bossSpeed * Vector3.right * Time.deltaTime;
-            transform.Translate(moveAmount);
         }
     }
 
+    void skillManager()
+    {
+        sTime += Time.deltaTime;
+        skTime += Time.deltaTime;
+        rollTime += Time.deltaTime;
+
+        if (skill1Range)
+        {
+            if (skTime < 1.4f)
+            {
+                _AnimState = AnimState.ATTACK;
+                SetCurrentAnimation(_AnimState, false);
+            }
+            if (skTime > 1.4f)
+            {
+                skTime = 0f;
+                skill1Range = false;
+                isMove = true;
+                attackRange.enabled = false;
+                SetCurrentAnimation(_AnimState);
+            }
+
+        }
+
+        if (rollOn)
+        {
+            if (rollTime < 0.3f)
+            {
+                _AnimState = AnimState.GTC;
+                SetCurrentAnimation(_AnimState, false);
+            }
+            if (rollTime > 0.3f && rollTime < 1.3f)
+            {
+                _AnimState = AnimState.CIR;
+                SetCurrentAnimation(_AnimState, false);
+                //rigid.velocity = new Vector2((transform.localScale.x * rollSpeed * Time.deltaTime), rigid.velocity.y);
+                //moveAmount = dir * rollSpeed * Time.deltaTime;
+                //transform.Translate(moveAmount);
+                //transform.localRotation = new Quaternion(0, 0, (transform.localScale.x * 8f), 0);
+            }
+            if (rollTime > 1.3f && rollTime < 1.6f)
+            {
+                _AnimState = AnimState.CTG;
+                //rigid.velocity = new Vector2(0f, 0f);
+                
+                rollRange.enabled = false;
+                main.enabled = true;
+                SetCurrentAnimation(_AnimState, false);
+            }
+            if (rollTime > 1.6f)
+            {
+                rollTime = 0f;
+                rollOn = false;
+                isMove = true;
+                //transform.localRotation = new Quaternion(0, 0, 0, 0);
+                SetCurrentAnimation(_AnimState);
+            }
+        }
+    }
     public void Skill1()
     {
+        attackRange.enabled = true;
         skTime = 0f;
+        Debug.Log("s");
         skill1Range = true;
+        mHit = true;
+        isMove = false;
+    }
+
+    public void Roll()
+    {
+        main.enabled = false;
+        rollRange.enabled = true;
+        rollTime = 0f;
+        Debug.Log("r");
+        rollOn = true;
+        isMove = false;
+        //skTime = 0f;
+        //Debug.Log("s");
+        //skill1Range = true;
+        //mHit = true;
+        //isMove = false;
     }
 
     //void Stomp()

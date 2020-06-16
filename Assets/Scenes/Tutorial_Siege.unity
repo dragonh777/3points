@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &69534952
 RectTransform:
   m_ObjectHideFlags: 0
@@ -496,6 +496,7 @@ GameObject:
   - component: {fileID: 447329374}
   - component: {fileID: 447329373}
   - component: {fileID: 447329376}
+  - component: {fileID: 447329377}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -599,6 +600,20 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &447329377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447329372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3da084061211f4c9c36f0280019b05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1457951727}
+  bound: {fileID: 512084116}
 --- !u!1 &476948873
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,6 +889,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 500580230}
   m_CullTransparentMesh: 0
+--- !u!61 &512084116 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7021474667131220619, guid: 3ee18529c8a03b14eb5eacbe536262e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1093083202}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &565557067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -881,11 +902,56 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 751372501412364112, guid: 21948136fbdc0fe4298776c7a3fc4e52,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 751372501412364113, guid: 21948136fbdc0fe4298776c7a3fc4e52,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.014
+      objectReference: {fileID: 0}
+    - target: {fileID: 751372501412364113, guid: 21948136fbdc0fe4298776c7a3fc4e52,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.745
+      objectReference: {fileID: 0}
+    - target: {fileID: 751372501412364142, guid: 21948136fbdc0fe4298776c7a3fc4e52,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 115624195
+      objectReference: {fileID: 0}
+    - target: {fileID: 751372501412364142, guid: 21948136fbdc0fe4298776c7a3fc4e52,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 751372501516787848, guid: 21948136fbdc0fe4298776c7a3fc4e52,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 751372501516787851, guid: 21948136fbdc0fe4298776c7a3fc4e52,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 115624195
+      objectReference: {fileID: 0}
+    - target: {fileID: 751372501516787851, guid: 21948136fbdc0fe4298776c7a3fc4e52,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 751372502789409704, guid: 21948136fbdc0fe4298776c7a3fc4e52,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1457951728}
+    - target: {fileID: 751372502789409704, guid: 21948136fbdc0fe4298776c7a3fc4e52,
+        type: 3}
+      propertyPath: Speed
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 751372502789409708, guid: 21948136fbdc0fe4298776c7a3fc4e52,
         type: 3}
       propertyPath: m_Name
@@ -894,12 +960,12 @@ PrefabInstance:
     - target: {fileID: 751372502789409709, guid: 21948136fbdc0fe4298776c7a3fc4e52,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.32
+      value: -6.14
       objectReference: {fileID: 0}
     - target: {fileID: 751372502789409709, guid: 21948136fbdc0fe4298776c7a3fc4e52,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.84
+      value: -17.7
       objectReference: {fileID: 0}
     - target: {fileID: 751372502789409709, guid: 21948136fbdc0fe4298776c7a3fc4e52,
         type: 3}
@@ -1737,7 +1803,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1040070091
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2002,7 +2068,7 @@ MonoBehaviour:
   - {fileID: 1834455904}
   - {fileID: 500580233}
   monster:
-  - {fileID: 0}
+  - {fileID: 1311424111}
   - {fileID: 0}
   - {fileID: 0}
   monsterRenderer:
@@ -2989,6 +3055,7 @@ GameObject:
   - component: {fileID: 1457951730}
   - component: {fileID: 1457951729}
   - component: {fileID: 1457951732}
+  - component: {fileID: 1457951733}
   m_Layer: 0
   m_Name: Golem
   m_TagString: Untagged
@@ -3040,8 +3107,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8c9525c23e7ba4f419edf653374db01b, type: 2}
   - {fileID: 11400000, guid: 34d765163fd467c43870627664a61a72, type: 2}
   - {fileID: 11400000, guid: e142bdaf8713b3a4996c0c45e896bebd, type: 2}
+  main: {fileID: 1457951731}
+  rollRange: {fileID: 1457951733}
   attackRange: {fileID: 1457951732}
   moveDelay: 1
+  rollSpeed: 2000
   bossSpeed: 10
 --- !u!50 &1457951730
 Rigidbody2D:
@@ -3058,12 +3128,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!61 &1457951731
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3097,13 +3167,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457951727}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2, y: 1.75}
+  m_Offset: {x: 2, y: 1.75}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3114,8 +3184,24 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.5, y: 3.5}
+  m_Size: {x: 6, y: 3.5}
   m_EdgeRadius: 0
+--- !u!58 &1457951733
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457951727}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.15, y: 1.6}
+  serializedVersion: 2
+  m_Radius: 1.8
 --- !u!1 &1471215823
 GameObject:
   m_ObjectHideFlags: 0
@@ -3134,7 +3220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1471215824
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4318,7 +4404,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1073854088}
-        m_MethodName: Summon1
+        m_MethodName: Skill1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1457951729}
+        m_MethodName: Roll
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

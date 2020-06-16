@@ -262,7 +262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &41464461
 Transform:
   m_ObjectHideFlags: 0
@@ -5030,11 +5030,10 @@ MonoBehaviour:
   maxJumps: 2
   idleAnim: non_mixing
   shootAnim: aim_shot
-  graphicsRoot: {fileID: 1537860784}
-  aimPivot: {fileID: 641562394}
   aimPivotBone: {fileID: 1420486291}
   bulletEffect: {fileID: 1994310399}
   bulletPrefab: {fileID: 481565135}
+  aimPivot: {fileID: 641562394}
   skeletonAnimation: {fileID: 1656143627}
   AnimClip:
   - {fileID: 11400000, guid: e101562162b3c634b9e005fccb032781, type: 2}
