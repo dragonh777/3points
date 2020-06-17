@@ -44,7 +44,7 @@ public class BackgroundParallax : MonoBehaviour
 			Vector3 backgroundTargetPos = new Vector3(backgroundTargetPosX, backgroundTargetPosY, backgrounds[i].position.z);
 			
 			// Lerp the background's position between itself and it's target position.
-			backgrounds[i].position = Vector3.Lerp(backgrounds[i].position, backgroundTargetPos, smoothing * Time.deltaTime);
+			backgrounds[i].position = Vector3.Lerp(backgrounds[i].position, backgroundTargetPos, /*smoothing * */Time.deltaTime);
 		}
 		
 		// Set the previousCamPos to the camera's position at the end of this frame.
