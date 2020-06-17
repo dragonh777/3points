@@ -10,7 +10,7 @@ public class BossControl : MonoBehaviour
 {
     public enum AnimState
     {
-        IDLE, WAL, WAR, ATTACK, GTC, CTG, CIR
+        IDLE, WAL, WAR, ATTACK, GTC, CTG, CIR, DIE
     }
 
     [Header("HP")]
@@ -79,9 +79,11 @@ public class BossControl : MonoBehaviour
     private bool isMove = true;
     private float sTime = 0f;
     private float rollTime = 0f;
+    float deathTime = 0f;
     int step = 0;
     float skTime = 0f;
     bool skill1Range = false;
+    bool death = false;
 
     Vector3 moveAmount;
     Vector3 dir;
@@ -142,7 +144,7 @@ public class BossControl : MonoBehaviour
             {
                 WheelGooo.hit = true;
             }
-            if (!rollOn)
+            if (!death && !rollOn)
             {
                 hpS.value -= 10f;
                 hp -= 10;
@@ -186,6 +188,31 @@ public class BossControl : MonoBehaviour
         //else if (!isDelay)
         //    SetCurrentAnimation(_AnimState, isDelay);
         SetCurrentAnimation(_AnimState);
+        deathTime += Time.deltaTime;
+        if (death)
+        {
+            Debug.Log("death");
+            deathTime = 0f;
+            if(deathTime > 1.0f)
+            {
+                Debug.Log("destroy");
+                Destroy(gameObject);
+                death = false;
+            }
+            _AnimState = AnimState.DIE;
+            SetCurrentAnimation(_AnimState, false);
+            Debug.Log("Daim");
+            hp = 0;
+            hpS.value = 0;
+        }
+            
+        if (hp <= 0)
+        {
+            death = true;
+            Debug.Log("death true");
+        }
+
+            
     }
 
     
@@ -193,8 +220,11 @@ public class BossControl : MonoBehaviour
     void regen()
     {
         //hp 리젠
-        hpRegen += hpRegenPerSecond * Time.deltaTime;
-        hpS.value += hpRegenPerSecond * Time.deltaTime;
+        if (!death)
+        {
+            hpRegen += hpRegenPerSecond * Time.deltaTime;
+            hpS.value += hpRegenPerSecond * Time.deltaTime;
+        }
         hpText.text = hp + "/" + maxHp;
         if (hpRegen > 1.0f)
         {
@@ -204,8 +234,11 @@ public class BossControl : MonoBehaviour
         }
 
         //sp 리젠
-        spRegen += spRegenPerSecond * Time.deltaTime;
-        spS.value += spRegenPerSecond * Time.deltaTime;
+        if (!death)
+        {
+            spRegen += spRegenPerSecond * Time.deltaTime;
+            spS.value += spRegenPerSecond * Time.deltaTime;
+        }
         spText.text = sp + "/" + maxSp;
         if (spRegen > 1.0f)
         {
@@ -256,6 +289,7 @@ public class BossControl : MonoBehaviour
         sTime += Time.deltaTime;
         skTime += Time.deltaTime;
         rollTime += Time.deltaTime;
+        
 
         if (skill1Range)
         {
