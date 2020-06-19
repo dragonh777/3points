@@ -172,7 +172,7 @@ public class BossControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isMove)
+        if (isMove && !death)
             BossMove();
     }
 
@@ -193,21 +193,20 @@ public class BossControl : MonoBehaviour
         {
             Debug.Log("death");
             deathTime = 0f;
-            if(deathTime > 1.0f)
-            {
-                Debug.Log("destroy");
-                Destroy(gameObject);
-                death = false;
-            }
             _AnimState = AnimState.DIE;
             SetCurrentAnimation(_AnimState, false);
             Debug.Log("Daim");
-            hp = 0;
-            hpS.value = 0;
+            if (deathTime > 1.0f)
+            {
+                Debug.Log("destroy");
+                Destroy(gameObject);
+            }
         }
             
-        if (hp <= 0)
+        if (!death && hp <= 0)
         {
+            hpS.value = 0;
+            hp = 0;
             death = true;
             Debug.Log("death true");
         }

@@ -103,7 +103,7 @@ MonoBehaviour:
       width: 1
       height: 0.11621094
     _bodyWeights: []
-    _yOffsetPercent: 0
+    _yOffsetPercent: 0.13
     _colliderOffset: -0.34
     _colliderThickness: 0.44
     _physicsMaterial2D: {fileID: 0}

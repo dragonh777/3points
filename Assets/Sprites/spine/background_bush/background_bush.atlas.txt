@@ -1,0 +1,55 @@
+
+background_bush.png
+size: 1066,523
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bush
+  rotate: false
+  xy: 299, 28
+  size: 286, 251
+  orig: 286, 251
+  offset: 0, 0
+  index: -1
+grass1
+  rotate: false
+  xy: 850, 286
+  size: 214, 235
+  orig: 214, 235
+  offset: 0, 0
+  index: -1
+grass2
+  rotate: true
+  xy: 587, 161
+  size: 118, 265
+  orig: 118, 265
+  offset: 0, 0
+  index: -1
+mushroom1
+  rotate: true
+  xy: 587, 25
+  size: 134, 202
+  orig: 134, 202
+  offset: 0, 0
+  index: -1
+mushroom2
+  rotate: false
+  xy: 854, 136
+  size: 160, 148
+  orig: 160, 148
+  offset: 0, 0
+  index: -1
+rock
+  rotate: false
+  xy: 2, 2
+  size: 295, 277
+  orig: 295, 277
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: false
+  xy: 2, 281
+  size: 846, 240
+  orig: 846, 240
+  offset: 0, 0
+  index: -1
