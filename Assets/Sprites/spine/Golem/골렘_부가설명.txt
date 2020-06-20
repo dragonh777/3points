@@ -1,0 +1,17 @@
+golem_under_walk_L : 상체 키 없이 왼쪽 다리 앞으로 가는 애니 (왼쪽하체걷기)
+
+golem_under_walk_L_idle: 왼다리 앞으로 나간 상태에서 멈춘 포즈 
+
+golem_under_walk_R : 상체 키 없이 오른쪽 다리 앞으로 가는 애니 (오른쪽하체걷기)
+
+golem_ under_walk_R_idle: 오른다리 앞으로 나간 상태에서 멈춘 포즈
+
+golem_upper_walk : 하체 키 없이 상체만 걷는 애니 (상체걷기)
+
+golem_walk_Full: 걷기 풀버젼 
+
+--------------------
+
+
+상체걷기+왼쪽하체걷기를 믹스해서 쓰거나 golem_idle과 멈춘포즈를 섞어서 쓰거나
+하면 될 것 같습니다.. 

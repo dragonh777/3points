@@ -93,6 +93,7 @@ public class Players : MonoBehaviour
     private float rotSpeed = 20f;
     private float angle;
 
+    private int jmpcount;
     private Quaternion vec;
 
     
@@ -103,6 +104,7 @@ public class Players : MonoBehaviour
         target = transform.position;
         right = new Vector3(1, 1, 1);
         left = new Vector3(-1, 1, 1);
+        jmpcount = maxJumps;
 
         movetmp = moveSpeed;
 
@@ -116,7 +118,7 @@ public class Players : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "Bottom")
         {
-            maxJumps = 2;
+            jmpcount = maxJumps;
         }
     }
 
@@ -175,13 +177,16 @@ public class Players : MonoBehaviour
             //    _AnimState = AnimState.DASH;
             else if (rb.velocity.y > 0)
             {
-                if (maxJumps == 0)
+                if (jmpcount == 0)
                     _AnimState = AnimState.JUMPD;
                 else
                     _AnimState = AnimState.JUMP;
             }
             else
-                _AnimState = AnimState.FALL;
+            {
+                if (!isGround)
+                    _AnimState = AnimState.FALL;
+            }
         }
         else
         {
@@ -213,13 +218,16 @@ public class Players : MonoBehaviour
             //    _AnimState = AnimState.DASH;
             else if (rb.velocity.y > 0)
             {
-                if (maxJumps == 0)
+                if (jmpcount == 0)
                     _AnimState = AnimState.JUMPD;
                 else
                     _AnimState = AnimState.JUMP;
             }
             else
-                _AnimState = AnimState.FALL;
+            {
+                if (!isGround)
+                    _AnimState = AnimState.FALL;
+            }
             //방향에 좌우 따라 맞춤
             dir = new Vector3(dir1, 0, 0);
             transform.localScale = new Vector2(dir1, 1);
@@ -238,13 +246,19 @@ public class Players : MonoBehaviour
         //    return;
         //}
 
-        if (maxJumps > 0)
+        
+
+
+        if (jmpcount > 0)
         {
+            if (!isGround)
+                jmpcount = 1;
+
             rb.velocity = Vector2.zero;
             Vector2 jumpVelocity = new Vector2(0, jumpSpeed);
             rb.AddForce(jumpVelocity, ForceMode2D.Impulse);
 
-            maxJumps--;
+            jmpcount--;
         }
     }
 
@@ -288,10 +302,6 @@ public class Players : MonoBehaviour
 
     void ChaseMouse()
     {
-
-
-        
-
         if (flipped)
         {
             this.transform.localScale = left;
@@ -300,19 +310,6 @@ public class Players : MonoBehaviour
         {
             this.transform.localScale = right;
         }
-
-        if (Input.GetButtonDown("BasicAttack"))
-        {
-            //Debug.Log(aimPivotBone.transform.localRotation.z);
-            
-        }
-
-        //if (aimDuration < aTime)
-        //{
-        //    skeletonAnimation.state.SetAnimation(1, idleAnim, false);
-        //    aTime = 0f;
-        //    aiming = false;
-        //}
     }
     // Update is called once per frame
     void Update()
