@@ -72,6 +72,7 @@ public class Players : MonoBehaviour
     private Vector3 moveAmount;
     private Vector3 right;
     private Vector3 left;
+    private Vector3 dir;
 
     private Rigidbody2D rb;
     private bool isGround = false;
@@ -85,6 +86,7 @@ public class Players : MonoBehaviour
     private float dir1;
     private float aTime = 0f;
     private float atTime;
+    private float dashTime = 0f;
     private float movetmp = 0f;
     private float a = 0f;
     private float b = 0f;
@@ -163,18 +165,20 @@ public class Players : MonoBehaviour
 
     void Move()
     {
-        dir1 = Input.GetAxisRaw("Horizontal");
+        
 
-        Vector3 dir = Vector3.zero;
+        dir = Vector3.zero;
 
 
 
         if (dir1 == 0f)                         //방향이 0이면(움직이지 않으면)
         {
             if (isGround)                       //애니메이션 재생
+            {
                 _AnimState = AnimState.IDLE;
-            //else if (rb.velocity.x != 0)
-            //    _AnimState = AnimState.DASH;
+            }
+            else if (dashCheck)
+                _AnimState = AnimState.DASH;
             else if (rb.velocity.y > 0)
             {
                 if (jmpcount == 0)
@@ -205,17 +209,19 @@ public class Players : MonoBehaviour
                         _AnimState = AnimState.RUB;
                     }
                 }
+                else if (dashCheck)
+                    _AnimState = AnimState.DASH;
+
                 else
                 {
                     moveSpeed = movetmp;
                     _AnimState = AnimState.RUN;
                 }
 
-                //if (rb.velocity.x != 0)
-                //    _AnimState = AnimState.DASH;
+                
             }
-            //else if (rb.velocity.x != 0)
-            //    _AnimState = AnimState.DASH;
+            else if (dashCheck)
+                _AnimState = AnimState.DASH;
             else if (rb.velocity.y > 0)
             {
                 if (jmpcount == 0)
@@ -240,15 +246,6 @@ public class Players : MonoBehaviour
 
     void Jump()
     {
-        //if (!canMove)
-        //{
-        //    Stun();
-        //    return;
-        //}
-
-        
-
-
         if (jmpcount > 0)
         {
             if (!isGround)
@@ -311,9 +308,26 @@ public class Players : MonoBehaviour
             this.transform.localScale = right;
         }
     }
+
+    void dash()
+    {
+        if (Input.GetButtonDown("Dash") && !dashCheck)
+        {
+            isDash = true;
+            if (dir1 > 0)
+                rb.velocity = new Vector2(dashSpeed, 0);
+            else if (dir1 < 0)
+                rb.velocity = new Vector2(-dashSpeed, 0);
+            rb.gravityScale = 0f;
+            //moveAmount = dir * jumpSpeed * Time.deltaTime;
+            //transform.Translate(moveAmount);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
+
+        dir1 = Input.GetAxisRaw("Horizontal");
 
         fire();
 
@@ -351,8 +365,22 @@ public class Players : MonoBehaviour
             ChaseMouse();
         }
 
+        if (isDash)
+        {
+            dashTime = 0f;
+            isDash = false;
+            dashCheck = true;
+        }
+        if (dashTime > 0.15f)
+        {
+            dashCheck = false;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
+            rb.gravityScale = 1f;
+        }
+
         //ChaseMouse();
         atTime += Time.deltaTime;
+        dashTime += Time.deltaTime;
         
 
         SetCurrentAnimation(_AnimState);
@@ -365,6 +393,8 @@ public class Players : MonoBehaviour
             isJump = false;
             Jump();
         }
-        Move();
+        if (!dashCheck)
+            Move();
+        dash();
     }
 }
