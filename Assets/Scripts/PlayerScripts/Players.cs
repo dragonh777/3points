@@ -24,6 +24,7 @@ public class Players : MonoBehaviour
     public float backmoveSpeed = 3f;
     public float jumpSpeed = 1f;
     public float dashSpeed = 1f;
+    public float dashCooltime = 1.5f;
     public float aimDuration = 1f;
     public float jumpDuration = 0.5f;
     public float attackDelay = 0.5f;
@@ -75,9 +76,9 @@ public class Players : MonoBehaviour
     private Vector3 dir;
 
     private Rigidbody2D rb;
+
     private bool isGround = false;
     private bool isJump = false;
-    private bool isDash = false;
     private bool dashCheck = true;
     private bool flipped;
     private bool flip = false;
@@ -87,12 +88,12 @@ public class Players : MonoBehaviour
     private float aTime = 0f;
     private float atTime;
     private float dashTime = 0f;
+    private float dashDelay = 0f;
     private float movetmp = 0f;
     private float a = 0f;
     private float b = 0f;
     private float minAngle = -180;
     private float maxAngle = 180;
-    private float rotSpeed = 20f;
     private float angle;
 
     private int jmpcount;
@@ -113,7 +114,6 @@ public class Players : MonoBehaviour
         atTime = attackDelay;
 
         mouseCastPlane = new Plane(Vector3.forward, transform.position);
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -148,7 +148,6 @@ public class Players : MonoBehaviour
         //해당 애니메이션으로 변경한다.
         skeletonAnimation.state.SetAnimation(0, animCip, loop).TimeScale = timeScale;
         
-
         skeletonAnimation.loop = loop;
         skeletonAnimation.timeScale = timeScale;
 
@@ -177,8 +176,6 @@ public class Players : MonoBehaviour
             {
                 _AnimState = AnimState.IDLE;
             }
-            else if (dashCheck)
-                _AnimState = AnimState.DASH;
             else if (rb.velocity.y > 0)
             {
                 if (jmpcount == 0)
@@ -209,8 +206,6 @@ public class Players : MonoBehaviour
                         _AnimState = AnimState.RUB;
                     }
                 }
-                else if (dashCheck)
-                    _AnimState = AnimState.DASH;
 
                 else
                 {
@@ -220,8 +215,6 @@ public class Players : MonoBehaviour
 
                 
             }
-            else if (dashCheck)
-                _AnimState = AnimState.DASH;
             else if (rb.velocity.y > 0)
             {
                 if (jmpcount == 0)
@@ -276,13 +269,11 @@ public class Players : MonoBehaviour
 
         if (a < 270 && a > 90)
             flip = true;
+
         else
             flip = false;
+
         flipped = flip;
-
-
-
-
 
         mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         angle = Mathf.Atan2(mouse.y - target.y, mouse.x - target.x) * Mathf.Rad2Deg;
@@ -293,8 +284,8 @@ public class Players : MonoBehaviour
         a = flip ? 180 + Mathf.Clamp(Mathf.DeltaAngle(0, a - 180), -maxAngle, -minAngle) : Mathf.Clamp(Mathf.DeltaAngle(0, a), minAngle, maxAngle);
         b = flip ? 180 + Mathf.Clamp(Mathf.DeltaAngle(0, b - 180), -maxAngle, -minAngle) : Mathf.Clamp(Mathf.DeltaAngle(0, b), minAngle, maxAngle);
 
-        aimPivotBone.transform.localRotation = Quaternion.RotateTowards(aimPivotBone.transform.localRotation, Quaternion.AngleAxis(flip ? 180 - a : a, Vector3.forward), 300 * Time.deltaTime);
-        vec = Quaternion.RotateTowards(vec, Quaternion.AngleAxis(flip ? 180 + b : b, Vector3.forward), 300 * Time.deltaTime);
+        aimPivotBone.transform.localRotation = Quaternion.RotateTowards(aimPivotBone.transform.localRotation, Quaternion.AngleAxis(flip ? 180 - a : a, Vector3.forward), 1000 * Time.deltaTime);
+        vec = Quaternion.RotateTowards(vec, Quaternion.AngleAxis(flip ? 180 + b : b, Vector3.forward), 10000 * Time.deltaTime);
     }
 
     void ChaseMouse()
@@ -311,14 +302,18 @@ public class Players : MonoBehaviour
 
     void dash()
     {
-        if (Input.GetButtonDown("Dash") && !dashCheck)
+        if ((Input.GetButtonDown("Dash") && !dashCheck) && (dashCooltime < dashDelay))
         {
-            isDash = true;
             if (dir1 > 0)
                 rb.velocity = new Vector2(dashSpeed, 0);
             else if (dir1 < 0)
                 rb.velocity = new Vector2(-dashSpeed, 0);
             rb.gravityScale = 0f;
+            dashTime = 0f;
+            dashDelay = 0f;
+            dashCheck = true;
+            _AnimState = AnimState.DASH;
+            SetCurrentAnimation(_AnimState);
             //moveAmount = dir * jumpSpeed * Time.deltaTime;
             //transform.Translate(moveAmount);
         }
@@ -365,13 +360,7 @@ public class Players : MonoBehaviour
             ChaseMouse();
         }
 
-        if (isDash)
-        {
-            dashTime = 0f;
-            isDash = false;
-            dashCheck = true;
-        }
-        if (dashTime > 0.15f)
+        if (dashTime > jumpDuration)
         {
             dashCheck = false;
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
@@ -381,7 +370,7 @@ public class Players : MonoBehaviour
         //ChaseMouse();
         atTime += Time.deltaTime;
         dashTime += Time.deltaTime;
-        
+        dashDelay += Time.deltaTime;
 
         SetCurrentAnimation(_AnimState);
     }
@@ -393,8 +382,10 @@ public class Players : MonoBehaviour
             isJump = false;
             Jump();
         }
+
         if (!dashCheck)
             Move();
+
         dash();
     }
 }

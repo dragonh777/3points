@@ -18,7 +18,7 @@ public class BulletControl : MonoBehaviour
 
     public static int bDamage;
 
-    public Transform pdir;
+    private GameObject pdir;
 
     bool left = false;
 
@@ -26,21 +26,22 @@ public class BulletControl : MonoBehaviour
     void Start()    // Bullet프리팹 생성시 초기화
     {
         bDamage = bulletDamage;
-        if (pdir.localScale.x > 0f)
+        pdir = GameObject.Find("Player");
+        if (pdir.transform.localScale.x > 0f)
         {
             this.transform.localScale = new Vector3(1, 1, 1);
             left = false;
         }
-        else if (pdir.localScale.x < 0f)
+        else if (pdir.transform.localScale.x < 0f)
         {
             this.transform.localScale = new Vector3(-1, 1, 1);
-            //
             left = true;
         }
     }
 
     private void Update()
     {
+        Destroy(gameObject, 2f);
     }
     // Update is called once per frame
     void FixedUpdate()  // Bullet프리팹 생성 후 날아가게 하기
@@ -71,6 +72,22 @@ public class BulletControl : MonoBehaviour
             Debug.Log("Hit");
             Destroy(gameObject);
             EnemyMove.Hp -= bDamage;
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Floor")   // 태그 Wall이나 Floor에닿으면 Destroy
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Floor")   // 태그 Wall이나 Floor에닿으면 Destroy
+        {
+            Destroy(gameObject);
         }
     }
 
