@@ -1,0 +1,27 @@
+
+effect_dash1_wind.png
+size: 488,565
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+레이어 1
+  rotate: false
+  xy: 2, 429
+  size: 457, 134
+  orig: 457, 134
+  offset: 0, 0
+  index: -1
+레이어 2
+  rotate: true
+  xy: 2, 2
+  size: 425, 163
+  orig: 425, 163
+  offset: 0, 0
+  index: -1
+레이어 3
+  rotate: true
+  xy: 167, 10
+  size: 417, 319
+  orig: 417, 319
+  offset: 0, 0
+  index: -1

@@ -11,7 +11,7 @@ public class Players : MonoBehaviour
 
     public enum AnimState
     {
-        IDLE, RUB, RUN, JUMP, JUMPD, DASH, FALL
+        IDLE, RUB, RUN, JUMP, JUMPD, DASH, FALL, ILSD
     }
 
     private AnimState _AnimState;
@@ -45,6 +45,8 @@ public class Players : MonoBehaviour
     public SkeletonUtilityBone aimPivotBone;
     public GameObject bulletEffect;
     public GameObject bulletPrefab;
+    public GameObject dashBurstEffect;
+    public GameObject dashWindEffect;
     public Transform aimPivot;
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset[] AnimClip;
@@ -88,7 +90,6 @@ public class Players : MonoBehaviour
     private float aTime = 0f;
     private float atTime;
     private float dashTime = 0f;
-    private float dashDelay = 0f;
     private float movetmp = 0f;
     private float a = 0f;
     private float b = 0f;
@@ -174,7 +175,10 @@ public class Players : MonoBehaviour
         {
             if (isGround)                       //애니메이션 재생
             {
-                _AnimState = AnimState.IDLE;
+                if (aiming)
+                    _AnimState = AnimState.ILSD;
+                else
+                    _AnimState = AnimState.IDLE;
             }
             else if (rb.velocity.y > 0)
             {
@@ -302,15 +306,20 @@ public class Players : MonoBehaviour
 
     void dash()
     {
-        if ((Input.GetButtonDown("Dash") && !dashCheck) && (dashCooltime < dashDelay))
+        if ((Input.GetButtonDown("Dash") && !dashCheck) && (dashCooltime < dashTime))
         {
-            if (dir1 > 0)
+
+            if (transform.localScale.x > 0)
                 rb.velocity = new Vector2(dashSpeed, 0);
-            else if (dir1 < 0)
+
+            else if (transform.localScale.x < 0)
                 rb.velocity = new Vector2(-dashSpeed, 0);
+
+            Instantiate(dashBurstEffect, transform.position, Quaternion.identity);
+            Instantiate(dashWindEffect, transform.position, Quaternion.identity);
+
             rb.gravityScale = 0f;
             dashTime = 0f;
-            dashDelay = 0f;
             dashCheck = true;
             _AnimState = AnimState.DASH;
             SetCurrentAnimation(_AnimState);
@@ -321,6 +330,7 @@ public class Players : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(dashTime);
 
         dir1 = Input.GetAxisRaw("Horizontal");
 
@@ -362,6 +372,7 @@ public class Players : MonoBehaviour
 
         if (dashTime > jumpDuration)
         {
+            
             dashCheck = false;
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
             rb.gravityScale = 1f;
@@ -370,7 +381,6 @@ public class Players : MonoBehaviour
         //ChaseMouse();
         atTime += Time.deltaTime;
         dashTime += Time.deltaTime;
-        dashDelay += Time.deltaTime;
 
         SetCurrentAnimation(_AnimState);
     }

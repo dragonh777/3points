@@ -1,26 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Spine;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BulletControl : MonoBehaviour
 {
-    // Bullet프리팹 스크립트
-    // 구현된 기능
-    //마우스 방향으로 날아감
-    // 데미지, 속도 가지고 있음
-
-    // 구현해야할 기능
-    // 날아가는 방향으로 총알 회전시키기
+    public enum AnimState
+    {
+        AIR, DEL, HIT
+    }
 
     public float bulletSpeed = 30f;
     public int bulletDamage = 35;
 
     public static int bDamage;
 
+    [Header("References")]
+    public SkeletonAnimation skeletonAnimation;
+    public AnimationReferenceAsset[] AnimClip;
+
     private GameObject pdir;
+    private float hitTime = 0f;
+    private float delTime = 0f;
+    private float fTime = 0f;
+
+
+    private AnimState _AnimState;
+    private string CurrentAnimation;
 
     bool left = false;
+    bool isHit = false;
+    bool isDel = false;
 
     // Start is called before the first frame update
     void Start()    // Bullet프리팹 생성시 초기화
@@ -39,9 +51,54 @@ public class BulletControl : MonoBehaviour
         }
     }
 
+    private void _AsyncAnimation(AnimationReferenceAsset animCip, bool loop, float timeScale)
+    {
+        //동일한 애니메이션을 재생하려고 한다면 아래 코드 구문 실행 x
+        if (animCip.name.Equals(CurrentAnimation))
+            return;
+
+        //해당 애니메이션으로 변경한다.
+        skeletonAnimation.state.SetAnimation(0, animCip, loop).TimeScale = timeScale;
+
+
+        skeletonAnimation.loop = loop;
+        skeletonAnimation.timeScale = timeScale;
+
+        //현재 재생되고 있는 애니메이션 값을 변경
+        CurrentAnimation = animCip.name;
+    }
+
+    private void SetCurrentAnimation(AnimState _state)
+    {
+        _AsyncAnimation(AnimClip[(int)_state], true, 1f);
+    }
+
+    private void SetCurrentAnimation(AnimState _state, bool loop)
+    {
+        _AsyncAnimation(AnimClip[(int)_state], loop, 1f);
+    }
+
     private void Update()
     {
-        Destroy(gameObject, 2f);
+        if (Time.time > 2f)
+        {
+            isDel = true;
+        }
+        if (isDel)
+        {
+            isDel = false;
+            delTime = 0f;
+            _AnimState = AnimState.DEL;
+            SetCurrentAnimation(_AnimState, false);
+        }
+        if (delTime > 0.7f)
+        {
+            Destroy(gameObject);
+        }
+
+        hitTime += Time.deltaTime;
+        delTime += Time.deltaTime;
+        fTime += Time.deltaTime;
     }
     // Update is called once per frame
     void FixedUpdate()  // Bullet프리팹 생성 후 날아가게 하기

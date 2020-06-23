@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class BulletEffect : MonoBehaviour
 {
-    float Ttime = 0f;
-
+    
     private GameObject pdir;
     // Start is called before the first frame update
     void Start()
