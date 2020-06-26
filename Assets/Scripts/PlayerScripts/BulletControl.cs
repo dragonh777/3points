@@ -37,6 +37,7 @@ public class BulletControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()    // Bullet프리팹 생성시 초기화
     {
+        fTime = 0f;
         bDamage = bulletDamage;
         pdir = GameObject.Find("Player");
         if (pdir.transform.localScale.x > 0f)
@@ -80,22 +81,25 @@ public class BulletControl : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time > 2f)
+        if (fTime > 0.5f)
         {
             isDel = true;
         }
-        if (isDel)
+        if (!isHit && isDel)
         {
-            isDel = false;
             delTime = 0f;
             _AnimState = AnimState.DEL;
             SetCurrentAnimation(_AnimState, false);
+
+            Destroy(gameObject, 0.7f);
         }
-        if (delTime > 0.7f)
+
+        if (isHit && hitTime > 0.7f)
         {
             Destroy(gameObject);
         }
 
+        Destroy(gameObject, 1.5f);
         hitTime += Time.deltaTime;
         delTime += Time.deltaTime;
         fTime += Time.deltaTime;
@@ -103,7 +107,6 @@ public class BulletControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()  // Bullet프리팹 생성 후 날아가게 하기
     {
-        //Debug.Log(a);
         if (left)
         {
             GetComponent<Transform>().transform.Translate(new Vector3(-1, 0, 0) * bulletSpeed * Time.deltaTime);
@@ -113,8 +116,6 @@ public class BulletControl : MonoBehaviour
             GetComponent<Transform>().transform.Translate(new Vector3(1, 0, 0) * bulletSpeed * Time.deltaTime);
         }
 
-
-
         //Destroy(gameObject, 5); // 5초 후 자동 Destroy
     }
 
@@ -122,12 +123,20 @@ public class BulletControl : MonoBehaviour
     {
         if (collision.gameObject.tag == "Wall"|| collision.gameObject.tag == "Floor")   // 태그 Wall이나 Floor에닿으면 Destroy
         {
-            Destroy(gameObject);
+            bulletSpeed = 0f;
+            _AnimState = AnimState.HIT;
+            SetCurrentAnimation(_AnimState, false);
+            isHit = true;
+            hitTime = 0f;
         }
         else if (collision.gameObject.tag == "Enemy")   // 태그 Enemy에 닿으면
         {
+            bulletSpeed = 0f;
             Debug.Log("Hit");
-            Destroy(gameObject);
+            _AnimState = AnimState.HIT;
+            SetCurrentAnimation(_AnimState, false);
+            isHit = true;
+            hitTime = 0f;
             EnemyMove.Hp -= bDamage;
         }
     }
@@ -136,7 +145,12 @@ public class BulletControl : MonoBehaviour
     {
         if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Floor")   // 태그 Wall이나 Floor에닿으면 Destroy
         {
-            Destroy(gameObject);
+            bulletSpeed = 0f;
+            _AnimState = AnimState.HIT;
+            SetCurrentAnimation(_AnimState, false);
+            isHit = true;
+            hitTime = 0f;
+            //Destroy(gameObject, 0.7f);
         }
     }
 
@@ -144,7 +158,11 @@ public class BulletControl : MonoBehaviour
     {
         if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Floor")   // 태그 Wall이나 Floor에닿으면 Destroy
         {
-            Destroy(gameObject);
+            bulletSpeed = 0f;
+            _AnimState = AnimState.HIT;
+            SetCurrentAnimation(_AnimState, false);
+            isHit = true;
+            hitTime = 0f;
         }
     }
 
@@ -152,7 +170,11 @@ public class BulletControl : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(gameObject);
+            bulletSpeed = 0f;
+            _AnimState = AnimState.HIT;
+            SetCurrentAnimation(_AnimState, false);
+            isHit = true;
+            hitTime = 0f;
         }
     }
 }

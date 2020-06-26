@@ -36,6 +36,6 @@ public class BulletEffect : MonoBehaviour
         //{
         //    this.gameObject.SetActive(false);
         //}
-        Destroy(gameObject, 0.3f);
+        Destroy(gameObject, 0.2f);
     }
 }

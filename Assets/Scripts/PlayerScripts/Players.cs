@@ -11,7 +11,7 @@ public class Players : MonoBehaviour
 
     public enum AnimState
     {
-        IDLE, RUB, RUN, JUMP, JUMPD, DASH, FALL, ILSD
+        IDLE, RUB, RUN, JUMP, JUMPD, DASH, FALL, ILSD, DOWN, GHIT, AHIT, LAND
     }
 
     private AnimState _AnimState;
@@ -81,6 +81,8 @@ public class Players : MonoBehaviour
 
     private bool isGround = false;
     private bool isJump = false;
+    private bool isLand = false;
+    private bool isHit = false;
     private bool dashCheck = true;
     private bool flipped;
     private bool flip = false;
@@ -96,6 +98,7 @@ public class Players : MonoBehaviour
     private float minAngle = -180;
     private float maxAngle = 180;
     private float angle;
+    private float airTime = 0f;
 
     private int jmpcount;
     private Quaternion vec;
@@ -116,12 +119,24 @@ public class Players : MonoBehaviour
 
         mouseCastPlane = new Plane(Vector3.forward, transform.position);
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            isHit = true;
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "Bottom")
         {
             jmpcount = maxJumps;
+            if (rb.velocity.y < -18f)
+            {
+                isLand = true;
+                airTime = 0f;
+            }
         }
     }
 
@@ -135,9 +150,7 @@ public class Players : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "Bottom")
-        {
             isGround = false;
-        }
     }
 
     private void _AsyncAnimation(AnimationReferenceAsset animCip, bool loop, float timeScale)
@@ -161,7 +174,11 @@ public class Players : MonoBehaviour
         _AsyncAnimation(AnimClip[(int)_state], true, 1f);
     }
 
-    
+    private void SetCurrentAnimation(AnimState _state, bool loop)
+    {
+        _AsyncAnimation(AnimClip[(int)_state], loop, 1f);
+    }
+
 
     void Move()
     {
@@ -177,9 +194,12 @@ public class Players : MonoBehaviour
             {
                 if (aiming)
                     _AnimState = AnimState.ILSD;
+                //else if (Input.GetKey(KeyCode.S))
+                //    _AnimState = AnimState.DOWN;
                 else
                     _AnimState = AnimState.IDLE;
             }
+            
             else if (rb.velocity.y > 0)
             {
                 if (jmpcount == 0)
@@ -190,7 +210,11 @@ public class Players : MonoBehaviour
             else
             {
                 if (!isGround)
+                {
                     _AnimState = AnimState.FALL;
+                        
+                }
+                    
             }
         }
         else
@@ -214,11 +238,16 @@ public class Players : MonoBehaviour
                 else
                 {
                     moveSpeed = movetmp;
+                    //if (Input.GetKey(KeyCode.S))
+                    //    _AnimState = AnimState.DOWN;
+                    //else
                     _AnimState = AnimState.RUN;
                 }
 
                 
             }
+            
+
             else if (rb.velocity.y > 0)
             {
                 if (jmpcount == 0)
@@ -229,7 +258,10 @@ public class Players : MonoBehaviour
             else
             {
                 if (!isGround)
+                {
                     _AnimState = AnimState.FALL;
+                }
+                    
             }
             //방향에 좌우 따라 맞춤
             dir = new Vector3(dir1, 0, 0);
@@ -295,20 +327,17 @@ public class Players : MonoBehaviour
     void ChaseMouse()
     {
         if (flipped)
-        {
             this.transform.localScale = left;
-        }
+
         else
-        {
             this.transform.localScale = right;
-        }
     }
 
     void dash()
     {
+        
         if ((Input.GetButtonDown("Dash") && !dashCheck) && (dashCooltime < dashTime))
         {
-
             if (transform.localScale.x > 0)
                 rb.velocity = new Vector2(dashSpeed, 0);
 
@@ -317,7 +346,6 @@ public class Players : MonoBehaviour
 
             Instantiate(dashBurstEffect, transform.position, Quaternion.identity);
             Instantiate(dashWindEffect, transform.position, Quaternion.identity);
-
             rb.gravityScale = 0f;
             dashTime = 0f;
             dashCheck = true;
@@ -330,16 +358,18 @@ public class Players : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(dashTime);
+
+        dash();
+
+        //Debug.Log(dashTime);
 
         dir1 = Input.GetAxisRaw("Horizontal");
 
         fire();
 
         if (Input.GetButtonDown("Jump"))
-        {
             isJump = true;
-        }
+
         if (Input.GetButtonDown("BasicAttack"))
         {
             //Instantiate(bulletPrefab, aimPivotBone.transform.position, aimPivotBone.transform.rotation);
@@ -356,6 +386,17 @@ public class Players : MonoBehaviour
             aiming = true;
 
         }
+
+        if (isLand)
+        {
+            _AnimState = AnimState.LAND;
+            SetCurrentAnimation(_AnimState, false);
+            if (airTime > 0.3f)
+            {
+                isLand = false;
+            }
+        }
+        
         //Debug.Log(aimPivotBone.transform.position.x);
         if (aimDuration < aTime)
         {
@@ -372,7 +413,6 @@ public class Players : MonoBehaviour
 
         if (dashTime > jumpDuration)
         {
-            
             dashCheck = false;
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
             rb.gravityScale = 1f;
@@ -381,13 +421,14 @@ public class Players : MonoBehaviour
         //ChaseMouse();
         atTime += Time.deltaTime;
         dashTime += Time.deltaTime;
+        airTime += Time.deltaTime;
 
         SetCurrentAnimation(_AnimState);
     }
 
     private void FixedUpdate()
     {
-        if (isJump)
+        if (isJump && !dashCheck)
         {
             isJump = false;
             Jump();
@@ -395,7 +436,5 @@ public class Players : MonoBehaviour
 
         if (!dashCheck)
             Move();
-
-        dash();
     }
 }
