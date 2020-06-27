@@ -28,10 +28,14 @@ public class Players : MonoBehaviour
     public float aimDuration = 1f;
     public float jumpDuration = 0.5f;
     public float attackDelay = 0.5f;
+    public int hp = 6;
     [Range(1, 3)]
     public int maxJumps = 1;
 
-    
+
+    public float xx = 0f;
+
+    public static int HP = 0;
 
     [Header("Animations")]
     [SpineAnimation]
@@ -111,6 +115,8 @@ public class Players : MonoBehaviour
         target = transform.position;
         right = new Vector3(1, 1, 1);
         left = new Vector3(-1, 1, 1);
+        HP = hp;
+        
         jmpcount = maxJumps;
 
         movetmp = moveSpeed;
@@ -212,7 +218,6 @@ public class Players : MonoBehaviour
                 if (!isGround)
                 {
                     _AnimState = AnimState.FALL;
-                        
                 }
                     
             }
@@ -344,6 +349,7 @@ public class Players : MonoBehaviour
             else if (transform.localScale.x < 0)
                 rb.velocity = new Vector2(-dashSpeed, 0);
 
+            skeletonAnimation.state.SetAnimation(1, idleAnim, false);
             Instantiate(dashBurstEffect, transform.position, Quaternion.identity);
             Instantiate(dashWindEffect, transform.position, Quaternion.identity);
             rb.gravityScale = 0f;
@@ -358,10 +364,8 @@ public class Players : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         dash();
 
-        //Debug.Log(dashTime);
 
         dir1 = Input.GetAxisRaw("Horizontal");
 
@@ -370,7 +374,10 @@ public class Players : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
             isJump = true;
 
-        if (Input.GetButtonDown("BasicAttack"))
+        if ((Input.GetKeyDown(KeyCode.X) || isHit) && HP > 0)
+            HP--;
+
+        if (Input.GetButtonDown("BasicAttack") && !dashCheck)
         {
             //Instantiate(bulletPrefab, aimPivotBone.transform.position, aimPivotBone.transform.rotation);
             //skeletonAnimation.state.SetAnimation(1, shootAnim, false);
@@ -384,7 +391,6 @@ public class Players : MonoBehaviour
             }
             aTime = 0f;
             aiming = true;
-
         }
 
         if (isLand)
