@@ -141,30 +141,30 @@ public class BulletControl : MonoBehaviour
         }
     }
 
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Floor")   // 태그 Wall이나 Floor에닿으면 Destroy
-        {
-            bulletSpeed = 0f;
-            _AnimState = AnimState.HIT;
-            SetCurrentAnimation(_AnimState, false);
-            isHit = true;
-            hitTime = 0f;
-            //Destroy(gameObject, 0.7f);
-        }
-    }
+    //void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Floor")   // 태그 Wall이나 Floor에닿으면 Destroy
+    //    {
+    //        bulletSpeed = 0f;
+    //        _AnimState = AnimState.HIT;
+    //        SetCurrentAnimation(_AnimState, false);
+    //        isHit = true;
+    //        hitTime = 0f;
+    //        //Destroy(gameObject, 0.7f);
+    //    }
+    //}
 
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Floor")   // 태그 Wall이나 Floor에닿으면 Destroy
-        {
-            bulletSpeed = 0f;
-            _AnimState = AnimState.HIT;
-            SetCurrentAnimation(_AnimState, false);
-            isHit = true;
-            hitTime = 0f;
-        }
-    }
+    //void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Floor")   // 태그 Wall이나 Floor에닿으면 Destroy
+    //    {
+    //        bulletSpeed = 0f;
+    //        _AnimState = AnimState.HIT;
+    //        SetCurrentAnimation(_AnimState, false);
+    //        isHit = true;
+    //        hitTime = 0f;
+    //    }
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
