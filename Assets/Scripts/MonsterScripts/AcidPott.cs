@@ -23,6 +23,7 @@ public class AcidPott : MonoBehaviour
     void Start()
     {
         currentHP = HP;
+        _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         _animator = GetComponent<Animator>();
         _animator.Play("idle");
     }
@@ -131,10 +132,11 @@ public class AcidPott : MonoBehaviour
         statement = index;
         hitState = false;
     }
-
-    private void OnCollisionEnter2D(Collision2D other) 
+    
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(other.gameObject.tag == "Bullet") {
+        if(collision.gameObject.tag == "Bullet")
+        {
             Hit();
         }
     }
