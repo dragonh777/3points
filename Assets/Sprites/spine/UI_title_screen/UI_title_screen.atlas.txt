@@ -1,0 +1,75 @@
+
+UI_title_screen.png
+size: 1158,1953
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Lunar
+  rotate: false
+  xy: 380, 371
+  size: 102, 104
+  orig: 102, 104
+  offset: 0, 0
+  index: -1
+Lunar_backlight
+  rotate: false
+  xy: 380, 595
+  size: 176, 176
+  orig: 176, 176
+  offset: 0, 0
+  index: -1
+Solar
+  rotate: false
+  xy: 380, 477
+  size: 116, 116
+  orig: 116, 116
+  offset: 0, 0
+  index: -1
+Solar_backlight
+  rotate: false
+  xy: 2, 10
+  size: 298, 298
+  orig: 298, 298
+  offset: 0, 0
+  index: -1
+Title
+  rotate: true
+  xy: 206, 332
+  size: 439, 172
+  orig: 439, 172
+  offset: 0, 0
+  index: -1
+ground
+  rotate: true
+  xy: 2, 310
+  size: 461, 202
+  orig: 461, 202
+  offset: 0, 0
+  index: -1
+space
+  rotate: true
+  xy: 302, 2
+  size: 328, 224
+  orig: 328, 224
+  offset: 0, 0
+  index: -1
+stardust_2
+  rotate: false
+  xy: 2, 773
+  size: 1154, 1178
+  orig: 1154, 1178
+  offset: 0, 0
+  index: -1
+
+UI_title_screen2.png
+size: 1152,1142
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+stardust_1
+  rotate: false
+  xy: 2, 2
+  size: 1148, 1138
+  orig: 1148, 1138
+  offset: 0, 0
+  index: -1

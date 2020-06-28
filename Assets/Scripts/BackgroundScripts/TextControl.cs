@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class TextControl : MonoBehaviour
 {
-    private TypeWriterEffect writer = new TypeWriterEffect();
+    public GameObject currentKey;
+    public GameObject nextKey;
     public static bool isMove = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -14,8 +15,9 @@ public class TextControl : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             isMove = true;
-            Debug.Log("aa");
             this.gameObject.SetActive(false);
+            currentKey.SetActive(false);
+            nextKey.SetActive(true);
         }
     }
 
