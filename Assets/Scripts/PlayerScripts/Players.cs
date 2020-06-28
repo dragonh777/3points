@@ -246,7 +246,10 @@ public class Players : MonoBehaviour
                 if (isHit)
                     _AnimState = AnimState.AHIT;
                 else if (jmpcount == 0)
+                {
+                    skeletonAnimation.state.SetAnimation(1, idleAnim, false);
                     _AnimState = AnimState.JUMPD;
+                }
                 else
                     _AnimState = AnimState.JUMP;
             }
@@ -306,7 +309,10 @@ public class Players : MonoBehaviour
                 if (isHit)
                     _AnimState = AnimState.AHIT;
                 else if (jmpcount == 0)
+                {
+                    skeletonAnimation.state.SetAnimation(1, idleAnim, false);
                     _AnimState = AnimState.JUMPD;
+                }
                 else
                     _AnimState = AnimState.JUMP;
             }

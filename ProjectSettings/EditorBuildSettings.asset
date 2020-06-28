@@ -11,7 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial_Operation.unity
     guid: 8c7a415d5b9dbbf4c991a60febd690af
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Tutorial_Siege.unity
     guid: dd953e606ff07634388f0a8b43f94841
+  - enabled: 1
+    path: Assets/Scenes/Tutorial_Boss.unity
+    guid: 5ece3686e9850144fb521ac76a984608
+  - enabled: 1
+    path: Assets/Scenes/Tutorial_Hunt.unity
+    guid: 4c971e9d4f38a5a468ef600ff8c7d3fd
   m_configObjects: {}
