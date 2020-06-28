@@ -477,10 +477,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce28126ddc5275e4ab761c516b438270, type: 2}
   - {fileID: 11400000, guid: 69c8b4477927cfb4396ccd9e49ab659b, type: 2}
   Speed: 100
-  player: {fileID: 0}
+  player: {fileID: 2474469164145198428, guid: c583fd5d1863c2649b5ed06a4a6234b4, type: 3}
   wheelgooSprite: {fileID: 751372501412364112}
   wheelgooGFX: {fileID: 751372501516787852}
-  hitEffect: {fileID: 0}
   HPBar: {fileID: 751372500959646721}
 --- !u!1 &751372502829979894
 GameObject:
