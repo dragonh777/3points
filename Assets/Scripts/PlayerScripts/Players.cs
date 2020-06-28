@@ -28,7 +28,7 @@ public class Players : MonoBehaviour
     public float aimDuration = 1f;
     public float jumpDuration = 0.5f;
     public float attackDelay = 0.5f;
-    public int hp = 6;
+    public int hpMax = 6;
     [Range(1, 3)]
     public int maxJumps = 1;
 
@@ -115,8 +115,10 @@ public class Players : MonoBehaviour
         target = transform.position;
         right = new Vector3(1, 1, 1);
         left = new Vector3(-1, 1, 1);
-        HP = hp;
-        
+        HP = hpMax;
+
+        skeletonAnimation.skeleton.SetColor(new Color32(235, 235, 255, 255));
+
         jmpcount = maxJumps;
 
         movetmp = moveSpeed;
@@ -127,10 +129,22 @@ public class Players : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            isHit = true;
-        }
+        //if (collision.gameObject.tag == "Enemy" && !isHit)
+        //{
+        //    HP--;
+
+        //    if (transform.localScale.x > 0)
+        //        rb.AddForce(new Vector2(-8, 5), ForceMode2D.Impulse);
+                
+        //    else if (transform.localScale.x < 0)
+        //        rb.AddForce(new Vector2(8, 5), ForceMode2D.Impulse);
+
+        //    if (HP > 1)
+        //    {
+        //        isHit = true;
+        //        StartCoroutine("invincibility");
+        //    }
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -142,6 +156,23 @@ public class Players : MonoBehaviour
             {
                 isLand = true;
                 airTime = 0f;
+            }
+        }
+
+        if (collision.gameObject.tag == "Enemy" && !isHit && !dashCheck)
+        {
+            HP--;
+
+            if (transform.localScale.x > 0 && HP > 0)
+                rb.AddForce(new Vector2(-8, 5), ForceMode2D.Impulse);
+
+            else if (transform.localScale.x < 0 && HP > 0)
+                rb.AddForce(new Vector2(8, 5), ForceMode2D.Impulse);
+
+            if (HP > 1)
+            {
+                isHit = true;
+                StartCoroutine("invincibility");
             }
         }
     }
@@ -192,13 +223,17 @@ public class Players : MonoBehaviour
 
         dir = Vector3.zero;
 
-
-
+        
         if (dir1 == 0f)                         //방향이 0이면(움직이지 않으면)
         {
             if (isGround)                       //애니메이션 재생
             {
-                if (aiming)
+                if (isHit)
+                {
+                    _AnimState = AnimState.GHIT;
+                    SetCurrentAnimation(_AnimState, false);
+                }
+                else if (aiming)
                     _AnimState = AnimState.ILSD;
                 //else if (Input.GetKey(KeyCode.S))
                 //    _AnimState = AnimState.DOWN;
@@ -208,17 +243,19 @@ public class Players : MonoBehaviour
             
             else if (rb.velocity.y > 0)
             {
-                if (jmpcount == 0)
+                if (isHit)
+                    _AnimState = AnimState.AHIT;
+                else if (jmpcount == 0)
                     _AnimState = AnimState.JUMPD;
                 else
                     _AnimState = AnimState.JUMP;
             }
             else
             {
-                if (!isGround)
-                {
+                if (isHit)
+                    _AnimState = AnimState.AHIT;
+                else if (!isGround)
                     _AnimState = AnimState.FALL;
-                }
                     
             }
         }
@@ -228,7 +265,12 @@ public class Players : MonoBehaviour
             {
                 if (aiming)
                 {
-                    if ((aimStick.x > 0 && dir1 > 0) || (aimStick.x < 0 && dir1 < 0))
+                    if (isHit)
+                    {
+                        _AnimState = AnimState.GHIT;
+                        SetCurrentAnimation(_AnimState, false);
+                    }
+                    else if ((aimStick.x > 0 && dir1 > 0) || (aimStick.x < 0 && dir1 < 0))
                     {
                         moveSpeed = movetmp;
                         _AnimState = AnimState.RUN;
@@ -246,7 +288,13 @@ public class Players : MonoBehaviour
                     //if (Input.GetKey(KeyCode.S))
                     //    _AnimState = AnimState.DOWN;
                     //else
-                    _AnimState = AnimState.RUN;
+                    if (isHit)
+                    {
+                        _AnimState = AnimState.GHIT;
+                        SetCurrentAnimation(_AnimState, false);
+                    }
+                    else
+                        _AnimState = AnimState.RUN;
                 }
 
                 
@@ -255,17 +303,19 @@ public class Players : MonoBehaviour
 
             else if (rb.velocity.y > 0)
             {
-                if (jmpcount == 0)
+                if (isHit)
+                    _AnimState = AnimState.AHIT;
+                else if (jmpcount == 0)
                     _AnimState = AnimState.JUMPD;
                 else
                     _AnimState = AnimState.JUMP;
             }
             else
             {
-                if (!isGround)
-                {
+                if (isHit)
+                    _AnimState = AnimState.AHIT;
+                else if (!isGround)
                     _AnimState = AnimState.FALL;
-                }
                     
             }
             //방향에 좌우 따라 맞춤
@@ -361,6 +411,29 @@ public class Players : MonoBehaviour
             //transform.Translate(moveAmount);
         }
     }
+
+    IEnumerator invincibility()
+    {
+        int cnt = 0;
+
+        while (cnt < 2)
+        {
+            if (cnt % 2 == 0)
+                skeletonAnimation.skeleton.SetColor(new Color32(150, 150, 150, 255));
+            else
+                skeletonAnimation.skeleton.SetColor(new Color32(235, 235, 255, 255));
+
+            yield return new WaitForSeconds(0.2f);
+
+            cnt++;
+        }
+
+        skeletonAnimation.skeleton.SetColor(new Color32(235, 235, 255, 255));
+
+        isHit = false;
+
+        yield return null;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -374,8 +447,10 @@ public class Players : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
             isJump = true;
 
-        if ((Input.GetKeyDown(KeyCode.X) || isHit) && HP > 0)
-            HP--;
+        if ((Input.GetKeyDown(KeyCode.X) || !isHit) && HP > 0)
+        {
+            
+        }
 
         if (Input.GetButtonDown("BasicAttack") && !dashCheck)
         {
