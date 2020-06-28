@@ -152,7 +152,7 @@ public class Players : MonoBehaviour
         if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "Bottom")
         {
             jmpcount = maxJumps;
-            if (rb.velocity.y < -18f)
+            if (rb.velocity.y < -10f)
             {
                 isLand = true;
                 airTime = 0f;

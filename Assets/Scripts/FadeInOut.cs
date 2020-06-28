@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FadeInOut : MonoBehaviour
 {
-    public float fTime = 3f;
+    public float fTime = 0.4f;
 
     private float leftTime = 0f;
     // Start is called before the first frame update
@@ -18,12 +18,17 @@ public class FadeInOut : MonoBehaviour
     void Update()
     {
         leftTime -= Time.deltaTime;
-        float ratio1 = 1f - (leftTime / fTime);
-
+        float ratio = 0f + (leftTime / fTime);
+        byte ratiob = (byte)((ratio * 100) + 155);
+        GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, ratiob);
+        if (ratiob <= 1)
+        {
+            Destroy(gameObject);
+        }
         //if (ratio > 0)
         //{
         //    ratio--;
-        //    GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, ratio);
+        //    
         //}
     }
 }
