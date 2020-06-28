@@ -1,169 +1,155 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Spine;
-using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BombSeed : MonoBehaviour
 {
-    public SkeletonAnimation skeletonAnimation;
-    public AnimationReferenceAsset[] AnimClip;
+    public Image HPBar;
+    public Canvas HPCanvas;
 
-    public float Speed = 150f;
+    private Transform _playerTransform;
+    private Rigidbody2D _rigid;
+    private Animator _animator;
+    private GameObject effect;
 
-    public Transform player;
-    public GameObject hpBar;
-
-    private Transform transform;
-    private Rigidbody2D rigid;
-    private CircleCollider2D coll;
-
-    private int statement = 0;  // 0: Idle, 1: Chase, 2: Attack
-    private int udstate = 0;    // 0: UP, 1: DOWN
-    private float setDirY;
-    private bool canbomb = true;    // true: can bomb, false: can't bomb
-
-    private void Awake()
-    {
-        rigid = GetComponent<Rigidbody2D>();
-        transform = GetComponent<Transform>();
-        coll = GetComponent<CircleCollider2D>();
-    }
+    private float moveSpeed = 150f;
+    public int statement = 0;  // 0: idle, 1: chase, 2: hit, 3: pop, 4: die
+    public static float HP = 100.0f;
+    private float currentHP;
+    private bool hitFlag = false;   // t: 쳐맞음, f: 안맞음
 
     // Start is called before the first frame update
     void Start()
     {
-        setDirY = transform.position.y;// 기본좌표따기
-        StartCoroutine("UDChange"); // Idle상태일 때 위아래 상태변경
+        currentHP = HP;
+        _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        _rigid = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        effect = gameObject.transform.GetChild(2).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(coll.enabled == false) { // 두1질때 콜라이더 꺼지니까 그거 체크해서 스크립트 끄기
-            rigid.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
-            gameObject.GetComponent<BombSeed>().enabled = false;
+        // 맞을 때
+        if (currentHP != HP)
+        {
+            currentHP = HP;
+            HPBar.fillAmount = HP / 100f;
+            statement = 2;
+        }
+        // 죽을 때
+        if (HP <= 0)
+        {
+            statement = 4;
         }
     }
 
     void FixedUpdate()
     {
-        if(statement == 0 && canbomb) {
-            Move_Idle();
+        if (statement == 0 && !hitFlag)  // idle
+        {
+            _animator.Play("bomb_idle");
         }
-        else if(statement == 1 && canbomb) {
-            Move_Chase();
+        else if (statement == 1 && !hitFlag) // chase
+        {
+            Chase();
         }
-        else if(statement == 2 && canbomb) {
-            Attack();
+        else if (statement == 2 && !hitFlag) // hit
+        {
+            hitFlag = true;
+            Hit();
+        }
+        else if (statement == 3) // pop
+        {
+            Pop();
+        }
+        else if (statement == 4) // die 
+        {
+            Die();
         }
     }
 
-    void OnDestroy()
+    void Chase()
     {
+        float dirX = _playerTransform.position.x - transform.position.x;
+        float dirY = _playerTransform.position.y - transform.position.y;
+        float moveAmountX = 0, moveAmountY = 0;
+        if (dirX > 0)
+        {
+            moveAmountX = moveSpeed * Time.deltaTime;
+        }
+        else if (dirX < 0)
+        {
+            moveAmountX = -moveSpeed * Time.deltaTime;
+        }
 
+        if (dirY > 0)
+        {
+            moveAmountY = moveSpeed * Time.deltaTime;
+        }
+        if (dirY < 0)
+        {
+            moveAmountY = -moveSpeed * Time.deltaTime;
+        }
+
+        _rigid.velocity = new Vector2(moveAmountX, moveAmountY);
+        _animator.Play("bomb_idle");
+    }
+
+    void Hit()
+    {
+        _rigid.constraints = RigidbodyConstraints2D.FreezeAll;
+        _animator.Play("bomb_hit");
+        HP -= 10f;
+    }
+
+    void AfterHit()
+    {
+        _rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
+        hitFlag = false;
+        statement = 1;
+    }
+
+    void Pop()
+    {
+        _rigid.constraints = RigidbodyConstraints2D.FreezeAll;
+        _animator.Play("bomb_pop");
+        Invoke("AfterPop", 0.38f);
+    }
+
+    void AfterPop()
+    {
+        effect.SetActive(true);
+    }
+
+    void Die()
+    {
+        _animator.Play("bomb_die");
+    }
+
+    public void AfterDeath()
+    {
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) 
     {
-        if(collision.gameObject.tag == "Player") {// 트리거에 Player가 닿으면
-            statement = 1;  // Chase상태
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        // 발판에서 벗어나면 다시 collider를 트리거상태 false
-        if (collision.gameObject.tag == "Floor") {
-            coll.isTrigger = false;
-        }
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)  
-    {
-        if(collision.gameObject.tag == "Player") {// 콜라이더에 Player닿으면
-            statement = 2;  // Attack상태
+        if (collision.gameObject.tag == "Bullet")   // 총알에 맞으면
+        {
+            statement = 2;  // hit
         }
-        // 총알에 닿으면(맞으면) Chase상태로 변경
-        if(collision.gameObject.tag == "Bullet") {
-            statement = 1;  
-        }
-        // 발판에 닿으면 통과하게 trigger상태로 바꿔줌
-        if(collision.gameObject.tag == "Floor") {
-            coll.isTrigger = true;
+        if (collision.gameObject.tag == "Player")    // 캐릭터와 충돌하면
+        {
+            statement = 3;  // pop
         }
     }
 
+    //private void OnCollisionEnter2D(Collision2D collision)  
+    //{
+        
+    //}
 
-    void Move_Idle()    // 코루틴 말고 다른 방법(y좌표 정해줘서 그 범위 벗어나면 udstate변경)으로 수정해보기
-    {
-        float moveAmount = 0;
-        float dirY = setDirY - transform.position.y;
-
-        if(udstate == 0) {
-            moveAmount = Speed * Time.deltaTime;
-        }
-        else if(udstate == 1) {
-            moveAmount = -Speed * 0.3f * Time.deltaTime;
-        }
-
-        if(dirY <= 0) {  // 원래 있던 위치보다 높이 올라가려고 하면 올라가지않게하기
-            return;
-        }
-        rigid.velocity = new Vector2(rigid.velocity.x, moveAmount);
-    }
-    IEnumerator UDChange()
-    {
-        if(statement != 0) {
-            yield break;
-        }
-
-        if (udstate == 1) {
-            udstate = 0;
-        }
-        else if(udstate == 0) {
-            udstate = 1;
-        }
-        yield return new WaitForSeconds(1f);
-        StartCoroutine("UDChange");
-    }
-
-    private void Move_Chase()
-    {
-        float dirX = player.position.x - transform.position.x;
-        float dirY = player.position.y - transform.position.y + 2f;
-        float moveAmountX = 0, moveAmountY = 0;
-        if (dirX > 0) {
-            moveAmountX = Speed * Time.deltaTime;
-        }
-        else if (dirX < 0) {
-            moveAmountX = -Speed * Time.deltaTime;
-        }
-
-        if (dirY > 0) {
-            moveAmountY = Speed * Time.deltaTime;
-        }
-        if (dirY < 0) {
-            moveAmountY = -Speed * Time.deltaTime;
-        }
-
-        rigid.velocity = new Vector2(moveAmountX, moveAmountY);
-    }
-
-// 애니메이션, 데미지입히기 넣기
-    void Attack()
-    {
-        canbomb = false;
-        // 제자리고정
-        rigid.constraints = RigidbodyConstraints2D.FreezeAll;
-
-        Debug.Log("Attack");
-        Invoke("AttackDestroy", 2);
-    }
-    // 공격 후 destroy
-    void AttackDestroy()
-    {
-        Destroy(gameObject);
-        Destroy(hpBar);
-    }
 }

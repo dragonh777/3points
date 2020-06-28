@@ -1,0 +1,41 @@
+
+bomb_spine.png
+size: 969,463
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: true
+  xy: 2, 2
+  size: 459, 583
+  orig: 567, 784
+  offset: 16, 0
+  index: -1
+eye_1
+  rotate: false
+  xy: 802, 295
+  size: 165, 166
+  orig: 165, 166
+  offset: 0, 0
+  index: -1
+eye_2
+  rotate: true
+  xy: 802, 222
+  size: 71, 72
+  orig: 73, 74
+  offset: 1, 1
+  index: -1
+left_wing
+  rotate: true
+  xy: 587, 198
+  size: 263, 213
+  orig: 263, 213
+  offset: 0, 0
+  index: -1
+right_wing
+  rotate: false
+  xy: 587, 16
+  size: 285, 180
+  orig: 285, 180
+  offset: 0, 0
+  index: -1

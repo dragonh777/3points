@@ -30,39 +30,40 @@ public class WheelGoo : MonoBehaviour
         _GFX = gameObject.transform.GetChild(0).gameObject;
         _animator = _GFX.GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody2D>();
-
-        _sprite.transform.Rotate(new Vector3(0, 0, 1));
     }
 
     // Update is called once per frame
     void Update()
     {
-        //// 맞을 때
-        //if (currentHP != HP)
-        //{
-        //    currentHP = HP;
-        //    HPBar.fillAmount = HP / 100f;
-        //}
-        //// 죽을 때
-        //if (HP <= 0)
-        //{
-        //    statement = 2;
-        //}
+        // 맞을 때
+        if (currentHP != HP)
+        {
+            currentHP = HP;
+            HPBar.fillAmount = HP / 100f;
+        }
+        // 죽을 때
+        if (HP <= 0)
+        {
+            statement = 2;
+        }
     }
 
     void FixedUpdate()
     {
-        //if (statement == 0 && !hitFlag) {   // wheel
-        //    Move();
-        //}
-        //else if(statement == 1 && !hitFlag) {   // hit
-        //    hitFlag = true;
+        if (statement == 0 && !hitFlag)
+        {   // wheel
+            Move();
+        }
+        else if (statement == 1 && !hitFlag)
+        {   // hit
+            hitFlag = true;
 
-        //    Hit();
-        //}
-        //else if(statement == 2) {   // die
-        //    Die();
-        //}
+            Hit();
+        }
+        else if (statement == 2)
+        {   // die
+            Die();
+        }
     }
 
     void Move()
@@ -98,6 +99,8 @@ public class WheelGoo : MonoBehaviour
     {
         _sprite.SetActive(true);    // 스프라이트 켜고
         _GFX.SetActive(false);  // 애니메이션 끄고
+
+        _sprite.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
 
         hitFlag = false;
         statement = 0;

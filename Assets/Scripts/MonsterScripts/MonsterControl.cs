@@ -4,32 +4,42 @@ using UnityEngine;
 
 public class MonsterControl : MonoBehaviour
 {
-    private AcidPott _acidPot;    // 애시드팟 스크립트
-    private WheelGoo _wheelGoo;
+    private AcidPott _acidPot = null;
+    private WheelGoo _wheelGoo = null;
+    private BombSeed _bombSeed = null;
 
     void Start()
     {
         _acidPot = this.transform.parent.gameObject.GetComponent<AcidPott>();
         _wheelGoo = this.transform.parent.gameObject.GetComponent<WheelGoo>();
+        _bombSeed = this.transform.parent.gameObject.GetComponent<BombSeed>();
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if(other.gameObject.tag == "Player") {
+        // 애시드팟꺼
+        if (other.gameObject.tag == "Player" && _acidPot != null) {
             _acidPot.isCollide = true;
             _acidPot.statement = 2;
+        }
+        // 밤시드꺼
+        else if(other.gameObject.tag == "Player" && _bombSeed != null)
+        {
+            _bombSeed.statement = 1;
         }
     }
     private void OnTriggerStay2D(Collider2D other) 
     {
-        if(other.gameObject.tag == "Player") {
+        // 애시드팟꺼
+        if (other.gameObject.tag == "Player" && _acidPot != null) {
             _acidPot.isCollide = true;
             _acidPot.statement = 2;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player") {  // 트리거에서 player가 벗어나면
+        // 애시드팟꺼
+        if (collision.gameObject.tag == "Player" && _acidPot != null) {  // 트리거에서 player가 벗어나면
             _acidPot.isCollide = false;
         }
     }
@@ -43,5 +53,11 @@ public class MonsterControl : MonoBehaviour
     void AfterDeath()
     {
         _wheelGoo.AfterDeath();
+    }
+
+    // 밤시드꺼
+    void AfterDeath_bombSeed()
+    {
+        _bombSeed.AfterDeath();
     }
 }

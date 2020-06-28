@@ -161,6 +161,10 @@ public class Players : MonoBehaviour
 
         if (collision.gameObject.tag == "Enemy" && !isHit && !dashCheck)
         {
+            if(collision.gameObject.name == "BombSeed") {
+                return;
+            }
+
             HP--;
 
             if (transform.localScale.x > 0 && HP > 0)
