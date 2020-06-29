@@ -440,6 +440,7 @@ MonoBehaviour:
     type: 3}
   HPBar: {fileID: 7529067892766785887}
   HPCanvas: {fileID: 7529067892513045594}
+  bullet: {fileID: 1710880904111314123, guid: f6830e2380f3a434b975213532870920, type: 3}
   statement: 0
   isCollide: 0
 --- !u!61 &7529067893648345129

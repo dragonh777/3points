@@ -14,11 +14,12 @@ public class ThornTentacle : MonoBehaviour
     private CapsuleCollider2D _capColl; // 애니메이션 있는 오브젝트 콜라이더(텐타클)
     private Animator _animator;
     private GameObject attackBound;
+
     public int statement = 0;  // 0: seed, 1: appear, 2: idle, 3: attack, 4: hit, 5: die
     private bool appearFlag = false;    // t: appear, f: seed
     public bool isCollide = false; // t: 공격범위 안에 플레이어
     private bool attackFlag = false;    // t: 공격모션중, f: 공격모션끝(공격모션 끝나야 다음공격 방향 정해짐)
-    private bool hitFlag = true;   // t:맞는모션중, f: 안맞는중
+    private bool hitFlag = true;   // t:맞는모션중(무적), f: 안맞는중
 
     public static float HP = 100.0f;
     private float currentHP;
@@ -46,11 +47,11 @@ public class ThornTentacle : MonoBehaviour
         // 죽을 때
         if(HP <= 0) {
             statement = 5;
+            _animator.SetBool("isDead", true);
         }
 
-        if(appearFlag) {
-            appearFlag = false;
-            statement = 1;
+        if(isCollide) {
+            statement = 3;
         }
     }
 
@@ -59,25 +60,21 @@ public class ThornTentacle : MonoBehaviour
         if(statement == 1) {    // appear
             _animator.SetBool("isCollide", true);
         }
-        else if(statement == 2 && !isCollide) {   // idle
+        if(statement == 2 && !isCollide) {   // idle
+            _boxColl.enabled = false;
             _animator.Play("vine_idle");
         }
         else if(statement == 3 && !attackFlag) {   // attack
+            _boxColl.enabled = false;
             Attack();
         }
         else if(statement == 4) {   // hit
             _animator.Play("vine_hit");
         }
-        else if(statement == 5) {   // die
-            _animator.Play("vine_die");
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag == "Player" && statement == 0) {
-            appearFlag = true;
-        }
-        else if(other.gameObject.tag == "Bullet" && statement != 0) {
+        if(other.gameObject.tag == "Bullet" && (statement == 2 || statement == 3) && HP > 0) {
             Hit();
         }
     }
@@ -86,9 +83,10 @@ public class ThornTentacle : MonoBehaviour
     void Appear() 
     {
         HPCanvas.gameObject.SetActive(true);
-        _boxColl.enabled = false;
         _capColl.enabled = true;
-        attackBound.SetActive(true);
+        gameObject.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        gameObject.transform.GetChild(0).gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+        
         hitFlag = false;
     }
 
@@ -106,7 +104,12 @@ public class ThornTentacle : MonoBehaviour
     }
     void AttackFlagSetFalse()   // 애니메이션이벤트에서 사용
     {
+        _boxColl.enabled = false;
         attackFlag = false;
+    }
+    void AttackBoundEnable()    // 애니메이션 이벤트
+    {
+        _boxColl.enabled = true;
     }
 
     void Hit()
@@ -117,6 +120,14 @@ public class ThornTentacle : MonoBehaviour
         HP -= 10f;
     }
 
+    void AfterHit()     // 애니메이션 이벤트용
+    {
+        hitFlag = false;
+        attackFlag = false;
+        _animator.SetBool("hitEnd", true);
+        statement = 2;
+    }
+
     void Die()
     {
         Destroy(gameObject);
@@ -124,8 +135,6 @@ public class ThornTentacle : MonoBehaviour
 
     void StatementChange(int index)     // 애니메이션이벤트에서 statement바꾸기용
     {
-        hitFlag = false;
-        _animator.SetBool("hitEnd", true);
         statement = index;
     }
 }

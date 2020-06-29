@@ -29,9 +29,11 @@ public class MonsterControl : MonoBehaviour
             _bombSeed.statement = 1;
         }
         // 텐타클꺼
-        else if(_tentacle != null && other.gameObject.tag == "Player") {
+        if(_tentacle != null && _tentacle.statement == 0 && other.gameObject.tag == "Player") {
+            _tentacle.statement = 1;
+        }
+        else if(_tentacle != null && (_tentacle.statement == 2 || _tentacle.statement == 3) && other.gameObject.tag == "Player") {
             _tentacle.isCollide = true;
-            _tentacle.statement = 3;
         }
     }
     private void OnTriggerStay2D(Collider2D other) 
@@ -42,9 +44,8 @@ public class MonsterControl : MonoBehaviour
             _acidPot.statement = 2;
         }
         // 텐타클꺼
-        else if(_tentacle != null && other.gameObject.tag == "Player") {
+        else if(_tentacle != null && (_tentacle.statement == 2 || _tentacle.statement == 3) && other.gameObject.tag == "Player") {
             _tentacle.isCollide = true;
-            _tentacle.statement = 3;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

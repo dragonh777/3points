@@ -8,6 +8,7 @@ public class AcidPott : MonoBehaviour
     public Transform _playerTransform;
     public Image HPBar;
     public Canvas HPCanvas;
+    public GameObject bullet;
     
     private Animator _animator;
     private float moveSpeed = 1f;
@@ -15,6 +16,8 @@ public class AcidPott : MonoBehaviour
     private int walkState = 0;  // 0: left walk, 1: right walk
     public bool isCollide = false; // t: collide, f: not collide
     private bool hitState = false;  // t: 맞고있을때, 무적, f: 평상시, 맞을수 있음
+
+    public static bool attackPosition = false;    // t: 왼쪽공격, f: 오른쪽공격(총알에서 얻어옴)
 
     public static float HP = 100.0f;
     private float currentHP;
@@ -101,13 +104,30 @@ public class AcidPott : MonoBehaviour
         if(dirX > 0) {  // 플레이어가 왼쪽이면
             transform.localScale = new Vector3(-0.2f, 0.2f);    // 왼쪽보고
             HPCanvas.transform.localScale = new Vector3(-0.0463f, 0.0463f);
+            attackPosition = true;
         }
         else if(dirX < 0) { // 플레이어가 오른쪽이면
             transform.localScale = new Vector3(0.2f, 0.2f);   // 오른쪽보고
             HPCanvas.transform.localScale = new Vector3(0.0463f, 0.0463f);
+            attackPosition = false;
         }
         _animator.Play("attack");
     }
+
+    void Shoot()
+    {
+        GameObject acidBullet = Instantiate(bullet);
+        //acidBullet.transform.parent = gameObject.transform;
+        if(attackPosition) {
+            acidBullet.transform.localPosition = new Vector3(transform.position.x + 0.92f, transform.position.y + 1.194f);  
+            acidBullet.transform.localScale = new Vector3(0.2f, 0.2f);
+        }
+        else if(!attackPosition) {
+            acidBullet.transform.localPosition = new Vector3(transform.position.x - 0.92f, transform.position.y + 1.194f);
+            acidBullet.transform.localScale = new Vector3(-0.2f, 0.2f);
+        }
+    }
+
     void Hit()
     {
         hitState = true;
