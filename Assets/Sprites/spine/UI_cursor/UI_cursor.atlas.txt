@@ -1,0 +1,34 @@
+
+UI_cursor.png
+size: 526,159
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+cursor_crystal
+  rotate: false
+  xy: 195, 8
+  size: 121, 149
+  orig: 121, 149
+  offset: 0, 0
+  index: -1
+cursor_crystal_click
+  rotate: false
+  xy: 318, 8
+  size: 121, 149
+  orig: 121, 149
+  offset: 0, 0
+  index: -1
+cursor_crystal_click_light
+  rotate: false
+  xy: 441, 55
+  size: 83, 102
+  orig: 83, 102
+  offset: 0, 0
+  index: -1
+cursor_edge
+  rotate: true
+  xy: 2, 2
+  size: 155, 191
+  orig: 155, 191
+  offset: 0, 0
+  index: -1
