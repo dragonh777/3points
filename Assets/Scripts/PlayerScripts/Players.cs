@@ -11,7 +11,7 @@ public class Players : MonoBehaviour
 
     public enum AnimState
     {
-        IDLE, RUB, RUN, JUMP, JUMPD, DASH, FALL, ILSD, DOWN, GHIT, AHIT, LAND
+        IDLE, RUB, RUN, JUMP, JUMPD, DASH, FALL, ILSD, DOWN, GHIT, AHIT, LAND, DIE
     }
 
     private AnimState _AnimState;
@@ -457,10 +457,10 @@ public class Players : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
             isJump = true;
 
-        if ((Input.GetKeyDown(KeyCode.X) || !isHit) && HP > 0)
-        {
+        //if ((Input.GetKeyDown(KeyCode.X) || !isHit) && HP > 0)
+        //{
             
-        }
+        //}
 
         if (Input.GetButtonDown("BasicAttack") && !dashCheck)
         {
@@ -507,6 +507,12 @@ public class Players : MonoBehaviour
             dashCheck = false;
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
             rb.gravityScale = 1f;
+        }
+
+        if (HP <= 0)
+        {
+            _AnimState = AnimState.DIE;
+            SetCurrentAnimation(_AnimState, false);
         }
 
         //ChaseMouse();

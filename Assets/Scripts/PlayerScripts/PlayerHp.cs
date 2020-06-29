@@ -56,7 +56,7 @@ public class PlayerHp : MonoBehaviour
             cnt--;
         }
 
-        if (regen > 3.0f)
+        if (regen > 3.0f && Players.HP > 0)
         {
             regen = 0f;
             if (cnt < 5)
