@@ -15,6 +15,8 @@ public class WheelGoo : MonoBehaviour
     private GameObject _GFX;    // 휠구 애니메이션 그래픽
     private Animator _animator; // 휠구 애니메이터
     private Rigidbody2D _rigid; // 휠구 리지드바디
+    private CircleCollider2D _cirColl;
+    private BoxCollider2D _boxColl;
 
     public static float HP = 100.0f;
     private float currentHP;
@@ -30,6 +32,8 @@ public class WheelGoo : MonoBehaviour
         _GFX = gameObject.transform.GetChild(0).gameObject;
         _animator = _GFX.GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody2D>();
+        _cirColl = GetComponent<CircleCollider2D>();
+        _boxColl = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -110,6 +114,9 @@ public class WheelGoo : MonoBehaviour
     {
         _GFX.SetActive(true);   // 애니메이션 켜고
         _sprite.SetActive(false);   // 스프라이트 끄고
+        _rigid.constraints = RigidbodyConstraints2D.FreezeAll;
+        _cirColl.enabled = false;
+        _boxColl.enabled = false;
 
         _animator.Play("vineball_die");
     }

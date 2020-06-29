@@ -10,6 +10,7 @@ public class BombSeed : MonoBehaviour
 
     private Transform _playerTransform;
     private Rigidbody2D _rigid;
+    private CircleCollider2D _cirColl;
     private Animator _animator;
     private GameObject effect;
 
@@ -25,6 +26,7 @@ public class BombSeed : MonoBehaviour
         currentHP = HP;
         _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         _rigid = GetComponent<Rigidbody2D>();
+        _cirColl = GetComponent<CircleCollider2D>();
         _animator = GetComponent<Animator>();
         effect = gameObject.transform.GetChild(2).gameObject;
     }
@@ -73,28 +75,9 @@ public class BombSeed : MonoBehaviour
 
     void Chase()
     {
-        float dirX = _playerTransform.position.x - transform.position.x;
-        float dirY = _playerTransform.position.y - transform.position.y;
-        float moveAmountX = 0, moveAmountY = 0;
-        if (dirX > 0)
-        {
-            moveAmountX = moveSpeed * Time.deltaTime;
-        }
-        else if (dirX < 0)
-        {
-            moveAmountX = -moveSpeed * Time.deltaTime;
-        }
+        Vector3 target = new Vector3(_playerTransform.position.x, _playerTransform.position.y);
+        transform.position = Vector3.MoveTowards(transform.position, target, 0.1f);
 
-        if (dirY > 0)
-        {
-            moveAmountY = moveSpeed * Time.deltaTime;
-        }
-        if (dirY < 0)
-        {
-            moveAmountY = -moveSpeed * Time.deltaTime;
-        }
-
-        _rigid.velocity = new Vector2(moveAmountX, moveAmountY);
         _animator.Play("bomb_idle");
     }
 
@@ -115,6 +98,7 @@ public class BombSeed : MonoBehaviour
     void Pop()
     {
         _rigid.constraints = RigidbodyConstraints2D.FreezeAll;
+        _cirColl.enabled = false;
         _animator.Play("bomb_pop");
         Invoke("AfterPop", 0.38f);
     }
@@ -127,6 +111,7 @@ public class BombSeed : MonoBehaviour
     void Die()
     {
         _animator.Play("bomb_die");
+        _cirColl.enabled = false;
     }
 
     public void AfterDeath()
@@ -146,10 +131,5 @@ public class BombSeed : MonoBehaviour
             statement = 3;  // pop
         }
     }
-
-    //private void OnCollisionEnter2D(Collision2D collision)  
-    //{
-        
-    //}
 
 }

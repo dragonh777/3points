@@ -11,6 +11,9 @@ public class AcidPott : MonoBehaviour
     public GameObject bullet;
     
     private Animator _animator;
+    private BoxCollider2D _boxColl;
+    private CapsuleCollider2D _capColl;
+    private Rigidbody2D _rigid;
     private float moveSpeed = 1f;
     public int statement = 0;  // 0: idle, 1: walk, 2: attack, 3: hit, 4: die
     private int walkState = 0;  // 0: left walk, 1: right walk
@@ -27,6 +30,9 @@ public class AcidPott : MonoBehaviour
     {
         currentHP = HP;
         _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        _capColl = GetComponent<CapsuleCollider2D>();
+        _boxColl = GetComponent<BoxCollider2D>();
+        _rigid = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _animator.Play("idle");
     }
@@ -68,6 +74,9 @@ public class AcidPott : MonoBehaviour
         }
         else if(statement == 4) {
             _animator.Play("die");
+            _rigid.constraints = RigidbodyConstraints2D.FreezeAll;
+            _capColl.enabled = false;
+            _boxColl.enabled = false;
         }
 
     }

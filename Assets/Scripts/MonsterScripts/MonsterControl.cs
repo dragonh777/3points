@@ -76,4 +76,5 @@ public class MonsterControl : MonoBehaviour
     {
         _bombSeed.AfterDeath();
     }
+
 }
