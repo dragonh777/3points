@@ -28,7 +28,7 @@ public class SkillUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("BasicAttack") && leftTime <= 0)
+        if (Input.GetButtonDown("BasicAttack") && leftTime <= 0 && !Players.isDie)
         {
             backBtn[0].SetActive(true);
             leftTime = coolTime[0];
@@ -66,7 +66,7 @@ public class SkillUI : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Dash") && leftTime1 <= 0)
+        if (Input.GetButtonDown("Dash") && leftTime1 <= 0 && !Players.isDie)
         {
             backBtn[1].SetActive(true);
             leftTime1 = coolTime[1];

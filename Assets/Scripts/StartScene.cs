@@ -14,11 +14,14 @@ public class StartScene : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {;
+    {
         if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Return))
         {
             if (cnt == 0)
+            {
+                Players.isDie = false;
                 SceneManager.LoadScene("Tutorial_Operation");
+            }
             if (cnt == 3)
             {
 #if UNITY_EDITOR

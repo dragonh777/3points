@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class Pause : MonoBehaviour
             isPause = true;
             Time.timeScale = 0;
             this.gameObject.SetActive(true);
+            Debug.Log("pause");
         }
     }
 
@@ -48,8 +50,15 @@ public class Pause : MonoBehaviour
             isPause = false;
             Time.timeScale = 1;
             this.gameObject.SetActive(false);
+            Debug.Log("pause2");
         }
     }
+    public void MainMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("StartScene");
+    }
+
     public void Exit()
     {
 #if UNITY_EDITOR
@@ -58,4 +67,6 @@ public class Pause : MonoBehaviour
                 Application.Quit();
 #endif
     }
+
+    
 }

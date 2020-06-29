@@ -36,6 +36,7 @@ public class Players : MonoBehaviour
     public float xx = 0f;
 
     public static int HP = 0;
+    public static bool isDie = false;
 
     [Header("Animations")]
     [SpineAnimation]
@@ -51,6 +52,7 @@ public class Players : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject dashBurstEffect;
     public GameObject dashWindEffect;
+    public GameObject gameOver;
     public Transform aimPivot;
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset[] AnimClip;
@@ -447,12 +449,14 @@ public class Players : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        dash();
+        if (!isDie)
+            dash();
 
 
         dir1 = Input.GetAxisRaw("Horizontal");
 
-        fire();
+        if (!isDie)
+            fire();
 
         if (Input.GetButtonDown("Jump"))
             isJump = true;
@@ -462,7 +466,7 @@ public class Players : MonoBehaviour
             
         //}
 
-        if (Input.GetButtonDown("BasicAttack") && !dashCheck)
+        if (Input.GetButtonDown("BasicAttack") && !dashCheck && !isDie)
         {
             //Instantiate(bulletPrefab, aimPivotBone.transform.position, aimPivotBone.transform.rotation);
             //skeletonAnimation.state.SetAnimation(1, shootAnim, false);
@@ -513,6 +517,8 @@ public class Players : MonoBehaviour
         {
             _AnimState = AnimState.DIE;
             SetCurrentAnimation(_AnimState, false);
+            isDie = true;
+            gameOver.SetActive(true);
         }
 
         //ChaseMouse();
@@ -525,13 +531,13 @@ public class Players : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isJump && !dashCheck)
+        if (isJump && !dashCheck && !isDie)
         {
             isJump = false;
             Jump();
         }
 
-        if (!dashCheck)
+        if (!dashCheck && !isDie)
             Move();
     }
 }
