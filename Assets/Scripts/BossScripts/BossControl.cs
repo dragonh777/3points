@@ -178,7 +178,6 @@ public class BossControl : MonoBehaviour
 
     void Update()
     {
-        
         skillManager();
         regen();
         //BossStep();
@@ -210,11 +209,7 @@ public class BossControl : MonoBehaviour
             death = true;
             Debug.Log("death true");
         }
-
-            
     }
-
-    
 
     void regen()
     {
