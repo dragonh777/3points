@@ -12,6 +12,7 @@ TagManager:
   - RightWall
   - LeftWall
   - Bottom
+  - Golem
   layers:
   - Default
   - TransparentFX

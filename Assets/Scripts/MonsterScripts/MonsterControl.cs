@@ -48,14 +48,14 @@ public class MonsterControl : MonoBehaviour
             _tentacle.isCollide = true;
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
         // 애시드팟꺼
-        if (_acidPot != null && collision.gameObject.tag == "Player") {  // 트리거에서 player가 벗어나면
+        if (_acidPot != null && other.gameObject.tag == "Player") {  // 트리거에서 player가 벗어나면
             _acidPot.isCollide = false;
         }
         // 텐타클꺼
-        else if(_tentacle != null && collision.gameObject.tag == "Player") {
+        else if(_tentacle != null && other.gameObject.tag == "Player") {
             _tentacle.isCollide = false;
         }
     }
