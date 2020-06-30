@@ -1,0 +1,41 @@
+
+object_cracked_rock.png
+size: 671,209
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dust_gentle
+  rotate: true
+  xy: 226, 35
+  size: 172, 160
+  orig: 172, 160
+  offset: 0, 0
+  index: -1
+dust_spread
+  rotate: false
+  xy: 2, 2
+  size: 222, 205
+  orig: 222, 205
+  offset: 0, 0
+  index: -1
+rock_1
+  rotate: true
+  xy: 527, 7
+  size: 77, 72
+  orig: 77, 72
+  offset: 0, 0
+  index: -1
+rock_2
+  rotate: false
+  xy: 527, 86
+  size: 142, 121
+  orig: 142, 121
+  offset: 0, 0
+  index: -1
+rock_3
+  rotate: false
+  xy: 388, 22
+  size: 137, 185
+  orig: 137, 185
+  offset: 0, 0
+  index: -1
