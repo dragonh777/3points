@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 563116654668141471}
   - component: {fileID: 563116654668141468}
   - component: {fileID: 8564573374953385044}
-  - component: {fileID: 1839214159345344973}
+  - component: {fileID: 4123939179931288255}
   m_Layer: 12
   m_Name: WheelGoo
   m_TagString: Enemy
@@ -189,7 +189,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34853745, y: 0.032530785}
   m_EdgeRadius: 0
---- !u!114 &1839214159345344973
+--- !u!114 &4123939179931288255
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,6 +204,7 @@ MonoBehaviour:
   HPBar: {fileID: 563116654619835988}
   HPCanvas: {fileID: 563116655039063046}
   moveSpeed: 120
+  HP: 100
 --- !u!1 &563116655039063042
 GameObject:
   m_ObjectHideFlags: 0

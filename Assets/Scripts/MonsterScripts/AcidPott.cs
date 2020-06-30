@@ -29,7 +29,7 @@ public class AcidPott : MonoBehaviour
     void Start()
     {
         currentHP = HP;
-        //_playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         _capColl = GetComponent<CapsuleCollider2D>();
         _boxColl = GetComponent<BoxCollider2D>();
         _rigid = GetComponent<Rigidbody2D>();
