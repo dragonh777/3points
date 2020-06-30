@@ -1,0 +1,27 @@
+
+object_forest_portal.png
+size: 951,1195
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+frame
+  rotate: false
+  xy: 2, 545
+  size: 824, 648
+  orig: 824, 648
+  offset: 0, 0
+  index: -1
+light
+  rotate: true
+  xy: 576, 123
+  size: 420, 373
+  orig: 420, 373
+  offset: 0, 0
+  index: -1
+wall
+  rotate: false
+  xy: 2, 2
+  size: 572, 541
+  orig: 572, 541
+  offset: 0, 0
+  index: -1

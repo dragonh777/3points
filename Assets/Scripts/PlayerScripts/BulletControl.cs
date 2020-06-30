@@ -168,6 +168,14 @@ public class BulletControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Floor")   // 태그 Wall이나 Floor에닿으면 Destroy
+        {
+            bulletSpeed = 0f;
+            _AnimState = AnimState.HIT;
+            SetCurrentAnimation(_AnimState, false);
+            isHit = true;
+            hitTime = 0f;
+        }
         if (collision.gameObject.tag == "Enemy")
         {
             bulletSpeed = 0f;

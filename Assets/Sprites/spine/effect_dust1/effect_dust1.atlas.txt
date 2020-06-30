@@ -1,0 +1,76 @@
+
+effect_dust1.png
+size: 1047,1029
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+cloud1
+  rotate: false
+  xy: 355, 78
+  size: 349, 344
+  orig: 349, 344
+  offset: 0, 0
+  index: -1
+cloud2
+  rotate: false
+  xy: 712, 330
+  size: 333, 340
+  orig: 333, 340
+  offset: 0, 0
+  index: -1
+gentle1
+  rotate: false
+  xy: 2, 16
+  size: 323, 184
+  orig: 323, 184
+  offset: 0, 0
+  index: -1
+smash1_L
+  rotate: true
+  xy: 2, 202
+  size: 277, 351
+  orig: 277, 351
+  offset: 0, 0
+  index: -1
+smash1_M
+  rotate: false
+  xy: 706, 2
+  size: 339, 326
+  orig: 339, 326
+  offset: 0, 0
+  index: -1
+smash1_R
+  rotate: false
+  xy: 745, 672
+  size: 295, 355
+  orig: 295, 355
+  offset: 0, 0
+  index: -1
+smash_particle1
+  rotate: false
+  xy: 384, 689
+  size: 359, 338
+  orig: 359, 338
+  offset: 0, 0
+  index: -1
+smash_wave1
+  rotate: false
+  xy: 2, 833
+  size: 380, 194
+  orig: 380, 194
+  offset: 0, 0
+  index: -1
+smash_wave_surround1
+  rotate: true
+  xy: 2, 481
+  size: 350, 354
+  orig: 350, 354
+  offset: 0, 0
+  index: -1
+wind1
+  rotate: false
+  xy: 358, 424
+  size: 352, 263
+  orig: 352, 263
+  offset: 0, 0
+  index: -1
