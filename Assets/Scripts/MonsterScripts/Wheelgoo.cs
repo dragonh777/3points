@@ -18,7 +18,7 @@ public class WheelGoo : MonoBehaviour
     private CircleCollider2D _cirColl;
     private BoxCollider2D _boxColl;
 
-    public static float HP = 100.0f;
+    public float HP = 100.0f;
     private float currentHP;
     private int statement = 0;  // 0: wheel, 1: hit, 2: die
     private bool hitFlag = false;   // t: 맞는중, f: 안맞는중

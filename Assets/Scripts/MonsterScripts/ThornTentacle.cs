@@ -21,7 +21,7 @@ public class ThornTentacle : MonoBehaviour
     private bool attackFlag = false;    // t: 공격모션중, f: 공격모션끝(공격모션 끝나야 다음공격 방향 정해짐)
     private bool hitFlag = true;   // t:맞는모션중(무적), f: 안맞는중
 
-    public static float HP = 100.0f;
+    public float HP = 100.0f;
     private float currentHP;
 
     // Start is called before the first frame update

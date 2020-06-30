@@ -22,7 +22,7 @@ public class AcidPott : MonoBehaviour
 
     public static bool attackPosition = false;    // t: 왼쪽공격, f: 오른쪽공격(총알에서 얻어옴)
 
-    public static float HP = 100.0f;
+    public float HP = 100.0f;
     private float currentHP;
     
     // Start is called before the first frame update
@@ -141,7 +141,14 @@ public class AcidPott : MonoBehaviour
     {
         hitState = true;
         HP -= 10f;
+
+        Invoke("AfterHit", 0.15f);
     }
+    void AfterHit()
+    {
+
+    }
+
     void Die()
     {
         Destroy(this.gameObject);
@@ -164,7 +171,7 @@ public class AcidPott : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Bullet")
+        if(collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Golem")
         {
             Hit();
         }

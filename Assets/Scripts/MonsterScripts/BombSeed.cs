@@ -16,7 +16,7 @@ public class BombSeed : MonoBehaviour
 
     private float moveSpeed = 150f;
     public int statement = 0;  // 0: idle, 1: chase, 2: hit, 3: pop, 4: die
-    public static float HP = 100.0f;
+    public float HP = 100.0f;
     private float currentHP;
     private bool hitFlag = false;   // t: 쳐맞음, f: 안맞음
 
