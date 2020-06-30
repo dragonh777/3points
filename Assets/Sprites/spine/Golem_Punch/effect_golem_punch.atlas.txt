@@ -1,0 +1,55 @@
+
+effect_golem_punch.png
+size: 568,535
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+golem_punch_L
+  rotate: false
+  xy: 374, 260
+  size: 190, 120
+  orig: 190, 120
+  offset: 0, 0
+  index: -1
+golem_punch_R
+  rotate: false
+  xy: 384, 382
+  size: 176, 151
+  orig: 176, 151
+  offset: 0, 0
+  index: -1
+wave_1
+  rotate: true
+  xy: 2, 317
+  size: 107, 370
+  orig: 107, 370
+  offset: 0, 0
+  index: -1
+wave_2
+  rotate: true
+  xy: 2, 208
+  size: 107, 370
+  orig: 107, 370
+  offset: 0, 0
+  index: -1
+wave_3
+  rotate: true
+  xy: 2, 426
+  size: 107, 380
+  orig: 107, 380
+  offset: 0, 0
+  index: -1
+wind_1
+  rotate: false
+  xy: 2, 2
+  size: 281, 204
+  orig: 281, 204
+  offset: 0, 0
+  index: -1
+wind_2
+  rotate: false
+  xy: 285, 2
+  size: 281, 204
+  orig: 281, 204
+  offset: 0, 0
+  index: -1

@@ -100,8 +100,8 @@ GameObject:
   - component: {fileID: 563116654668141470}
   - component: {fileID: 563116654668141471}
   - component: {fileID: 563116654668141468}
-  - component: {fileID: 5107960927211742725}
   - component: {fileID: 8564573374953385044}
+  - component: {fileID: 1839214159345344973}
   m_Layer: 12
   m_Name: WheelGoo
   m_TagString: Enemy
@@ -163,21 +163,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5107960927211742725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 563116654668141469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f326f0bab6108c48881c29579f3c65b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HPBar: {fileID: 563116654619835988}
-  HPCanvas: {fileID: 563116655039063046}
-  moveSpeed: 120
 --- !u!61 &8564573374953385044
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -204,6 +189,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34853745, y: 0.032530785}
   m_EdgeRadius: 0
+--- !u!114 &1839214159345344973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563116654668141469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f326f0bab6108c48881c29579f3c65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPBar: {fileID: 563116654619835988}
+  HPCanvas: {fileID: 563116655039063046}
+  moveSpeed: 120
 --- !u!1 &563116655039063042
 GameObject:
   m_ObjectHideFlags: 0
