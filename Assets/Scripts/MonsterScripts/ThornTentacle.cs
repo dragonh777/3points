@@ -16,7 +16,7 @@ public class ThornTentacle : MonoBehaviour
     private GameObject attackBound;
 
     public int statement = 0;  // 0: seed, 1: appear, 2: idle, 3: attack, 4: hit, 5: die
-    private bool appearFlag = false;    // t: appear, f: seed
+    //private bool appearFlag = false;    // t: appear, f: seed
     public bool isCollide = false; // t: 공격범위 안에 플레이어
     private bool attackFlag = false;    // t: 공격모션중, f: 공격모션끝(공격모션 끝나야 다음공격 방향 정해짐)
     private bool hitFlag = true;   // t:맞는모션중(무적), f: 안맞는중

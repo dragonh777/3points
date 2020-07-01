@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,8 @@ public class Golem : MonoBehaviour
     public GameObject hand; // 로켓펀치 손 프리팹
     public Image HPbar;
     public Image SPBar;
+    public TextMeshProUGUI HPText;
+    public TextMeshProUGUI SPText;
 
     // EmptyObject꺼
     private Rigidbody2D _rigid;
@@ -16,6 +19,7 @@ public class Golem : MonoBehaviour
     // GFX꺼
     private Animator _animator;
     private GameObject _GFX;    // 애니메이션 있는 그래픽 오브젝트
+    private Transform _GFXTransform;
 
     private float movePower = 1f;
     private float rollMovePower = 2f;
@@ -27,12 +31,14 @@ public class Golem : MonoBehaviour
     public static float SP = 120f;
     public float currentHP;
     public float currentSP;
+    private float HPAmount;
+    private float SPAmount;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentHP = HP;
-        currentSP = SP;
+        HPAmount = currentHP = HP;
+        SPAmount = currentSP = SP;
 
         _rigid = GetComponent<Rigidbody2D>();
         _rollSprite = transform.GetChild(1).gameObject;
@@ -40,6 +46,7 @@ public class Golem : MonoBehaviour
 
         _GFX = transform.GetChild(0).gameObject;
         _animator = _GFX.GetComponent<Animator>();
+        _GFXTransform = _GFX.GetComponent<Transform>();
 
         ReGen();
     }
@@ -47,18 +54,22 @@ public class Golem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HPbar.fillAmount = currentHP / HP;
-        SPBar.fillAmount = currentSP / SP;
+        HPAmount = Mathf.Lerp(HPAmount, currentHP, 0.5f);
+        SPAmount = Mathf.Lerp(SPAmount, currentSP, 0.5f);
+        HPbar.fillAmount = HPAmount / HP;
+        SPBar.fillAmount = SPAmount / SP;
+        HPText.text = currentHP + "/" + HP;
+        SPText.text = currentSP + "/" + SP;
 
         // 맞고있을때, 롤링중에는 체력 안닳음, 
         if(Input.GetKeyDown(KeyCode.X) && !hitFlag && !rollinFlag) {
             hitFlag = true;
-            currentHP -= 10f;
+            currentHP -= 30f;
             
             if(attackFlag) {   // 공격모션중엔 체력만 닳고 모션취소 x
                 hitFlag = false;
             }
-            else if(!attackFlag) {  // 공격안하고있을 때
+            else if(!attackFlag) {  // 공격안하고있을 때, 맞는모션
                 Hit();
             }
             else {
@@ -68,8 +79,16 @@ public class Golem : MonoBehaviour
 
         // 죽을 때
         if(currentHP <= 0) {
+            currentHP = 0f;
             hitFlag = true;
             Die();
+        }
+
+        if(Input.GetAxisRaw("Horizontal") != 0) {   // 걸어다닐 때
+            _animator.SetBool("isWalk", true);
+        }
+        else {  // 아닐 때
+            _animator.SetBool("isWalk", false);
         }
     }
 
@@ -81,6 +100,10 @@ public class Golem : MonoBehaviour
     // 체력, 마나 리젠, 임시용
     void ReGen() 
     {
+        if(currentHP <= 0) {
+            return;
+        }
+
         if(currentHP != HP) {
             currentHP += 10;
         }
@@ -102,11 +125,9 @@ public class Golem : MonoBehaviour
 
         if(Input.GetAxisRaw("Horizontal") < 0) {
             moveVelocity = Vector3.left;
-            // transform.localScale = new Vector3(-1, 1, 1);
 
             if(!rollinFlag) {   // 평상시
                 transform.localScale = new Vector3(-1, 1, 1);
-                _animator.Play("golem_walk_Full");
             }
             else {  // 롤상태
                 if(transform.localScale.x > 0) {
@@ -119,11 +140,9 @@ public class Golem : MonoBehaviour
         }
         else if(Input.GetAxisRaw("Horizontal") > 0) {
             moveVelocity = Vector3.right;
-            //transform.localScale = new Vector3(1, 1, 1);
 
             if(!rollinFlag) {   // 평상시
                 transform.localScale = new Vector3(1, 1, 1);
-                _animator.Play("golem_walk_Full");
             }
             else {  // 롤상태
                 if(transform.localScale.x > 0) {
@@ -132,11 +151,6 @@ public class Golem : MonoBehaviour
                 else {
                     _rollSprite.transform.Rotate(new Vector3(0, 0, 3));
                 }
-            }
-        }
-        else if(Input.GetAxisRaw("Horizontal") == 0) {
-            if(!rollinFlag) {   // 평상시
-                _animator.Play("golem_idle");
             }
         }
 
@@ -152,9 +166,11 @@ public class Golem : MonoBehaviour
     public void HandCrash(float cost)
     {
         hitFlag = false;
+        _animator.SetBool("isHit", false);
         if(attackFlag || currentSP < cost) {
             return;
         }
+        _animator.SetBool("isAttack", true);
         attackFlag = true;
 
         currentSP -= cost;
@@ -165,9 +181,11 @@ public class Golem : MonoBehaviour
     public void RocketPunch(float cost)
     {
         hitFlag = false;
+        _animator.SetBool("isHit", false);
         if(attackFlag || currentSP < cost) {
             return;
         }
+        _animator.SetBool("isAttack", true);
         attackFlag = true;
 
         currentSP -= cost;
@@ -178,9 +196,11 @@ public class Golem : MonoBehaviour
     public void RollingThunder(float cost)
     {
         hitFlag = false;
+        _animator.SetBool("isHit", false);
         if(attackFlag || currentSP < cost) {
             return;
         }
+        _animator.SetBool("isAttack", true);
         attackFlag = true;
 
         currentSP -= cost;
@@ -192,7 +212,7 @@ public class Golem : MonoBehaviour
 
     void Rolling_End()
     {
-        _GFX.SetActive(true);
+        _GFXTransform.GetComponent<MeshRenderer>().enabled = true;
         _rollSprite.SetActive(false);
         _rollSprite.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
         _animator.Play("golem_circle_off");
@@ -200,6 +220,7 @@ public class Golem : MonoBehaviour
 
     void Hit()
     {
+        _animator.SetBool("isHit", true);
         _animator.Play("golem_hit");
     }
 
@@ -213,13 +234,16 @@ public class Golem : MonoBehaviour
     // 맞는거 끝났을 때(애니메이션 이벤트)
     public void HitEnd()    
     {
+        _animator.SetBool("isHit", false);
         hitFlag = false;
     }
 
     // 죽는모션 이후(애니메이션 이벤트)
     public void AfterDeath()
     {
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        _GFXTransform.GetComponent<MeshRenderer>().enabled = false;
+        _rigid.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     // 롤 상태에 처리(애니메이션 이벤트)
@@ -230,7 +254,8 @@ public class Golem : MonoBehaviour
 
         _animator.Play("golem_circle");
         _rollSprite.SetActive(true);
-        _GFX.SetActive(false);
+
+        _GFXTransform.GetComponent<MeshRenderer>().enabled = false;
 
         Invoke("Rolling_End", 3f);
     }
@@ -256,6 +281,7 @@ public class Golem : MonoBehaviour
     // 공격끝나면 플래그 변경위함(애니메이션 이벤트)
     public void EndAttackMotion()
     {
+        _animator.SetBool("isAttack", false);
         attackFlag = false;
         _crashBound.SetActive(false);
     }

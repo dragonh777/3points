@@ -12,10 +12,10 @@ public class GolemHand : MonoBehaviour
     {
         golem = GameObject.Find("Golem");
         if(golem.transform.localScale.x > 0) {  // 오른쪽발사
-            transform.position = new Vector3(golem.transform.position.x + 2.32f, golem.transform.position.y + 3.0f);
+            transform.position = new Vector3(golem.transform.position.x + 1.379995f, golem.transform.position.y + 2.142848f);
         }
         else {  // 왼쪽발사
-            transform.position = new Vector3(golem.transform.position.x - 2.32f, golem.transform.position.y + 3.0f);
+            transform.position = new Vector3(golem.transform.position.x - 1.379995f, golem.transform.position.y + 2.142848f);
             transform.localScale = new Vector3(-1f, 1f);
         }
 

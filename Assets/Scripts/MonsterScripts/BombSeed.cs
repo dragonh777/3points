@@ -14,7 +14,6 @@ public class BombSeed : MonoBehaviour
     private Animator _animator;
     private GameObject effect;
 
-    private float moveSpeed = 150f;
     public int statement = 0;  // 0: idle, 1: chase, 2: hit, 3: pop, 4: die
     public float HP = 100.0f;
     private float currentHP;
