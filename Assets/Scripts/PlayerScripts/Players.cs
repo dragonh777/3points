@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Spine;
 using Spine.Unity;
-using UnityEditorInternal;
+//using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;

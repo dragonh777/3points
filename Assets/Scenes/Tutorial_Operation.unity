@@ -977,7 +977,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 335384087
   m_SortingLayer: -1
-  m_SortingOrder: 0
+  m_SortingOrder: 12
 --- !u!33 &445177742
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1636,7 +1636,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 335384087
   m_SortingLayer: -1
-  m_SortingOrder: 0
+  m_SortingOrder: 12
 --- !u!33 &608964183
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2364,7 +2364,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 335384087
   m_SortingLayer: -1
-  m_SortingOrder: 0
+  m_SortingOrder: 12
 --- !u!33 &759517743
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3051,7 +3051,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 335384087
   m_SortingLayer: -1
-  m_SortingOrder: 0
+  m_SortingOrder: 12
 --- !u!33 &897573576
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4516,7 +4516,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 335384087
   m_SortingLayer: -1
-  m_SortingOrder: 0
+  m_SortingOrder: 12
 --- !u!33 &1027314671
 MeshFilter:
   m_ObjectHideFlags: 0
