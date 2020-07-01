@@ -1,32 +1,60 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Button : MonoBehaviour
+public class SiegeButton : MonoBehaviour
 {
-    private Golem golemScript;
-
     public GameObject[] monster;
+    private Golem golemScript;
+    private ButtonCoolTime[] coolTimeScript = new ButtonCoolTime[6];
+    public bool isAttack = false;
 
     void Start()
     {
         golemScript = GameObject.Find("Golem").GetComponent<Golem>();
+
+        for(int i = 0; i < 6; i++) {
+            if(gameObject.name != "GameManager") {
+                break;
+            }
+
+            if (i < 3) {
+                coolTimeScript[i] = GameObject.Find("SkillBtn" + i.ToString()).GetComponent<ButtonCoolTime>();
+            }
+            else {
+                coolTimeScript[i] = GameObject.Find("SpawnBtn" + (i - 3).ToString()).GetComponent<ButtonCoolTime>();
+            }
+
+        }
     }
 
     // 스킬버튼함수
     public void Golem_HandCrash(float cost)
     {
+        if(isAttack || golemScript.currentSP < cost) {
+            return;
+        }
         golemScript.HandCrash(cost);
+        coolTimeScript[0].StartCoolTime(true);
     }
 
     public void Golem_RollingThunder(float cost)
     {
+        if(isAttack || golemScript.currentSP < cost) {
+            return;
+        }
         golemScript.RollingThunder(cost);
+        coolTimeScript[1].StartCoolTime(true);
     }
 
     public void Golem_RocketPunch(float cost)
     {
+        if (isAttack || golemScript.currentSP < cost) {
+            return;
+        }
         golemScript.RocketPunch(cost);
+        coolTimeScript[2].StartCoolTime(true);
     }
 
     // 소환버튼 함수
@@ -40,7 +68,7 @@ public class Button : MonoBehaviour
         else if(index == 1) {
             cost = 40f;
         }
-        else{
+        else {
             cost = 30f;
         }
 
@@ -54,6 +82,7 @@ public class Button : MonoBehaviour
         _monster.transform.position = spawnPosition;
 
         golemScript.currentSP -= cost;
+        coolTimeScript[index + 3].StartCoolTime(false);
     }
     
 

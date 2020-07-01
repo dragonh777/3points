@@ -54,8 +54,8 @@ public class Golem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HPAmount = Mathf.Lerp(HPAmount, currentHP, 0.5f);
-        SPAmount = Mathf.Lerp(SPAmount, currentSP, 0.5f);
+        HPAmount = Mathf.Lerp(HPAmount, currentHP, Time.deltaTime * 2f);
+        SPAmount = Mathf.Lerp(SPAmount, currentSP, Time.deltaTime * 2f);
         HPbar.fillAmount = HPAmount / HP;
         SPBar.fillAmount = SPAmount / SP;
         HPText.text = currentHP + "/" + HP;
@@ -281,6 +281,7 @@ public class Golem : MonoBehaviour
     // 공격끝나면 플래그 변경위함(애니메이션 이벤트)
     public void EndAttackMotion()
     {
+        GameObject.Find("GameManager").GetComponent<SiegeButton>().isAttack = false;
         _animator.SetBool("isAttack", false);
         attackFlag = false;
         _crashBound.SetActive(false);

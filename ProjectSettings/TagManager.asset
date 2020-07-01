@@ -12,7 +12,9 @@ TagManager:
   - RightWall
   - LeftWall
   - Bottom
-  - Golem
+  - Siege_Player
+  - Siege_Enemy
+  - Siege_Bullet
   layers:
   - Default
   - TransparentFX
