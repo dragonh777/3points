@@ -21,14 +21,9 @@ public class FadeInOut : MonoBehaviour
         float ratio = 0f + (leftTime / fTime);
         byte ratiob = (byte)((ratio * 100) + 155);
         GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, ratiob);
-        if (ratiob <= 1)
+        if (ratiob <= 5)
         {
             Destroy(gameObject);
         }
-        //if (ratio > 0)
-        //{
-        //    ratio--;
-        //    
-        //}
     }
 }

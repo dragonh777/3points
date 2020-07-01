@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Spine;
 using Spine.Unity;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -36,7 +37,12 @@ public class Players : MonoBehaviour
     public float xx = 0f;
 
     public static int HP = 0;
+    public static bool isHit = false;
     public static bool isDie = false;
+    public static bool isGround = false;
+    public static bool isMove = false;
+    public static bool isJump = false;
+    public static bool isLand = false;
 
     [Header("Animations")]
     [SpineAnimation]
@@ -44,7 +50,7 @@ public class Players : MonoBehaviour
     [SpineAnimation]
     public string shootAnim;
 
-    
+
 
     [Header("References")]
     public SkeletonUtilityBone aimPivotBone;
@@ -52,6 +58,7 @@ public class Players : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject dashBurstEffect;
     public GameObject dashWindEffect;
+    public GameObject dustEffect;
     public GameObject gameOver;
     public Transform aimPivot;
     public SkeletonAnimation skeletonAnimation;
@@ -85,10 +92,9 @@ public class Players : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    private bool isGround = false;
-    private bool isJump = false;
-    private bool isLand = false;
-    private bool isHit = false;
+
+
+
     private bool dashCheck = true;
     private bool flipped;
     private bool flip = false;
@@ -99,6 +105,7 @@ public class Players : MonoBehaviour
     private float atTime;
     private float dashTime = 0f;
     private float movetmp = 0f;
+    private float moveTime = 0f;
     private float a = 0f;
     private float b = 0f;
     private float minAngle = -180;
@@ -109,7 +116,7 @@ public class Players : MonoBehaviour
     private int jmpcount;
     private Quaternion vec;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -137,7 +144,7 @@ public class Players : MonoBehaviour
 
         //    if (transform.localScale.x > 0)
         //        rb.AddForce(new Vector2(-8, 5), ForceMode2D.Impulse);
-                
+
         //    else if (transform.localScale.x < 0)
         //        rb.AddForce(new Vector2(8, 5), ForceMode2D.Impulse);
 
@@ -154,16 +161,26 @@ public class Players : MonoBehaviour
         if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "Bottom")
         {
             jmpcount = maxJumps;
-            if (rb.velocity.y < -10f)
+            if (rb.velocity.y < -10f && rb.velocity.y > -25f)
             {
                 isLand = true;
                 airTime = 0f;
+                Instantiate(dustEffect, transform.position, Quaternion.identity);
+            }
+            else if (rb.velocity.y < -25f)
+            {
+                isLand = true;
+                DustEffect.isLLand = true;
+                airTime = 0f;
+                Instantiate(dustEffect, transform.position, Quaternion.identity);
+                Debug.Log("LLAND");
             }
         }
 
         if (collision.gameObject.tag == "Enemy" && !isHit && !dashCheck)
         {
-            if(collision.gameObject.name == "BombSeed") {
+            if (collision.gameObject.name == "BombSeed")
+            {
                 return;
             }
 
@@ -204,7 +221,7 @@ public class Players : MonoBehaviour
 
         //해당 애니메이션으로 변경한다.
         skeletonAnimation.state.SetAnimation(0, animCip, loop).TimeScale = timeScale;
-        
+
         skeletonAnimation.loop = loop;
         skeletonAnimation.timeScale = timeScale;
 
@@ -225,13 +242,15 @@ public class Players : MonoBehaviour
 
     void Move()
     {
-        
+
 
         dir = Vector3.zero;
 
-        
+
         if (dir1 == 0f)                         //방향이 0이면(움직이지 않으면)
         {
+            isMove = false;
+            moveTime = 0f;
             if (isGround)                       //애니메이션 재생
             {
                 if (isHit)
@@ -246,7 +265,7 @@ public class Players : MonoBehaviour
                 else
                     _AnimState = AnimState.IDLE;
             }
-            
+
             else if (rb.velocity.y > 0)
             {
                 if (isHit)
@@ -265,13 +284,20 @@ public class Players : MonoBehaviour
                     _AnimState = AnimState.AHIT;
                 else if (!isGround)
                     _AnimState = AnimState.FALL;
-                    
+
             }
         }
         else
         {
+            isMove = true;
+            moveTime += Time.deltaTime;
             if (isGround)
             {
+                if (moveTime > 0.5f)
+                {
+                    moveTime = 0f;
+                    Instantiate(dustEffect, transform.position, Quaternion.identity);
+                }
                 if (aiming)
                 {
                     if (isHit)
@@ -306,9 +332,9 @@ public class Players : MonoBehaviour
                         _AnimState = AnimState.RUN;
                 }
 
-                
+
             }
-            
+
 
             else if (rb.velocity.y > 0)
             {
@@ -328,7 +354,7 @@ public class Players : MonoBehaviour
                     _AnimState = AnimState.AHIT;
                 else if (!isGround)
                     _AnimState = AnimState.FALL;
-                    
+
             }
             //방향에 좌우 따라 맞춤
             dir = new Vector3(dir1, 0, 0);
@@ -402,7 +428,7 @@ public class Players : MonoBehaviour
 
     void dash()
     {
-        
+
         if ((Input.GetButtonDown("Dash") && !dashCheck) && (dashCooltime < dashTime))
         {
             if (transform.localScale.x > 0)
@@ -463,7 +489,7 @@ public class Players : MonoBehaviour
 
         //if ((Input.GetKeyDown(KeyCode.X) || !isHit) && HP > 0)
         //{
-            
+
         //}
 
         if (Input.GetButtonDown("BasicAttack") && !dashCheck && !isDie)
@@ -482,16 +508,18 @@ public class Players : MonoBehaviour
             aiming = true;
         }
 
-        if (isLand)
+        if (isLand && !isMove)
         {
+
             _AnimState = AnimState.LAND;
             SetCurrentAnimation(_AnimState, false);
             if (airTime > 0.3f)
             {
                 isLand = false;
             }
+
         }
-        
+
         //Debug.Log(aimPivotBone.transform.position.x);
         if (aimDuration < aTime)
         {
@@ -521,10 +549,12 @@ public class Players : MonoBehaviour
             gameOver.SetActive(true);
         }
 
+        //Debug.Log(Time.time);
         //ChaseMouse();
         atTime += Time.deltaTime;
         dashTime += Time.deltaTime;
         airTime += Time.deltaTime;
+
 
         SetCurrentAnimation(_AnimState);
     }

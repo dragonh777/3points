@@ -750,6 +750,8 @@ MonoBehaviour:
     type: 3}
   dashWindEffect: {fileID: 4806818449040349958, guid: 5f52302b5c2698d4eb7e7076ac824a8c,
     type: 3}
+  dustEffect: {fileID: 4846089759674293591, guid: 7d32a611e9a79e841b1f6016ca2e3a2e,
+    type: 3}
   gameOver: {fileID: 8861773450837300002, guid: 2d01f9eb79ced6c47a2da89834589bdc,
     type: 3}
   aimPivot: {fileID: 2474469165450290423}
