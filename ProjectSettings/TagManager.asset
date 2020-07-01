@@ -15,6 +15,7 @@ TagManager:
   - Siege_Player
   - Siege_Enemy
   - Siege_Bullet
+  - WorldOut
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - Enemy
   - Player
   - Hill
-  - 
+  - WorldOut
   - 
   - 
   - 
