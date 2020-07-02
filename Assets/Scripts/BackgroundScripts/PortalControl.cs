@@ -11,7 +11,7 @@ public class PortalControl : MonoBehaviour
         {
             if ((Input.GetKeyDown(KeyCode.W)))
             {
-                SceneManager.LoadScene("Tutorial_Siege");
+                SceneManager.LoadScene("Tutorial_Boss");
             }
         }
     }
