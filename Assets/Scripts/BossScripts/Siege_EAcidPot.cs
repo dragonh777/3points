@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AcidPott : MonoBehaviour
+public class Siege_EAcidPot : MonoBehaviour
 {
     public Transform _playerTransform;
     public Image HPBar;
@@ -30,12 +30,7 @@ public class AcidPott : MonoBehaviour
     void Start()
     {
         currentHP = HP;
-        if(gameObject.tag == "Siege_Enemy") {   // 공성전 적 애시드팟일 때
-            _playerTransform = GameObject.Find("Golem").GetComponent<Transform>();
-        }
-        else {
-            _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
-        }
+        _playerTransform = GameObject.Find("Golem").GetComponent<Transform>();
         _capColl = GetComponent<CapsuleCollider2D>();
         _boxColl = GetComponent<BoxCollider2D>();
         _rigid = GetComponent<Rigidbody2D>();
@@ -66,13 +61,13 @@ public class AcidPott : MonoBehaviour
 
     void FixedUpdate() 
     {    
-        if(statement == 0 && !isCollide && !hitState) {
-            Idle();
-        }
-        else if(statement == 1 && !isCollide && !hitState) {
+        // if(statement == 0 && !isCollide && !hitState) {
+        //     Idle();
+        // }
+        if( !isCollide && !hitState) {
             Walk();
         }
-        else if(statement == 2 && !hitState) {
+        else if(isCollide && !hitState) {
             Attack();
         }
         else if(statement == 3) {
@@ -98,13 +93,14 @@ public class AcidPott : MonoBehaviour
     void Walk()
     {
         Vector3 moveVelocity = Vector3.zero;
+        float dirX = _playerTransform.position.x - transform.position.x;
 
-        if(walkState == 0) {    // 왼쪽으로 걸어갈 때
+        if(dirX < 0) {    // 왼쪽으로 걸어갈 때
             moveVelocity = Vector3.left;
             transform.localScale = new Vector3(0.2f, 0.2f);
             HPCanvas.transform.localScale = new Vector3(0.0463f, 0.0463f);
         }
-        else if(walkState == 1) {   // 오른쪽으로 걸어갈 때
+        else if(dirX > 0) {   // 오른쪽으로 걸어갈 때
             moveVelocity = Vector3.right;
             transform.localScale = new Vector3(-0.2f, 0.2f);
             HPCanvas.transform.localScale = new Vector3(-0.0463f, 0.0463f);
@@ -114,7 +110,7 @@ public class AcidPott : MonoBehaviour
     }
     void Attack()
     {
-       float dirX = _playerTransform.position.x - transform.position.x;
+        float dirX = _playerTransform.position.x - transform.position.x;
 
         if(dirX > 0) {  // 플레이어가 왼쪽이면
             transform.localScale = new Vector3(-0.2f, 0.2f);    // 왼쪽보고
@@ -160,25 +156,22 @@ public class AcidPott : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    void IdleWalkStateChange()  // idle, walk상태 결정하기
-    {
-        statement = Random.Range(0, 2); // 0~1사이 랜덤값 statement로 지정
-    }
-    void WalkStateChange()  // left, rightwalk 결정하기
-    {
-        walkState = Random.Range(0, 2);
-    }
-
     void StatementChange(int index)
     {
         statement = index;
         hitState = false;
     }
+
+    void IdleWalkStateChange()  // idle, walk상태 결정하기
+    {
+    }
+    void WalkStateChange()  // left, rightwalk 결정하기
+    {
+    }
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Bullet")
-        {
+        if(collision.gameObject.tag == "Siege_Bullet") {
             Hit();
         }
     }

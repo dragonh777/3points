@@ -37,7 +37,7 @@ public class AcidPotBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Floor" || other.gameObject.tag == "Golem") {
+        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Floor") {
             _capColl.enabled = false;
             _rigid.constraints = RigidbodyConstraints2D.FreezeAll;
             _animator.Play("hit");

@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 7962279802540356968}
   m_Layer: 12
   m_Name: BombEffect
-  m_TagString: Bullet
+  m_TagString: Siege_Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 1558016879943702435}
   m_Layer: 0
   m_Name: Siege_BombSeed
-  m_TagString: Enemy
+  m_TagString: Siege_Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

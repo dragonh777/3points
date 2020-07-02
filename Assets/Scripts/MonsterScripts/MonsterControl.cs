@@ -8,7 +8,7 @@ public class MonsterControl : MonoBehaviour
     private WheelGoo _wheelGoo = null;
     private BombSeed _bombSeed = null;
     private ThornTentacle _tentacle = null;
-
+    
     void Start()
     {
         _acidPot = this.transform.parent.gameObject.GetComponent<AcidPott>();
@@ -20,12 +20,12 @@ public class MonsterControl : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) 
     {
         // 애시드팟꺼
-        if (_acidPot != null && other.gameObject.tag == "Player") {
+        if (_acidPot != null && (other.gameObject.tag == "Player" || other.gameObject.tag == "Siege_Player")) {
             _acidPot.isCollide = true;
             _acidPot.statement = 2;
         }
         // 밤시드꺼
-        else if(_bombSeed != null && other.gameObject.tag == "Player") {
+        else if(_bombSeed != null && (other.gameObject.tag == "Player" || other.gameObject.tag == "Siege_Enemy")) {
             _bombSeed.statement = 1;
         }
         // 텐타클꺼
@@ -39,7 +39,7 @@ public class MonsterControl : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other) 
     {
         // 애시드팟꺼
-        if (_acidPot != null && other.gameObject.tag == "Player") {
+        if (_acidPot != null && (other.gameObject.tag == "Player" || other.gameObject.tag == "Siege_Player")) {
             _acidPot.isCollide = true;
             _acidPot.statement = 2;
         }
@@ -51,7 +51,7 @@ public class MonsterControl : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         // 애시드팟꺼
-        if (_acidPot != null && other.gameObject.tag == "Player") {  // 트리거에서 player가 벗어나면
+        if (_acidPot != null && (other.gameObject.tag == "Player" || other.gameObject.tag == "Siege_Player")) {  // 트리거에서 player가 벗어나면
             _acidPot.isCollide = false;
         }
         // 텐타클꺼

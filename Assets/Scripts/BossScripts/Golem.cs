@@ -26,6 +26,7 @@ public class Golem : MonoBehaviour
     private bool attackFlag = false;    // t: 공격중, f: 아님
     private bool rollinFlag = false;    // t: 롤링상태, Move함수에서 애니메이션 제어욤
     private bool hitFlag = false;   // t: 맞고있을 때(잠시무적)
+    private bool hitTag = false;    // 상대와 충돌시 확인
 
     public static float HP = 150f;
     public static float SP = 120f;
@@ -62,7 +63,8 @@ public class Golem : MonoBehaviour
         SPText.text = currentSP + "/" + SP;
 
         // 맞고있을때, 롤링중에는 체력 안닳음, 
-        if(Input.GetKeyDown(KeyCode.X) && !hitFlag && !rollinFlag) {
+        if(/*Input.GetKeyDown(KeyCode.X)*/hitTag && !hitFlag && !rollinFlag) {
+            hitTag = false;
             hitFlag = true;
             currentHP -= 30f;
             
@@ -285,6 +287,13 @@ public class Golem : MonoBehaviour
         _animator.SetBool("isAttack", false);
         attackFlag = false;
         _crashBound.SetActive(false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        if(other.gameObject.tag == "Siege_EnemyBullet") {
+            hitTag = true;
+        }
     }
     
 }

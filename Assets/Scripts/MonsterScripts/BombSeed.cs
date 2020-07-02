@@ -125,7 +125,7 @@ public class BombSeed : MonoBehaviour
         {
             statement = 2;  // hit
         }
-        if (collision.gameObject.tag == "Player")    // 캐릭터와 충돌하면
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Siege_Enemy")    // 캐릭터와 충돌하면
         {
             statement = 3;  // pop
         }

@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 8897025336160470635}
   - component: {fileID: 8897025336160470641}
   - component: {fileID: 8897025336160470640}
-  - component: {fileID: 8340793044065316947}
+  - component: {fileID: 7494077013897148406}
   m_Layer: 12
-  m_Name: AcidPot_Bullet
-  m_TagString: Bullet
+  m_Name: Siege_AcidPot_Bullet
+  m_TagString: Siege_EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,7 +177,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8340793044065316947
+--- !u!114 &7494077013897148406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,6 +186,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8897025336160470634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ff8c15e964e3db46815263dccab0114, type: 3}
+  m_Script: {fileID: 11500000, guid: b18addacb1a87e047b2864592fc361e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

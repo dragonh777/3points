@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WheelGoo : MonoBehaviour
+public class Siege_WheelGoo : MonoBehaviour
 {
     public Image HPBar; // HP바 이미지
     public Canvas HPCanvas; // HP바 캔버스
 
     public float moveSpeed = 120.0f;
 
-    public Transform _playerTransform; // 플레이어 트랜스폼
+    private Transform _playerTransform; // 플레이어 트랜스폼
     private GameObject _sprite; // 휠구 스프라이트
     private GameObject _GFX;    // 휠구 애니메이션 그래픽
     private Animator _animator; // 휠구 애니메이터
@@ -19,7 +19,6 @@ public class WheelGoo : MonoBehaviour
     private BoxCollider2D _boxColl;
 
     public float HP = 100.0f;
-    private float maxHP;
     private float currentHP;
     private int statement = 0;  // 0: wheel, 1: hit, 2: die
     private bool hitFlag = false;   // t: 맞는중, f: 안맞는중
@@ -28,7 +27,6 @@ public class WheelGoo : MonoBehaviour
     void Start()
     {
         currentHP = HP;
-        maxHP = HP;
         _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         _sprite = gameObject.transform.GetChild(1).gameObject;
         _GFX = gameObject.transform.GetChild(0).gameObject;
@@ -45,7 +43,7 @@ public class WheelGoo : MonoBehaviour
         if (currentHP != HP)
         {
             currentHP = HP;
-            HPBar.fillAmount = currentHP / maxHP;
+            HPBar.fillAmount = HP / 100f;
         }
         // 죽을 때
         if (HP <= 0)
@@ -63,6 +61,7 @@ public class WheelGoo : MonoBehaviour
         else if (statement == 1 && !hitFlag)
         {   // hit
             hitFlag = true;
+
             Hit();
         }
         else if (statement == 2)
@@ -93,22 +92,10 @@ public class WheelGoo : MonoBehaviour
 
     void Hit()
     {
-        Debug.Log("hit");
-
         _GFX.SetActive(true);   // 애니메이션 켜고
         _sprite.SetActive(false);   // 스프라이트 끄고
 
-        if(gameObject.tag == "Siege_Player") {
-            float dirX = _playerTransform.position.x - this.transform.position.x;
-            if(dirX >= 0) {
-                _rigid.AddForce(new Vector2(-6, 5), ForceMode2D.Impulse);
-            }
-            else if(dirX < 0) {
-                _rigid.AddForce(new Vector2(6, 5), ForceMode2D.Impulse);
-            }
-        }
-
-        HP -= 10.0f;
+        HP -= 30.0f;
         _animator.Play("vineball_hit");
     }
 
@@ -141,8 +128,17 @@ public class WheelGoo : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!hitFlag && (collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Siege_EnemyBullet")) {
+        if (collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Siege_EnemyBullet") {
             statement = 1;
+        }
+        else if(collision.gameObject.tag == "Siege_Enemy") {
+            float dirX = _playerTransform.position.x - transform.position.x;
+            if(dirX > 0) {
+                _rigid.AddForce(new Vector2(-6, 5), ForceMode2D.Impulse);
+            }
+            else if(dirX < 0) {
+                _rigid.AddForce(new Vector2(6, 5), ForceMode2D.Impulse);
+            }
         }
     }
 }

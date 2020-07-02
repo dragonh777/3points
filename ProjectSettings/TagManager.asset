@@ -16,6 +16,8 @@ TagManager:
   - Siege_Enemy
   - Siege_Bullet
   - WorldOut
+  - Golem
+  - Siege_EnemyBullet
   layers:
   - Default
   - TransparentFX
