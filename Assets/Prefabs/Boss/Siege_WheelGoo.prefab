@@ -441,8 +441,8 @@ GameObject:
   - component: {fileID: 8219564088657602364}
   - component: {fileID: 8219564088657602367}
   - component: {fileID: 223540042507409655}
-  - component: {fileID: 8219564088657602355}
   - component: {fileID: 8219564088657602354}
+  - component: {fileID: 7692340260619042915}
   m_Layer: 12
   m_Name: Siege_WheelGoo
   m_TagString: Siege_Player
@@ -530,23 +530,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34853745, y: 0.032530785}
   m_EdgeRadius: 0
---- !u!114 &8219564088657602355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8219564088657602366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f326f0bab6108c48881c29579f3c65b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HPBar: {fileID: 8219564088873650935}
-  HPCanvas: {fileID: 8219564088486924453}
-  moveSpeed: 120
-  _playerTransform: {fileID: 0}
-  HP: 80
 --- !u!68 &8219564088657602354
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -565,6 +548,23 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.2, y: -0.73}
   - {x: 0.35, y: -0.73}
+--- !u!114 &7692340260619042915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8219564088657602366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f326f0bab6108c48881c29579f3c65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPBar: {fileID: 8219564088873650935}
+  HPCanvas: {fileID: 8219564088486924453}
+  moveSpeed: 120
+  _playerTransform: {fileID: 0}
+  HP: 100
 --- !u!1 &8219564088873650928
 GameObject:
   m_ObjectHideFlags: 0
