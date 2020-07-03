@@ -100,9 +100,9 @@ public class SiegeButton : MonoBehaviour
         golemScript.RollingMode();
     }
 
-    void EndRollindEndMotion()
+    void EndRollingEndMotion()
     {
-        golemScript.EndRollindEndMotion();
+        golemScript.EndRollingEndMotion();
     }
 
     void ShootRocketPunch()
@@ -110,9 +110,9 @@ public class SiegeButton : MonoBehaviour
         golemScript.ShootRocketPunch();
     }
 
-    void CrashBoundAtive()
+    void CrashBoundActive()
     {
-        golemScript.CrashBoundAtive();
+        golemScript.CrashBoundActive();
     }
 
     void HitEnd()

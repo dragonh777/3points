@@ -102,7 +102,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.03
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 3
@@ -1133,14 +1133,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.26666668
-    functionName: EndAttackMotion
+    functionName: EndRollingEndMotion
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.26666668
-    functionName: EndRollindEndMotion
+    functionName: EndAttackMotion
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -1860,7 +1860,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.8
-    functionName: CrashBoundAtive
+    functionName: CrashBoundActive
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

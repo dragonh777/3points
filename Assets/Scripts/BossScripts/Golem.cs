@@ -269,13 +269,13 @@ public class Golem : MonoBehaviour
     }
 
     // 바닥찍기 바운드생성
-    public void CrashBoundAtive()
+    public void CrashBoundActive()
     {
         _crashBound.SetActive(true);
     }
 
     // 롤 끝나면 플래그 변경 위함(애니메이션 이벤트)
-    public void EndRollindEndMotion()
+    public void EndRollingEndMotion()
     {
         rollinFlag = false;
     }
