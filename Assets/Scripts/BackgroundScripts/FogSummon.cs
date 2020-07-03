@@ -5,6 +5,7 @@ using UnityEngine;
 public class FogSummon : MonoBehaviour
 {
     public GameObject Fog;
+    public float summonDelay = 20f;
     public float xRange = 0f;
     public float minYRange = 0f;
     public float maxYRange = 1f;
@@ -25,7 +26,7 @@ public class FogSummon : MonoBehaviour
     {
         offsetY = Random.Range(minYRange, maxYRange);
         fTime += Time.deltaTime;
-        if (fTime > 10f)
+        if (fTime > summonDelay)
         {
             Instantiate(Fog, new Vector3(xRange, offsetY, 0), Quaternion.identity);
             fTime = 0f;

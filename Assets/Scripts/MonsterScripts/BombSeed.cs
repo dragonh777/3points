@@ -14,6 +14,7 @@ public class BombSeed : MonoBehaviour
     private Animator _animator;
     private GameObject effect;
 
+    private bool isPop = false;
     public int statement = 0;  // 0: idle, 1: chase, 2: hit, 3: pop, 4: die
     public float HP = 100.0f;
     private float currentHP;
@@ -98,6 +99,7 @@ public class BombSeed : MonoBehaviour
     {
         _rigid.constraints = RigidbodyConstraints2D.FreezeAll;
         _cirColl.enabled = false;
+        isPop = true;
         _animator.Play("bomb_pop");
         Invoke("AfterPop", 0.38f);
     }
@@ -121,7 +123,7 @@ public class BombSeed : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) 
     {
 
-        if (collision.gameObject.tag == "Bullet")   // 총알에 맞으면
+        if (collision.gameObject.tag == "Bullet" && !isPop)   // 총알에 맞으면
         {
             statement = 2;  // hit
         }

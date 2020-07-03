@@ -222,7 +222,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: -1802880531
+  m_SortingLayerID: 368539263
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &8777644009922446619
@@ -445,6 +445,7 @@ MonoBehaviour:
   HPCanvas: {fileID: 8777644009922446613}
   statement: 0
   isCollide: 0
+  HP: 100
 --- !u!70 &8777644011024554677
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

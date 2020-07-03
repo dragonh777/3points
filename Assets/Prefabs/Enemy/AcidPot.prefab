@@ -58,7 +58,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: -1802880531
+  m_SortingLayerID: 368539263
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &7529067892513045592
@@ -443,6 +443,7 @@ MonoBehaviour:
   bullet: {fileID: 1710880904111314123, guid: f6830e2380f3a434b975213532870920, type: 3}
   statement: 0
   isCollide: 0
+  HP: 100
 --- !u!61 &7529067893648345129
 BoxCollider2D:
   m_ObjectHideFlags: 0

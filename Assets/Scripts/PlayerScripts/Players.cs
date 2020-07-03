@@ -177,14 +177,22 @@ public class Players : MonoBehaviour
             }
         }
 
+        
+
         if (collision.gameObject.tag == "Enemy" && !isHit && !dashCheck)
         {
             if (collision.gameObject.name == "BombSeed")
             {
                 return;
             }
+            if (collision.gameObject.name == "BombEffect")
+            {
+                HP--;
+                PlayerHp.pHit2 = true;
+            }
 
             HP--;
+            PlayerHp.pHit = true;
 
             if (transform.localScale.x > 0 && HP > 0)
                 rb.AddForce(new Vector2(-8, 5), ForceMode2D.Impulse);
@@ -197,7 +205,11 @@ public class Players : MonoBehaviour
                 isHit = true;
                 StartCoroutine("invincibility");
             }
+
+            //Debug.Log("cnt : " + PlayerHp.cnt);
+            Debug.Log("HP : " + HP);
         }
+        
     }
 
     private void OnTriggerStay2D(Collider2D collision)

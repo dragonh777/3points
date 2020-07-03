@@ -58,7 +58,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: -1802880531
+  m_SortingLayerID: 368539263
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &3871839543448680793
@@ -522,9 +522,9 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1802880531
-  m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingLayerID: 495216711
+  m_SortingLayer: 4
+  m_SortingOrder: -1
 --- !u!95 &3871839544349774876
 Animator:
   serializedVersion: 3
@@ -633,6 +633,7 @@ MonoBehaviour:
   HPBar: {fileID: 3871839544278710293}
   HPCanvas: {fileID: 3871839543448680792}
   statement: 0
+  HP: 100
 --- !u!1 &3871839545467037613
 GameObject:
   m_ObjectHideFlags: 0
