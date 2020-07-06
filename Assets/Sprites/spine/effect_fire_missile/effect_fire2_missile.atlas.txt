@@ -1,0 +1,48 @@
+
+effect_fire2_missile.png
+size: 670,548
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+back_flare
+  rotate: false
+  xy: 399, 260
+  size: 260, 286
+  orig: 260, 286
+  offset: 0, 0
+  index: -1
+back_flare_red
+  rotate: false
+  xy: 234, 6
+  size: 221, 221
+  orig: 221, 221
+  offset: 0, 0
+  index: -1
+burst
+  rotate: true
+  xy: 88, 229
+  size: 317, 309
+  orig: 317, 309
+  offset: 0, 0
+  index: -1
+lens_flare
+  rotate: false
+  xy: 88, 3
+  size: 144, 224
+  orig: 144, 224
+  offset: 0, 0
+  index: -1
+missile
+  rotate: true
+  xy: 2, 62
+  size: 484, 84
+  orig: 484, 84
+  offset: 0, 0
+  index: -1
+particle
+  rotate: true
+  xy: 457, 2
+  size: 256, 211
+  orig: 256, 211
+  offset: 0, 0
+  index: -1

@@ -757,19 +757,20 @@ MonoBehaviour:
   aimPivot: {fileID: 2474469165450290423}
   skeletonAnimation: {fileID: 2474469164562473818}
   AnimClip:
-  - {fileID: 11400000, guid: 72f3c6835319ba543af87377cc26211a, type: 2}
-  - {fileID: 11400000, guid: 3dfa4c50040d6b345a113436fd9b38f9, type: 2}
-  - {fileID: 11400000, guid: aaadfc1d4997acd4dab7f4f2b3b57356, type: 2}
-  - {fileID: 11400000, guid: ad7668c214b656f44a49c0d93e0ae2fa, type: 2}
-  - {fileID: 11400000, guid: aac1ae9488e3038479324d390f839179, type: 2}
-  - {fileID: 11400000, guid: 88d8ed50d5b034549b85a5b3f3071993, type: 2}
-  - {fileID: 11400000, guid: ca7eb3722f547b240bd2562b2e9a3658, type: 2}
-  - {fileID: 11400000, guid: 2227c432aa9086f41a5c574144ff9a5e, type: 2}
-  - {fileID: 11400000, guid: a182ac481766b554ea4e3083136ac165, type: 2}
-  - {fileID: 11400000, guid: be4a1c5c006b81e40a83572e9154518f, type: 2}
-  - {fileID: 11400000, guid: 2a788020712cf7048978bf93c3b056b2, type: 2}
-  - {fileID: 11400000, guid: db35a6739ddd862489d54c517bc1f9f6, type: 2}
-  - {fileID: 11400000, guid: 77c61067e6141444e82ce05e50653ce3, type: 2}
+  - {fileID: 11400000, guid: 18ced4946c6ceec40adafbfebc7abc02, type: 2}
+  - {fileID: 11400000, guid: 083a2da6800877f42879eb0d57dcce9c, type: 2}
+  - {fileID: 11400000, guid: 168488dbc598c564e8a22cdff57ac223, type: 2}
+  - {fileID: 11400000, guid: 5c9a95e76c32c53479a22a9db6eb776f, type: 2}
+  - {fileID: 11400000, guid: 44420cf07deff1142a64da2024728d58, type: 2}
+  - {fileID: 11400000, guid: fe6c1ab1829a62947842c74636a8d6c1, type: 2}
+  - {fileID: 11400000, guid: 7466ba8868f073d4993825604e103ec1, type: 2}
+  - {fileID: 11400000, guid: a3c7f0f90e012a44f973ceb0b2701186, type: 2}
+  - {fileID: 11400000, guid: 3e6881f4444253147822875b8093bf8e, type: 2}
+  - {fileID: 11400000, guid: fd78bca6df55057439290b3d29f2e645, type: 2}
+  - {fileID: 11400000, guid: f3334ce1903c9d346b9555d1bba3aa36, type: 2}
+  - {fileID: 11400000, guid: 6e8bb6868990c614f974ac95fca518a5, type: 2}
+  - {fileID: 11400000, guid: f6077a3d2db1fb340aa2e4213356b4f9, type: 2}
+  - {fileID: 11400000, guid: 4ea203fe0bcd3814ab407536e8f4ac59, type: 2}
 --- !u!60 &2474469164145198431
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1205,7 +1206,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 63fb954942a5f274c94cd431a3e9195f, type: 2}
+  - {fileID: 2100000, guid: 94d45e507ff143845bbfeacc1fb64ca7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1238,7 +1239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: b9c95f6f3882f1b46a0b468bc32f0dbd, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: db13607fd4d82764597db98db03f7beb, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -2084,7 +2085,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2474469165450290420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.26219997, y: 2.5147002, z: 0}
+  m_LocalPosition: {x: 0.26870573, y: 2.5311697, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2474469165078566515}

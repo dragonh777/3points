@@ -12,6 +12,7 @@ public class Golem : MonoBehaviour
     public TextMeshProUGUI HPText;
     public TextMeshProUGUI SPText;
 
+    public GameObject gameOver;
     // EmptyObject꺼
     private Rigidbody2D _rigid;
     private GameObject _rollSprite; // 롤링 스프라이트
@@ -82,6 +83,7 @@ public class Golem : MonoBehaviour
         // 죽을 때
         if(currentHP <= 0) {
             currentHP = 0f;
+            gameOver.SetActive(true);
             hitFlag = true;
             Die();
         }

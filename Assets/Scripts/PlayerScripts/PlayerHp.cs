@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class PlayerHp : MonoBehaviour
 {
-
+    [Header("Reference")]
+    public float regenPerSecond = 6.0f;
     [Header("Animations")]
     [SpineAnimation]
     public string left;
@@ -86,7 +87,7 @@ public class PlayerHp : MonoBehaviour
         {
             regen = 0f;
         }
-        if (regen > 3.0f && Players.HP > 0)
+        if (regen > regenPerSecond && Players.HP > 0)
         {
             regen = 0f;
             if (cnt < 5)

@@ -137,7 +137,6 @@ public class BulletControl : MonoBehaviour
             SetCurrentAnimation(_AnimState, false);
             isHit = true;
             hitTime = 0f;
-            EnemyMove.Hp -= bDamage;
         }
     }
 

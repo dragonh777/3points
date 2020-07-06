@@ -18,12 +18,14 @@ public class BombSeed : MonoBehaviour
     public int statement = 0;  // 0: idle, 1: chase, 2: hit, 3: pop, 4: die
     public float HP = 100.0f;
     private float currentHP;
+    private float maxHP;
     private bool hitFlag = false;   // t: 쳐맞음, f: 안맞음
 
     // Start is called before the first frame update
     void Start()
     {
         currentHP = HP;
+        maxHP = HP;
         _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         _rigid = GetComponent<Rigidbody2D>();
         _cirColl = GetComponent<CircleCollider2D>();
@@ -38,7 +40,7 @@ public class BombSeed : MonoBehaviour
         if (currentHP != HP)
         {
             currentHP = HP;
-            HPBar.fillAmount = HP / 100f;
+            HPBar.fillAmount = HP / maxHP;
             statement = 2;
         }
         // 죽을 때

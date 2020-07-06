@@ -25,12 +25,14 @@ public class AcidPott : MonoBehaviour
 
     public float HP = 100.0f;
     private float currentHP;
-    
+    private float maxHP;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHP = HP;
-        if(gameObject.tag == "Siege_Enemy") {   // 공성전 적 애시드팟일 때
+        maxHP = HP;
+        if (gameObject.tag == "Siege_Enemy") {   // 공성전 적 애시드팟일 때
             _playerTransform = GameObject.Find("Golem").GetComponent<Transform>();
         }
         else {
@@ -49,7 +51,7 @@ public class AcidPott : MonoBehaviour
         // 맞을 때
         if(currentHP != HP) {
             currentHP = HP;
-            HPBar.fillAmount = HP / 100f;
+            HPBar.fillAmount = HP / maxHP;
             statement = 3;
         }
         // 죽을 때

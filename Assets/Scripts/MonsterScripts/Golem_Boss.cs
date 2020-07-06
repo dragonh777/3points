@@ -29,6 +29,7 @@ public class Golem_Boss : MonoBehaviour
     private GameObject _GFX;
     private GameObject _rollSprite;
     private GameObject _crashBound;
+    public GameObject gameOver;
 
     // 제어용 변수들
     public int state = 0;  // 1: walk, 2, 3: attack
@@ -56,6 +57,7 @@ public class Golem_Boss : MonoBehaviour
             SetAnimation("set", "golem_die", false);
             state = 100;
             isAttack = true;
+            gameOver.SetActive(true);
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             gameObject.GetComponent<CircleCollider2D>().enabled = false;
         }

@@ -12,7 +12,7 @@ public class Players : MonoBehaviour
 
     public enum AnimState
     {
-        IDLE, RUB, RUN, JUMP, JUMPD, DASH, FALL, ILSD, DOWN, GHIT, AHIT, LAND, DIE
+        IDLE, RUB, RUN, JUMP, JUMPD, DASH, FALL, ILSD, DOWN, GHIT, AHIT, LAND, LDTR, DIE
     }
 
     private AnimState _AnimState;
@@ -529,7 +529,16 @@ public class Players : MonoBehaviour
             {
                 isLand = false;
             }
+        }
+        else if (isLand && isMove)
+        {
 
+            _AnimState = AnimState.LDTR;
+            SetCurrentAnimation(_AnimState, false);
+            if (airTime > 0.3f)
+            {
+                isLand = false;
+            }
         }
 
         //Debug.Log(aimPivotBone.transform.position.x);

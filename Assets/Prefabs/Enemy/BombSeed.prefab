@@ -633,7 +633,7 @@ MonoBehaviour:
   HPBar: {fileID: 3871839544278710293}
   HPCanvas: {fileID: 3871839543448680792}
   statement: 0
-  HP: 100
+  HP: 30
 --- !u!1 &3871839545467037613
 GameObject:
   m_ObjectHideFlags: 0

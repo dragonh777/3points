@@ -59,7 +59,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 38d9f3f0a6f830a48be8528f2aed1f32, type: 2}
+  - {fileID: 2100000, guid: 5741b84471335d34ca189619546980bd, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: a3abac3c8b163f24a927cccc2daebee8, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: f4ae376705216594c9b6472a8dd01a05, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -203,9 +204,9 @@ MonoBehaviour:
   bulletDamage: 35
   skeletonAnimation: {fileID: 6161007603505472247}
   AnimClip:
-  - {fileID: 11400000, guid: d69267ab71658184eacfbdadea2ec5c9, type: 2}
-  - {fileID: 11400000, guid: 9c14ab16d69db8d49a758e55254b06e5, type: 2}
-  - {fileID: 11400000, guid: 0d3ff58a988d84f49a713f0bcc40f615, type: 2}
+  - {fileID: 11400000, guid: e283be76882d9ea4ab053bcc5523e7de, type: 2}
+  - {fileID: 11400000, guid: 1aa5e0837ba361947bbe67443e32efb4, type: 2}
+  - {fileID: 11400000, guid: 88e615466f5f9ff4fa1880b6aa01286e, type: 2}
 --- !u!1 &6269093412855424278
 GameObject:
   m_ObjectHideFlags: 0
