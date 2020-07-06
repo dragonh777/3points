@@ -9,7 +9,9 @@ using Spine.Unity;
 public class Golem_Boss : MonoBehaviour
 {
     // 골렘 정보
-    private float HP = 200f;
+    public float HP = 200f;
+    private float currentHP;
+    private float maxHP;
     
     // 애니메이션 관련
     public AnimState _AnimState;
@@ -21,22 +23,25 @@ public class Golem_Boss : MonoBehaviour
     private string currentAnimation;    // 애니메이션 중복실행 체크용
 
     // 받아오는 정보
+    public Image HPBar;
+    public GameObject _Punch;
     private GameObject _player;
     private GameObject _GFX;
     private GameObject _rollSprite;
     private GameObject _crashBound;
 
     // 제어용 변수들
-    public int state = 0;  // 1: walk, 2: attack
-    private bool animFlag = false;
-    private bool attackFlag = false;
-    private bool isRoll = false;
-    private bool isAttack = false;
-    private bool onAttackBound = false;   // 어택바운드 내에 들어오면 t
+    public int state = 0;  // 1: walk, 2, 3: attack
+    public bool isRoll = false;
+    public bool isAttack = false;
+    public bool onAttackBound = false;   // 어택바운드 내에 들어오면 t
+    public bool isHit = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        maxHP = currentHP = HP;
         _player = GameObject.Find("Player");
         _GFX = transform.GetChild(0).gameObject;
         _rollSprite = transform.GetChild(1).gameObject;
@@ -46,25 +51,63 @@ public class Golem_Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isAttack && !isRoll && !onAttackBound) {    // 공격중 아니고 롤중 아니고 공격바운드에 안들어오면
+        HPBar.fillAmount = currentHP / maxHP;
+        if(currentHP <= 0) {
+            SetAnimation("set", "golem_die", false);
+            state = 100;
+            isAttack = true;
+            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        }
+        else if(currentHP != HP) {
+            currentHP = HP;
+            if(!isAttack) {
+                isHit = true;
+                state = 100;
+                SetAnimation("set", "golem_hit", false);
+                Invoke("EndHit", 0.5f);
+            }
+        }
+
+        if(DistanceCheck().x >- 7f && DistanceCheck().x < 7f) {
+            onAttackBound = true;
+        }
+        else {
+            onAttackBound = false;
+        }
+
+        if(DistanceCheck().x > 0) { // 오른쪽으로 움직일 때
+            transform.localScale = new Vector3(1f, 1f);
+            }
+        else {  // 왼쪽으로 움직일 때
+            transform.localScale = new Vector3(-1f, 1f);
+        }  
+
+        if(onAttackBound && !isAttack && !isRoll && !isHit) {
+            if(currentHP <= (maxHP/2)) {
+                state = UnityEngine.Random.Range(3, 5);
+            }
+            else {
+                state = 3;
+            }
+        }
+        else if(!isAttack && !isRoll && !onAttackBound && !isHit){
             state = 1;  // walk
         }
 
-        if(onAttackBound) { // 공격중 아니고 롤중 아니고 공격바운드에 들어오면
-            state = 3;  // attack
-        }
-
-        Debug.Log(DistanceCheck());
+    }
+    void EndHit()
+    {
+        isHit = false;
     }
 
     void FixedUpdate() 
     {
         if(state == 1) {
-            SetAnimation("add", "golem_walk_Full", true);
+            SetAnimation("set", "golem_walk_Full", true);
             MoveToPlayer(0.03f);
         }
-
-        if(state == 2) {
+        else if(state == 2) {
             if(isAttack) {
                 return;
             }
@@ -72,8 +115,7 @@ public class Golem_Boss : MonoBehaviour
 
             Crash();
         }
-
-        if(state == 3) {
+        else if(state == 3) {
             MoveToPlayer(0.1f);
 
             if(isAttack) {
@@ -81,6 +123,13 @@ public class Golem_Boss : MonoBehaviour
             }
             isAttack = true;
             OnRolling();
+        }
+        else if(state == 4){
+            if(isAttack){
+                return;
+            }
+            isAttack = true;
+            RocketPunch();
         }
     }
 
@@ -94,15 +143,15 @@ public class Golem_Boss : MonoBehaviour
     void MoveToPlayer(float moveSpeed)
     {
         Vector3 target = new Vector3(_player.transform.position.x, transform.position.y);
-        transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed);
-
-        if(!isRoll) {
+        
+        if(!isRoll && !isAttack) {
             if(DistanceCheck().x > 0) { // 오른쪽으로 움직일 때
                 transform.localScale = new Vector3(1f, 1f);
             }
             else {  // 왼쪽으로 움직일 때
                 transform.localScale = new Vector3(-1f, 1f);
-            }        
+            }       
+            transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed); 
         }
         else if(isRoll) {
             if(transform.localScale.x > 0) {
@@ -111,6 +160,7 @@ public class Golem_Boss : MonoBehaviour
             else {
                 _rollSprite.transform.Rotate(new Vector3(0, 0, -5));
             }
+            transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed);
         }
     }
 
@@ -119,17 +169,17 @@ public class Golem_Boss : MonoBehaviour
     {
         SetAnimation("set", "golem_attack", false);
         Invoke("AcviteBound", 0.6f);
-        Invoke("EndCrash", 1.3333f);
     }
     void AcviteBound()
     {
         _crashBound.SetActive(true);
+        Invoke("EndCrash", 0.7333f);
     }
     void EndCrash()
     {
         _crashBound.SetActive(false);
-        state = 1;
         isAttack = false;
+        state = 1;
     }
 
     // 롤링 스킬
@@ -145,25 +195,41 @@ public class Golem_Boss : MonoBehaviour
     }
     void Rolling()
     {
-        _GFX.SetActive(false);
+        _GFX.GetComponent<MeshRenderer>().enabled = false;
         _rollSprite.SetActive(true);
 
         Invoke("EndRolling", 1f);
     }
     void EndRolling()
     {
-        _GFX.SetActive(true);
+        _GFX.GetComponent<MeshRenderer>().enabled = true;
         _rollSprite.SetActive(false);
         _rollSprite.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
         SetAnimation("set", "golem_circle_2", false);
-        isAttack = false;
+        // isAttack = false;
         isRoll = false;
+        Crash();
     }
 
     // 로켓펀치 스킬
     void RocketPunch()
     {
-
+        SetAnimation("set", "golem_punch", false);
+        Invoke("ShootRocketPunch", 0.2f);
+        Invoke("EndPunch", 1.4f);
+    }
+    void ShootRocketPunch()
+    {
+        if(!isAttack) {
+            return;
+        }
+        GameObject punch = Instantiate(_Punch);
+        punch.tag = "Enemy";
+    }
+    void EndPunch()
+    {
+        isAttack = false;
+        state = 1;
     }
 
     
@@ -189,15 +255,24 @@ public class Golem_Boss : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if(other.gameObject.tag == "Player") {
-            onAttackBound = true;
-        }    
+        // if(other.gameObject.tag == "Player") {
+        //     onAttackBound = true;
+        // }
+        if(other.gameObject.tag == "Bullet" && !isHit && !isRoll) {
+            HP -= 10f;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D other) 
+    {
+        // if(other.gameObject.tag == "Player") {
+        //     onAttackBound = true;
+        // }    
     }
     private void OnTriggerExit2D(Collider2D other) 
     {
-        if(other.gameObject.tag == "Player") {
-            onAttackBound = false;
-        }    
+        // if(other.gameObject.tag == "Player") {
+        //     onAttackBound = false;
+        // }    
     }
 
 

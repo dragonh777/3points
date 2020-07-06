@@ -8,6 +8,7 @@ public class MonsterControl : MonoBehaviour
     private WheelGoo _wheelGoo = null;
     private BombSeed _bombSeed = null;
     private ThornTentacle _tentacle = null;
+    private Golem_Boss _golem = null;
     
     void Start()
     {
@@ -15,6 +16,7 @@ public class MonsterControl : MonoBehaviour
         _wheelGoo = this.transform.parent.gameObject.GetComponent<WheelGoo>();
         _bombSeed = this.transform.parent.gameObject.GetComponent<BombSeed>();
         _tentacle = this.transform.parent.gameObject.GetComponent<ThornTentacle>();
+        _golem = this.transform.parent.gameObject.GetComponent<Golem_Boss>();
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
@@ -34,6 +36,11 @@ public class MonsterControl : MonoBehaviour
         }
         else if(_tentacle != null && (_tentacle.statement == 2 || _tentacle.statement == 3) && other.gameObject.tag == "Player") {
             _tentacle.isCollide = true;
+        }
+
+        // 보스 골렘꺼
+        if(_golem != null && other.gameObject.tag == "Bullet") {
+            _golem.HP -= 10f;
         }
     }
     private void OnTriggerStay2D(Collider2D other) 
