@@ -1,0 +1,34 @@
+
+effect_boom1.png
+size: 1090,1148
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 604, 753
+  size: 393, 393
+  orig: 393, 393
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 2, 546
+  size: 600, 600
+  orig: 600, 600
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 2, 2
+  size: 542, 542
+  orig: 542, 542
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 546, 2
+  size: 542, 542
+  orig: 542, 542
+  offset: 0, 0
+  index: -1

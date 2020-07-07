@@ -23,11 +23,12 @@ public class ThornTentacle : MonoBehaviour
 
     public float HP = 100.0f;
     private float currentHP;
+    private float maxHP;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentHP = HP;
+        currentHP = maxHP = HP;
         _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         _rigid = GetComponent<Rigidbody2D>();
         _boxColl = GetComponent<BoxCollider2D>();
@@ -42,7 +43,7 @@ public class ThornTentacle : MonoBehaviour
         // 맞을 때
         if(currentHP != HP) {
             currentHP = HP;
-            HPBar.fillAmount = HP / 100f;
+            HPBar.fillAmount = HP / maxHP;
         }
         // 죽을 때
         if(HP <= 0) {
