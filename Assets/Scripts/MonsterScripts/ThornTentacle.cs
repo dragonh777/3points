@@ -107,7 +107,7 @@ public class ThornTentacle : MonoBehaviour
     void AttackFlagSetFalse()   // 애니메이션이벤트에서 사용
     {
         _boxColl.enabled = false;
-        attackFlag = false;
+        //attackFlag = false;
     }
     void AttackBoundEnable()    // 애니메이션 이벤트
     {
@@ -137,6 +137,7 @@ public class ThornTentacle : MonoBehaviour
 
     void StatementChange(int index)     // 애니메이션이벤트에서 statement바꾸기용
     {
+        attackFlag = false;
         statement = index;
     }
 }
