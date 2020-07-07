@@ -82,14 +82,17 @@ public class Siege_PAcidPot : MonoBehaviour
     {
         GameObject acidBullet = Instantiate(bullet);
         acidBullet.gameObject.tag = "Siege_Bullet";
-        if(attackPosition) {
-            acidBullet.transform.localPosition = new Vector3(transform.position.x + 0.92f, transform.position.y + 1.194f);  
-            acidBullet.transform.localScale = new Vector3(0.2f, 0.2f);
-        }
-        else if(!attackPosition) {
-            acidBullet.transform.localPosition = new Vector3(transform.position.x - 0.92f, transform.position.y + 1.194f);
-            acidBullet.transform.localScale = new Vector3(-0.2f, 0.2f);
-        }
+        acidBullet.transform.parent = gameObject.transform;
+        //if(attackPosition) {
+        //    acidBullet.transform.localPosition = new Vector3(transform.position.x + 0.92f, transform.position.y + 1.194f);  
+        //    acidBullet.transform.localScale = new Vector3(0.2f, 0.2f);
+        //}
+        //else if(!attackPosition) {
+        //    acidBullet.transform.localPosition = new Vector3(transform.position.x - 0.92f, transform.position.y + 1.194f);
+        //    acidBullet.transform.localScale = new Vector3(-0.2f, 0.2f);
+        //}
+        acidBullet.transform.localPosition = new Vector3(-5f, 5.39f);
+        acidBullet.transform.localScale = new Vector3(-1f, 1f);
     }
     void Die()
     {

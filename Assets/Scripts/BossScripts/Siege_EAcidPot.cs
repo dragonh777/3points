@@ -21,21 +21,29 @@ public class Siege_EAcidPot : MonoBehaviour
     public bool isCollide = false; // t: collide, f: not collide
     private bool hitState = false;  // t: 맞고있을때, 무적, f: 평상시, 맞을수 있음
 
-    public static bool attackPosition = false;    // t: 왼쪽공격, f: 오른쪽공격(총알에서 얻어옴)
+    public bool attackPosition = false;    // t: 왼쪽공격, f: 오른쪽공격(총알에서 얻어옴)
 
     public float HP = 100.0f;
     private float currentHP;
+    private float maxHP;
+
+    public bool miniAcid = false;  // t: 작은애들
     
     // Start is called before the first frame update
     void Start()
     {
-        currentHP = HP;
+        maxHP = currentHP = HP;
         _playerTransform = GameObject.Find("Golem").GetComponent<Transform>();
         _capColl = GetComponent<CapsuleCollider2D>();
         _boxColl = GetComponent<BoxCollider2D>();
         _rigid = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _animator.Play("idle");
+        
+        if(gameObject.name.Equals("EnemyAcid")) {
+            miniAcid = true;
+            maxHP = currentHP = HP = 30f;
+        }
     }
 
     // Update is called once per frame
@@ -44,7 +52,7 @@ public class Siege_EAcidPot : MonoBehaviour
         // 맞을 때
         if(currentHP != HP) {
             currentHP = HP;
-            HPBar.fillAmount = HP / 100f;
+            HPBar.fillAmount = HP / maxHP;
             statement = 3;
         }
         // 죽을 때
@@ -97,12 +105,22 @@ public class Siege_EAcidPot : MonoBehaviour
 
         if(dirX < 0) {    // 왼쪽으로 걸어갈 때
             moveVelocity = Vector3.left;
-            transform.localScale = new Vector3(0.2f, 0.2f);
+            if(miniAcid) {
+                transform.localScale = new Vector3(0.2f, 0.2f);
+            }
+            else {
+                transform.localScale = new Vector3(0.4f, 0.4f);
+            }
             HPCanvas.transform.localScale = new Vector3(0.0463f, 0.0463f);
         }
         else if(dirX > 0) {   // 오른쪽으로 걸어갈 때
             moveVelocity = Vector3.right;
-            transform.localScale = new Vector3(-0.2f, 0.2f);
+            if(miniAcid) {
+                transform.localScale = new Vector3(-0.2f, 0.2f);
+            }
+            else {
+                transform.localScale = new Vector3(-0.4f, 0.4f);
+            }
             HPCanvas.transform.localScale = new Vector3(-0.0463f, 0.0463f);
         }
         _animator.Play("walk");
@@ -113,12 +131,22 @@ public class Siege_EAcidPot : MonoBehaviour
         float dirX = _playerTransform.position.x - transform.position.x;
 
         if(dirX > 0) {  // 플레이어가 왼쪽이면
-            transform.localScale = new Vector3(-0.2f, 0.2f);    // 왼쪽보고
+            if(miniAcid) {
+                transform.localScale = new Vector3(-0.2f, 0.2f);    // 왼쪽보고
+            }
+            else {
+                transform.localScale = new Vector3(-0.4f, 0.4f);    // 왼쪽보고
+            }
             HPCanvas.transform.localScale = new Vector3(-0.0463f, 0.0463f);
             attackPosition = true;
         }
         else if(dirX < 0) { // 플레이어가 오른쪽이면
-            transform.localScale = new Vector3(0.2f, 0.2f);   // 오른쪽보고
+            if (miniAcid) {
+                transform.localScale = new Vector3(0.2f, 0.2f);   // 오른쪽보고
+            }
+            else {
+                transform.localScale = new Vector3(0.4f, 0.4f);   // 오른쪽보고
+            }
             HPCanvas.transform.localScale = new Vector3(0.0463f, 0.0463f);
             attackPosition = false;
         }
@@ -128,15 +156,48 @@ public class Siege_EAcidPot : MonoBehaviour
     void Shoot()
     {
         GameObject acidBullet = Instantiate(bullet);
-        //acidBullet.transform.parent = gameObject.transform;
-        if(attackPosition) {
-            acidBullet.transform.localPosition = new Vector3(transform.position.x + 0.92f, transform.position.y + 1.194f);  
-            acidBullet.transform.localScale = new Vector3(0.2f, 0.2f);
-        }
-        else if(!attackPosition) {
-            acidBullet.transform.localPosition = new Vector3(transform.position.x - 0.92f, transform.position.y + 1.194f);
-            acidBullet.transform.localScale = new Vector3(-0.2f, 0.2f);
-        }
+        acidBullet.transform.parent = gameObject.transform;
+        //if(attackPosition) {
+        //    acidBullet.transform.localPosition = new Vector3(transform.position.x + 1.75f, transform.position.y + 2.2f); 
+        //    if(miniAcid) {
+        //        acidBullet.transform.localScale = new Vector3(0.2f, 0.2f);
+        //    }
+        //    else {
+        //        acidBullet.transform.localScale = new Vector3(0.4f, 0.4f);
+        //    }
+        //}
+        //else if(!attackPosition) {
+        //    if (miniAcid) {
+        //        acidBullet.transform.localScale = new Vector3(-0.2f, 0.2f);
+        //    }
+        //    else {
+        //        acidBullet.transform.localScale = new Vector3(-0.4f, 0.4f);
+        //    }
+        //    acidBullet.transform.localPosition = new Vector3(transform.position.x - 1.75f, transform.position.y + 2.2f);
+        //}
+
+        //-6.3  5.39
+        //if(miniAcid) {
+        //    if (attackPosition) {
+        //        acidBullet.transform.localPosition = new Vector3(-5.77f, 5.27f);
+        //        acidBullet.transform.localScale = new Vector3(-1f, 1f);
+        //    }
+        //    else {
+        //        acidBullet.transform.localPosition = new Vector3(-5.77f, 5.27f);
+        //        acidBullet.transform.localScale = new Vector3(-1f, 1f);
+        //    }
+        //}
+        //else {
+            //if (attackPosition) {
+            //    acidBullet.transform.localPosition = new Vector3(-5f, 5.39f);
+            //    acidBullet.transform.localScale = new Vector3(-1f, 1f);
+            //}
+            //else {
+                acidBullet.transform.localPosition = new Vector3(-5f, 5.39f);
+                acidBullet.transform.localScale = new Vector3(-1f, 1f);
+            //}
+        //}
+        
     }
 
     void Hit()
