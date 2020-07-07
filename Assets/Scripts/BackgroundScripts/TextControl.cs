@@ -25,7 +25,7 @@ public class TextControl : MonoBehaviour
             if (currentKey.name == "SpaceKey")
             {
                 marker[0].SetActive(true);
-                dialog.transform.localPosition = new Vector3(850, -300, 0);
+                dialog.transform.localPosition = new Vector3(870, -300, 0);
             }
             if (currentKey.name == "ShiftKey")
             {

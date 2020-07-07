@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 91697982}
   - component: {fileID: 91697981}
   m_Layer: 5
-  m_Name: LOAD GAME
+  m_Name: SIEGE MODE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LOAD GAME
+  m_text: SIEGE MODE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 64c67a8518b63154ebc576019fb871b0, type: 2}
   m_sharedMaterial: {fileID: 417385498455488308, guid: 64c67a8518b63154ebc576019fb871b0,
@@ -344,8 +344,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 1694498815
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0.39215687}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 91697981}
-    characterCount: 9
+    characterCount: 10
     spriteCount: 0
     spaceCount: 1
     wordCount: 2
@@ -876,7 +876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: b44f2480d2597864ba05434c48511293, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: f9dd09cf9372e3548a0d203bc8cc2807, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -918,9 +918,12 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8a93e2446f153214bbe9213a6e3e2fe2, type: 2}
-  - {fileID: 2100000, guid: ac9919c8a80d4dc46884a2955dc0fb40, type: 2}
-  - {fileID: 2100000, guid: 8a93e2446f153214bbe9213a6e3e2fe2, type: 2}
+  - {fileID: 2100000, guid: aa47b36905afb044784517d15dd8a524, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 2100000, guid: aa47b36905afb044784517d15dd8a524, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

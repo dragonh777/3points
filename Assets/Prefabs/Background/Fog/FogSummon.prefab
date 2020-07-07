@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Fog: {fileID: 7862090761620941155, guid: d5ed511a850602743b673fe8d757684b, type: 3}
-  summonDelay: 20
+  summonDelay: 32
   xRange: 45
   minYRange: -15
   maxYRange: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Fog: {fileID: 7780951512465617777, guid: c597a4111f9587842a906062f87b8dfa, type: 3}
-  summonDelay: 20
+  summonDelay: 31
   xRange: 45
   minYRange: -15
   maxYRange: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Fog: {fileID: 8650082857542120368, guid: d5e4cdf5ed0978041bbdbe0769e59325, type: 3}
-  summonDelay: 20
+  summonDelay: 29
   xRange: 45
   minYRange: -15
   maxYRange: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Fog: {fileID: 7522222160193695304, guid: d1276378f241c7e4d8ab2343c1a31a1b, type: 3}
-  summonDelay: 20
+  summonDelay: 30
   xRange: 45
   minYRange: -15
   maxYRange: 0
