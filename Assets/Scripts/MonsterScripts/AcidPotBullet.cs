@@ -8,6 +8,7 @@ public class AcidPotBullet : MonoBehaviour
     Animator _animator;
     Rigidbody2D _rigid;
     CapsuleCollider2D _capColl;
+    private bool isHit = false; // 어딘가에 맞으면 t
 
     // Start is called before the first frame update
     void Start()
@@ -27,11 +28,13 @@ public class AcidPotBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(AcidPott.attackPosition) {
-            transform.Rotate(0f, 0f, -1f);
-        }
-        else if(!AcidPott.attackPosition) {
-            transform.Rotate(0f, 0f, 1f);
+        if(!isHit) {
+            if(AcidPott.attackPosition) {
+                transform.Rotate(0f, 0f, -1f);
+            }
+            else if(!AcidPott.attackPosition) {
+                transform.Rotate(0f, 0f, 1f);
+            }    
         }
     }
 
@@ -40,6 +43,7 @@ public class AcidPotBullet : MonoBehaviour
         if(other.gameObject.tag == "Player" || other.gameObject.tag == "Floor") {
             _capColl.enabled = false;
             _rigid.constraints = RigidbodyConstraints2D.FreezeAll;
+            isHit = true;
             _animator.Play("hit");
         }
     }
