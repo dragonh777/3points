@@ -75,6 +75,7 @@ public class ThornTentacle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Bullet" && (statement == 2 || statement == 3) && HP > 0) {
+            Debug.Log("Tentacle Hit!!!!!");
             Hit();
         }
     }

@@ -1,0 +1,69 @@
+
+acidpot.png
+size: 261,528
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+back
+  rotate: true
+  xy: 200, 32
+  size: 103, 59
+  orig: 103, 59
+  offset: 0, 0
+  index: -1
+body
+  rotate: true
+  xy: 2, 318
+  size: 208, 188
+  orig: 208, 188
+  offset: 0, 0
+  index: -1
+flower
+  rotate: true
+  xy: 2, 96
+  size: 220, 162
+  orig: 220, 162
+  offset: 0, 0
+  index: -1
+leaf_l
+  rotate: true
+  xy: 192, 443
+  size: 83, 64
+  orig: 83, 64
+  offset: 0, 0
+  index: -1
+leaf_r
+  rotate: true
+  xy: 192, 350
+  size: 91, 55
+  orig: 91, 55
+  offset: 0, 0
+  index: -1
+leg_l
+  rotate: true
+  xy: 166, 227
+  size: 89, 88
+  orig: 89, 88
+  offset: 0, 0
+  index: -1
+leg_r
+  rotate: false
+  xy: 166, 137
+  size: 86, 88
+  orig: 86, 88
+  offset: 0, 0
+  index: -1
+spit_light
+  rotate: true
+  xy: 200, 2
+  size: 28, 40
+  orig: 28, 40
+  offset: 0, 0
+  index: -1
+stem
+  rotate: true
+  xy: 2, 5
+  size: 89, 196
+  orig: 89, 196
+  offset: 0, 0
+  index: -1

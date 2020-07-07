@@ -77,8 +77,9 @@ public class AcidPott : MonoBehaviour
         else if(statement == 2 && !hitState) {
             Attack();
         }
-        else if(statement == 3) {
-            _animator.Play("hit");
+        else if(statement == 3 && !hitState) {
+            hitState = true;
+            Hit();
         }
         else if(statement == 4) {
             _animator.Play("die");
@@ -147,14 +148,12 @@ public class AcidPott : MonoBehaviour
 
     void Hit()
     {
-        hitState = true;
+        _animator.Play("hit");
         HP -= 10f;
-
-        Invoke("AfterHit", 0.15f);
     }
     void AfterHit()
     {
-
+        hitState = false;
     }
 
     void Die()
@@ -181,7 +180,7 @@ public class AcidPott : MonoBehaviour
     {
         if(collision.gameObject.tag == "Bullet")
         {
-            Hit();
+            statement = 3;
         }
     }
 }
