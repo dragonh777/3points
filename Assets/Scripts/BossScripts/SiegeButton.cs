@@ -63,26 +63,29 @@ public class SiegeButton : MonoBehaviour
         float cost;
         Vector3 spawnPosition;
         GameObject _camera = GameObject.Find("Main Camera");
+        GameObject _golem = GameObject.Find("Golem");
+        GameObject _monster = monster[index];
 
         if(index == 0) {    // 휠구
-            spawnPosition = new Vector3(_camera.transform.position.x +2.3f, -7f);
+            spawnPosition = new Vector3(_golem.transform.position.x + 2.3f, -12f);
+            Debug.Log(_golem.transform.position.x);
             cost = 30f;
         }
         else if(index == 1) {   // 애시드팟
-            spawnPosition = new Vector3(_camera.transform.position.x +2.3f, -7f);
+            spawnPosition = new Vector3(_golem.transform.position.x + 2.3f, -12f);
             cost = 40f;
         }
         else {  //밤시드
             cost = 30f;
-            spawnPosition = new Vector3(_camera.transform.position.x - 11f, -7f);
+            spawnPosition = new Vector3(_golem.transform.position.x - 11f, -12f);
         }
 
         if(golemScript.currentSP < cost) {
             return;
         }
 
-        GameObject _monster = Instantiate(monster[index]);
         _monster.transform.position = spawnPosition;
+        Instantiate(_monster);
 
         golemScript.currentSP -= cost;
         coolTimeScript[index + 3].StartCoolTime(false);
