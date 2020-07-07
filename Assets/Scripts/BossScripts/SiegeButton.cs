@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SiegeButton : MonoBehaviour
 {
-    public GameObject[] monster;
+    public GameObject[] monster = new GameObject[3];
     private Golem golemScript;
     private ButtonCoolTime[] coolTimeScript = new ButtonCoolTime[6];
     public bool isAttack = false;
@@ -27,6 +27,29 @@ public class SiegeButton : MonoBehaviour
             }
 
         }
+    }
+
+    void Update()
+    {
+        //if (Input.GetKeyDown(KeyCode.Mouse0)) {  // 좌클릭, 내려찍기
+        //    Golem_HandCrash(20f);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.Mouse1)) {   // 우클릭, 구르기
+        //    Golem_RollingThunder(30f);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.E)) {  // E, 펀치
+        //    Golem_RocketPunch(50f);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.Alpha1)) {  // 1, 소환1
+        //    Spawn(0);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.Alpha2)) {  // 2, 소환2
+        //    Spawn(1);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.Alpha3)) {  // 3, 소환3
+        //    Spawn(2);
+        //}
+
     }
 
     // 스킬버튼함수
@@ -63,7 +86,6 @@ public class SiegeButton : MonoBehaviour
         float cost;
         Vector3 spawnPosition;
         GameObject _player = GameObject.Find("Player");
-        GameObject _camera = GameObject.Find("Main Camera");
         GameObject _golem = GameObject.Find("Golem");
         GameObject _monster = monster[index];
         float dirX = _player.transform.position.x - _golem.transform.position.x;

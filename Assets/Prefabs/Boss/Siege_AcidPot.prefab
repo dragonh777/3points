@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 8545575572112076164}
   - component: {fileID: 2971229088052214865}
   - component: {fileID: 7540766359210462597}
+  - component: {fileID: 3137471822102100914}
   m_Layer: 12
   m_Name: Siege_AcidPot
   m_TagString: Golem
@@ -338,7 +339,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8545575572112076175}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -414,6 +415,24 @@ MonoBehaviour:
   statement: 0
   isCollide: 0
   HP: 100
+--- !u!68 &3137471822102100914
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8545575572112076175}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.9575844, y: -0.2671814}
+  - {x: 1.1654902, y: -0.2671814}
 --- !u!1 &8545575572691140388
 GameObject:
   m_ObjectHideFlags: 0

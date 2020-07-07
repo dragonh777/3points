@@ -68,7 +68,7 @@ public class Golem : MonoBehaviour
         if(/*Input.GetKeyDown(KeyCode.X)*/hitTag && !hitFlag && !rollinFlag) {
             hitTag = false;
             hitFlag = true;
-            currentHP -= 30f;
+            currentHP -= 15f;
             
             if(attackFlag) {   // 공격모션중엔 체력만 닳고 모션취소 x
                 hitFlag = false;
