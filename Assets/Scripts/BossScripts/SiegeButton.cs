@@ -32,6 +32,7 @@ public class SiegeButton : MonoBehaviour
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.Mouse0)) {  // 좌클릭, 내려찍기
+        //    Debug.Log("zzzzzzzzzzzzzzzzzzzz");
         //    Golem_HandCrash(20f);
         //}
         //else if (Input.GetKeyDown(KeyCode.Mouse1)) {   // 우클릭, 구르기
@@ -159,6 +160,11 @@ public class SiegeButton : MonoBehaviour
     void AfterDeath()
     {
         golemScript.AfterDeath();
+    }
+
+    void hitFlagInit()
+    {
+        golemScript.hitFlagInit();
     }
 
 }

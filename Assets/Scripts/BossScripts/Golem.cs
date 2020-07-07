@@ -28,7 +28,7 @@ public class Golem : MonoBehaviour
     private bool rollinFlag = false;    // t: 롤링상태, Move함수에서 애니메이션 제어욤
     private bool hitFlag = false;   // t: 맞고있을 때(잠시무적)
     private bool hitTag = false;    // 상대와 충돌시 확인
-    private bool hithit = false;    // 맞는도중 맞지않게
+    //private bool hithit = false;    // 맞는도중 맞지않게
 
     public static float HP = 150f;
     public static float SP = 120f;
@@ -225,7 +225,7 @@ public class Golem : MonoBehaviour
 
     void Hit()
     {
-        hithit = true;
+        //hithit = true;
         _animator.SetBool("isHit", true);
         _animator.Play("golem_hit");
     }
@@ -242,7 +242,7 @@ public class Golem : MonoBehaviour
     {
         _animator.SetBool("isHit", false);
         hitFlag = false;
-        hithit = false;
+        //hithit = false;
     }
 
     // 죽는모션 이후(애니메이션 이벤트)
@@ -294,9 +294,15 @@ public class Golem : MonoBehaviour
         _crashBound.SetActive(false);
     }
 
+    // 애니메이션 이벤트
+    public void hitFlagInit()
+    {
+        hitFlag = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if(other.gameObject.tag == "Siege_EnemyBullet" && !hithit) {
+        if(other.gameObject.tag == "Siege_EnemyBullet"/* && !hithit*/) {
             hitTag = true;
         }
     }
