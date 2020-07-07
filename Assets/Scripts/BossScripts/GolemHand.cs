@@ -5,7 +5,7 @@ using UnityEngine;
 public class GolemHand : MonoBehaviour
 {
     private GameObject golem;
-    private float speed = 10.0f;
+    private float speed = 15.0f;
 
     // Start is called before the first frame update
     void Start()

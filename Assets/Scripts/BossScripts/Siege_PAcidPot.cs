@@ -50,6 +50,10 @@ public class Siege_PAcidPot : MonoBehaviour
             _capColl.enabled = false;
             _boxColl.enabled = false;
         }
+
+        if (!_playerTransform.gameObject.activeSelf) {
+            statement = 4;
+        }
     }
 
     void SpawnDestroy()

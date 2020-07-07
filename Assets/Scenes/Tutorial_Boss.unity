@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2680,9 +2680,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1631067954}
   - component: {fileID: 1631067955}
-  - component: {fileID: 1631067957}
   - component: {fileID: 1631067956}
   - component: {fileID: 1631067958}
+  - component: {fileID: 1631067959}
   m_Layer: 0
   m_Name: Golem
   m_TagString: Enemy
@@ -2761,22 +2761,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &1631067957
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1631067953}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.11594486, y: 1.0435064}
-  serializedVersion: 2
-  m_Radius: 1.1468525
 --- !u!58 &1631067958
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2793,6 +2777,24 @@ CircleCollider2D:
   m_Offset: {x: 0.12118578, y: 1.0300803}
   serializedVersion: 2
   m_Radius: 1.2877097
+--- !u!68 &1631067959
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631067953}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.5, y: 0}
+  - {x: 0.5, y: 0}
 --- !u!1 &1684970630 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2474469164145198433, guid: c583fd5d1863c2649b5ed06a4a6234b4,

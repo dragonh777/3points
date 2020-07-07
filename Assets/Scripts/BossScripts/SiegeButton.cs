@@ -62,22 +62,33 @@ public class SiegeButton : MonoBehaviour
     {
         float cost;
         Vector3 spawnPosition;
+        GameObject _player = GameObject.Find("Player");
         GameObject _camera = GameObject.Find("Main Camera");
         GameObject _golem = GameObject.Find("Golem");
         GameObject _monster = monster[index];
+        float dirX = _player.transform.position.x - _golem.transform.position.x;
 
         if(index == 0) {    // 휠구
-            spawnPosition = new Vector3(_golem.transform.position.x + 2.3f, -12f);
-            Debug.Log(_golem.transform.position.x);
+            if(dirX >= 0) {  // 적이 오른쪽에 있을 때
+                spawnPosition = new Vector3(_golem.transform.position.x + 3f, -12f);
+            }
+            else {
+                spawnPosition = new Vector3(_golem.transform.position.x - 3f, -12f);
+            }
             cost = 30f;
         }
         else if(index == 1) {   // 애시드팟
-            spawnPosition = new Vector3(_golem.transform.position.x + 2.3f, -12f);
+            if (dirX >= 0) {  // 적이 오른쪽에 있을 때
+                spawnPosition = new Vector3(_golem.transform.position.x + 3f, -12f);
+            }
+            else {
+                spawnPosition = new Vector3(_golem.transform.position.x - 3f, -12f);
+            }
             cost = 40f;
         }
         else {  //밤시드
-            cost = 30f;
             spawnPosition = new Vector3(_golem.transform.position.x - 11f, -12f);
+            cost = 30f;
         }
 
         if(golemScript.currentSP < cost) {

@@ -175,7 +175,7 @@ public class BulletControl : MonoBehaviour
             isHit = true;
             hitTime = 0f;
         }
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "HitBound")
         {
             bulletSpeed = 0f;
             _AnimState = AnimState.HIT;

@@ -37,6 +37,9 @@ public class MonsterControl : MonoBehaviour
         else if(_tentacle != null && (_tentacle.statement == 2 || _tentacle.statement == 3) && other.gameObject.tag == "Player") {
             _tentacle.isCollide = true;
         }
+        else if(_tentacle != null && other.gameObject.tag == "Bullet" && (_tentacle.statement == 2 || _tentacle.statement == 3) && _tentacle.HP > 0) {
+            _tentacle.Hit();
+        }
 
         // 보스 골렘꺼
         if(_golem != null && other.gameObject.tag == "Bullet") {

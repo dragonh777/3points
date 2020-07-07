@@ -18,6 +18,7 @@ TagManager:
   - WorldOut
   - Golem
   - Siege_EnemyBullet
+  - HitBound
   layers:
   - Default
   - TransparentFX

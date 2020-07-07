@@ -48,6 +48,10 @@ public class BombSeed : MonoBehaviour
         {
             statement = 4;
         }
+
+        if (!_playerTransform.gameObject.activeSelf) {
+            statement = 4;
+        }
     }
 
     void FixedUpdate()

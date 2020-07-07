@@ -36,6 +36,7 @@ public class WheelGoo : MonoBehaviour
         _rigid = GetComponent<Rigidbody2D>();
         _cirColl = GetComponent<CircleCollider2D>();
         _boxColl = GetComponent<BoxCollider2D>();
+
     }
 
     // Update is called once per frame
@@ -50,6 +51,10 @@ public class WheelGoo : MonoBehaviour
         // 죽을 때
         if (HP <= 0)
         {
+            statement = 2;
+        }
+
+        if(!_playerTransform.gameObject.activeSelf) {
             statement = 2;
         }
     }

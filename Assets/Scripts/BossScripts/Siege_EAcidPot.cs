@@ -153,7 +153,8 @@ public class Siege_EAcidPot : MonoBehaviour
 
     void Die()
     {
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 
     void StatementChange(int index)

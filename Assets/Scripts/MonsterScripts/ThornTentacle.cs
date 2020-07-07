@@ -11,7 +11,6 @@ public class ThornTentacle : MonoBehaviour
 
     private Rigidbody2D _rigid;
     private BoxCollider2D _boxColl; // 애니메이션 있는 오브젝트의 콜라이더(씨앗)
-    private CapsuleCollider2D _capColl; // 애니메이션 있는 오브젝트 콜라이더(텐타클)
     private Animator _animator;
     private GameObject attackBound;
 
@@ -32,7 +31,6 @@ public class ThornTentacle : MonoBehaviour
         _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         _rigid = GetComponent<Rigidbody2D>();
         _boxColl = GetComponent<BoxCollider2D>();
-        _capColl = GetComponent<CapsuleCollider2D>();
         _animator = GetComponent<Animator>();
         attackBound = gameObject.transform.GetChild(0).gameObject;
     }
@@ -70,6 +68,17 @@ public class ThornTentacle : MonoBehaviour
             Attack();
         }
         else if(statement == 4) {   // hit
+            float dirX = _playerTransform.position.x - transform.position.x;
+
+            if (dirX > 0) {  // 플레이어가 오른쪽이면
+                transform.localScale = new Vector3(-0.25f, 0.25f);
+                HPCanvas.transform.localScale = new Vector3(-0.03704f, 0.03704f);
+            }
+            else if (dirX < 0) { // 플레이어가 왼쪽이면
+                transform.localScale = new Vector3(0.25f, 0.25f);
+                HPCanvas.transform.localScale = new Vector3(0.03704f, 0.03704f);
+            }
+
             _animator.Play("vine_hit");
         }
     }
@@ -85,7 +94,7 @@ public class ThornTentacle : MonoBehaviour
     void Appear() 
     {
         HPCanvas.gameObject.SetActive(true);
-        _capColl.enabled = true;
+        gameObject.transform.GetChild(1).gameObject.SetActive(true);
         gameObject.transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().enabled = true;
         gameObject.transform.GetChild(0).gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
         
@@ -98,23 +107,26 @@ public class ThornTentacle : MonoBehaviour
         float dirX = _playerTransform.position.x - transform.position.x;
 
         if(dirX > 0) {  // 플레이어가 오른쪽이면
-            _animator.Play("vine_attack_right");
+            transform.localScale = new Vector3(-0.25f, 0.25f);
+            HPCanvas.transform.localScale = new Vector3(-0.03704f, 0.03704f);
         }
         else if(dirX < 0) { // 플레이어가 왼쪽이면
-            _animator.Play("vine_attack_left");
+            transform.localScale = new Vector3(0.25f, 0.25f);
+            HPCanvas.transform.localScale = new Vector3(0.03704f, 0.03704f);
         }
+
+        _animator.Play("vine_attack_left");
     }
     void AttackFlagSetFalse()   // 애니메이션이벤트에서 사용
     {
         _boxColl.enabled = false;
-        //attackFlag = false;
     }
     void AttackBoundEnable()    // 애니메이션 이벤트
     {
         _boxColl.enabled = true;
     }
 
-    void Hit()
+    public void Hit()
     {
         _animator.SetBool("hitEnd", false);
         hitFlag = true;
