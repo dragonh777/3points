@@ -9,6 +9,7 @@ public class SiegeButton : MonoBehaviour
     private Golem golemScript;
     private ButtonCoolTime[] coolTimeScript = new ButtonCoolTime[6];
     public bool isAttack = false;
+    public bool[] isInCoolTime = { false, false, false, false, false, false };   // 쿨타임중에는 t
 
     void Start()
     {
@@ -21,36 +22,39 @@ public class SiegeButton : MonoBehaviour
 
             if (i < 3) {
                 coolTimeScript[i] = GameObject.Find("SkillBtn" + i.ToString()).GetComponent<ButtonCoolTime>();
+                // 밑의줄은 버튼 클릭식으로 할 때는 주석처리 할 것
+                GameObject.Find("SkillBtn" + i.ToString()).GetComponent<Button>().enabled = false;
             }
             else {
                 coolTimeScript[i] = GameObject.Find("SpawnBtn" + (i - 3).ToString()).GetComponent<ButtonCoolTime>();
+                // 밑의줄은 버튼 클릭식으로 할 때는 주석처리 할 것
+                GameObject.Find("SpawnBtn" + (i - 3).ToString()).GetComponent<Button>().enabled = false;
             }
-
         }
     }
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Mouse0)) {  // 좌클릭, 내려찍기
-        //    Debug.Log("zzzzzzzzzzzzzzzzzzzz");
-        //    Golem_HandCrash(20f);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Mouse1)) {   // 우클릭, 구르기
-        //    Golem_RollingThunder(30f);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.E)) {  // E, 펀치
-        //    Golem_RocketPunch(50f);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Alpha1)) {  // 1, 소환1
-        //    Spawn(0);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Alpha2)) {  // 2, 소환2
-        //    Spawn(1);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Alpha3)) {  // 3, 소환3
-        //    Spawn(2);
-        //}
-
+        if (gameObject.name == "GameManager") {
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !isInCoolTime[0]) {  // 좌클릭, 내려찍기
+                Golem_HandCrash(20f);
+            }
+            else if (Input.GetKeyDown(KeyCode.Mouse1) && !isInCoolTime[1]) {   // 우클릭, 구르기
+                Golem_RollingThunder(30f);
+            }
+            else if (Input.GetKeyDown(KeyCode.E) && !isInCoolTime[2]) {  // E, 펀치
+                Golem_RocketPunch(50f);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha1) && !isInCoolTime[3]) {  // 1, 소환1
+                Spawn(0);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && !isInCoolTime[4]) {  // 2, 소환2
+                Spawn(1);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && !isInCoolTime[5]) {  // 3, 소환3
+                Spawn(2);
+            }
+        }
     }
 
     // 스킬버튼함수
@@ -60,7 +64,7 @@ public class SiegeButton : MonoBehaviour
             return;
         }
         golemScript.HandCrash(cost);
-        coolTimeScript[0].StartCoolTime(true);
+        coolTimeScript[0].StartCoolTime(true, 0);
     }
 
     public void Golem_RollingThunder(float cost)
@@ -69,7 +73,7 @@ public class SiegeButton : MonoBehaviour
             return;
         }
         golemScript.RollingThunder(cost);
-        coolTimeScript[1].StartCoolTime(true);
+        coolTimeScript[1].StartCoolTime(true, 1);
     }
 
     public void Golem_RocketPunch(float cost)
@@ -78,7 +82,7 @@ public class SiegeButton : MonoBehaviour
             return;
         }
         golemScript.RocketPunch(cost);
-        coolTimeScript[2].StartCoolTime(true);
+        coolTimeScript[2].StartCoolTime(true, 2);
     }
 
     // 소환버튼 함수
@@ -122,7 +126,7 @@ public class SiegeButton : MonoBehaviour
         Instantiate(_monster);
 
         golemScript.currentSP -= cost;
-        coolTimeScript[index + 3].StartCoolTime(false);
+        coolTimeScript[index + 3].StartCoolTime(false, index + 3);
     }
     
 

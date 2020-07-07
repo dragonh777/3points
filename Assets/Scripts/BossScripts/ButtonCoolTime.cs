@@ -15,6 +15,8 @@ public class ButtonCoolTime : MonoBehaviour
     private float speed = 1.0f;
     public bool isClicked = false;
 
+    private int _index;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,8 @@ public class ButtonCoolTime : MonoBehaviour
                     _image.gameObject.SetActive(false);
                     isClicked = false;
                     _button.enabled = true;
+
+                    buttonScript.isInCoolTime[_index] = false;
                 }
             }
 
@@ -45,12 +49,16 @@ public class ButtonCoolTime : MonoBehaviour
         }
     }
 
-    public void StartCoolTime(bool isSkill)
+    public void StartCoolTime(bool isSkill, int index)
     {
+        _index = index;
+
         if(isSkill) {
         buttonScript.isAttack = true;
         }
         _image.gameObject.SetActive(true);
+
+        buttonScript.isInCoolTime[index] = true;
 
         leftTime = coolTime;
         isClicked = true;

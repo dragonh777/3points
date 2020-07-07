@@ -98,8 +98,6 @@ public class WheelGoo : MonoBehaviour
 
     void Hit()
     {
-        Debug.Log("hit");
-
         _GFX.SetActive(true);   // 애니메이션 켜고
         _sprite.SetActive(false);   // 스프라이트 끄고
 
