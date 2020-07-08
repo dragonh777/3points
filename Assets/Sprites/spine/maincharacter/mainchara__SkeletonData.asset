@@ -17,8 +17,17 @@ MonoBehaviour:
   scale: 0.01
   skeletonJSON: {fileID: 4900000, guid: 544827433b72dcc4790c61378fd13a34, type: 3}
   skeletonDataModifiers: []
-  fromAnimation: []
-  toAnimation: []
-  duration: []
+  fromAnimation:
+  - jump
+  - jump_double
+  - aim_shot
+  toAnimation:
+  - dash
+  - dash
+  - dash
+  duration:
+  - 0
+  - 0
+  - 0
   defaultMix: 0.2
   controller: {fileID: 0}

@@ -636,7 +636,7 @@ MonoBehaviour:
   HPCanvas: {fileID: 7817969385944584922}
   statement: 0
   isCollide: 0
-  HP: 100
+  HP: 60
 --- !u!61 &7817969387044621691
 BoxCollider2D:
   m_ObjectHideFlags: 0
