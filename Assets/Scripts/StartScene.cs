@@ -22,6 +22,11 @@ public class StartScene : MonoBehaviour
                 Players.isDie = false;
                 SceneManager.LoadScene("Tutorial_Operation");
             }
+            if (cnt == 1)
+            {
+                Players.isDie = false;
+                SceneManager.LoadScene("Tutorial_Siege");
+            }
             if (cnt == 3)
             {
 #if UNITY_EDITOR

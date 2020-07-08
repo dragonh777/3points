@@ -70,7 +70,7 @@ public class ThornTentacle : MonoBehaviour
         else if(statement == 4) {   // hit
             float dirX = _playerTransform.position.x - transform.position.x;
 
-            if (dirX > 0) {  // 플레이어가 오른쪽이면
+            if (dirX >= 0) {  // 플레이어가 오른쪽이면
                 transform.localScale = new Vector3(-0.25f, 0.25f);
                 HPCanvas.transform.localScale = new Vector3(-0.03704f, 0.03704f);
             }
@@ -106,7 +106,7 @@ public class ThornTentacle : MonoBehaviour
         attackFlag = true;
         float dirX = _playerTransform.position.x - transform.position.x;
 
-        if(dirX > 0) {  // 플레이어가 오른쪽이면
+        if(dirX >= 0) {  // 플레이어가 오른쪽이면
             transform.localScale = new Vector3(-0.25f, 0.25f);
             HPCanvas.transform.localScale = new Vector3(-0.03704f, 0.03704f);
         }
@@ -132,6 +132,16 @@ public class ThornTentacle : MonoBehaviour
         hitFlag = true;
         statement = 4;
         HP -= 10f;
+        float dirX = _playerTransform.position.x - transform.position.x;
+
+        if (dirX >= 0) {  // 플레이어가 오른쪽이면
+            transform.localScale = new Vector3(-0.25f, 0.25f);
+            HPCanvas.transform.localScale = new Vector3(-0.03704f, 0.03704f);
+        }
+        else if (dirX < 0) { // 플레이어가 왼쪽이면
+            transform.localScale = new Vector3(0.25f, 0.25f);
+            HPCanvas.transform.localScale = new Vector3(0.03704f, 0.03704f);
+        }
     }
 
     void AfterHit()     // 애니메이션 이벤트용

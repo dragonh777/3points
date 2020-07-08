@@ -1,5 +1,5 @@
 
-UI_marker.png
+ui_marker.png
 size: 953,425
 format: RGBA8888
 filter: Linear,Linear

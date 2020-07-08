@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: UI_title_screen_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 38de826238f1e3e438cb812ea3855710, type: 2}
+  - {fileID: 11400000, guid: f165cf1d390509041aaaef94a0ee17b9, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: f486476328b916842a9227c3f122b573, type: 3}
-  skeletonDataModifiers: []
+  skeletonJSON: {fileID: 4900000, guid: 6895000691954a44293759d6da8ad1bc, type: 3}
+  skeletonDataModifiers:
+  - {fileID: 11400000, guid: 22c0225612a65ee4fb15bad49f644762, type: 2}
   fromAnimation: []
   toAnimation: []
   duration: []

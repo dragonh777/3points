@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: ba35ec7078ce406459a490f7869c32f3, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 3a9536954a35eae40ad9e60c13708f3e, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -404,7 +404,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: arrow
+  _animationName: arrow_single_delete
   loop: 1
   timeScale: 1
 --- !u!23 &83102365
@@ -425,7 +425,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b98913c1d98942c4086743c677fc889c, type: 2}
+  - {fileID: 2100000, guid: 3789791ca667788428eb7b23d46de041, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9889,7 +9889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: ba35ec7078ce406459a490f7869c32f3, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 3a9536954a35eae40ad9e60c13708f3e, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -9910,7 +9910,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: marker
+  _animationName: marker_create
   loop: 1
   timeScale: 1
 --- !u!23 &1584623006
@@ -9931,7 +9931,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b98913c1d98942c4086743c677fc889c, type: 2}
+  - {fileID: 2100000, guid: 3789791ca667788428eb7b23d46de041, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10254,7 +10254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: ba35ec7078ce406459a490f7869c32f3, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 3a9536954a35eae40ad9e60c13708f3e, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -10275,7 +10275,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: marker
+  _animationName: marker_create
   loop: 1
   timeScale: 1
 --- !u!23 &1608014829
@@ -10296,7 +10296,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b98913c1d98942c4086743c677fc889c, type: 2}
+  - {fileID: 2100000, guid: 3789791ca667788428eb7b23d46de041, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13974,7 +13974,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 63fb954942a5f274c94cd431a3e9195f, type: 2}
+      objectReference: {fileID: 2100000, guid: 94d45e507ff143845bbfeacc1fb64ca7, type: 2}
     - target: {fileID: 2474469164562473815, guid: c583fd5d1863c2649b5ed06a4a6234b4,
         type: 3}
       propertyPath: m_Mesh
@@ -14979,6 +14979,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 551140631}
     m_Modifications:
+    - target: {fileID: 6899922193671592099, guid: 278d0496b5a7e0741a330bcdd20a803f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -140
+      objectReference: {fileID: 0}
     - target: {fileID: 6899922194023668940, guid: 278d0496b5a7e0741a330bcdd20a803f,
         type: 3}
       propertyPath: m_Name
@@ -15042,12 +15047,12 @@ PrefabInstance:
     - target: {fileID: 6899922194023668941, guid: 278d0496b5a7e0741a330bcdd20a803f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 850
+      value: 870
       objectReference: {fileID: 0}
     - target: {fileID: 6899922194023668941, guid: 278d0496b5a7e0741a330bcdd20a803f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -470
+      value: -450
       objectReference: {fileID: 0}
     - target: {fileID: 6899922194023668941, guid: 278d0496b5a7e0741a330bcdd20a803f,
         type: 3}
