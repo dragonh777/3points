@@ -81,7 +81,7 @@ public class BulletControl : MonoBehaviour
 
     private void Update()
     {
-        if (fTime > 0.5f)
+        if (fTime > 0.25f)
         {
             isDel = true;
         }
@@ -91,7 +91,7 @@ public class BulletControl : MonoBehaviour
             _AnimState = AnimState.DEL;
             SetCurrentAnimation(_AnimState, false);
 
-            Destroy(gameObject, 0.7f);
+            Destroy(gameObject, 0.2f);
         }
 
         if (isHit && hitTime > 0.7f)
@@ -99,7 +99,6 @@ public class BulletControl : MonoBehaviour
             Destroy(gameObject);
         }
 
-        Destroy(gameObject, 1.5f);
         hitTime += Time.deltaTime;
         delTime += Time.deltaTime;
         fTime += Time.deltaTime;

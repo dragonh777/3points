@@ -142,7 +142,7 @@ public class BossControl : MonoBehaviour
         {
             if (rollOn)
             {
-                WheelGooo.hit = true;
+                //WheelGooo.hit = true;
             }
             if (!death && !rollOn)
             {
@@ -160,7 +160,7 @@ public class BossControl : MonoBehaviour
             {
                 if (mHit && skTime > 0.85f)
                 {
-                    WheelGooo.hit = true;
+                    //WheelGooo.hit = true;
                     Debug.Log("hit");
                     mHit = false;
                 }
