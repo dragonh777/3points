@@ -187,12 +187,20 @@ public class Players : MonoBehaviour
             }
             if (collision.gameObject.name == "BombEffect")
             {
-                HP--;
-                PlayerHp.pHit2 = true;
+                if (HP > 0)
+                {
+                    HP--;
+                    PlayerHp.pHit2 = true;
+                }
+                    
             }
 
-            HP--;
-            PlayerHp.pHit = true;
+            if (HP > 0)
+            {
+                HP--;
+                PlayerHp.pHit = true;
+            }
+               
 
             if (transform.localScale.x > 0 && HP > 0)
                 rb.AddForce(new Vector2(-8, 5), ForceMode2D.Impulse);
@@ -200,14 +208,14 @@ public class Players : MonoBehaviour
             else if (transform.localScale.x < 0 && HP > 0)
                 rb.AddForce(new Vector2(8, 5), ForceMode2D.Impulse);
 
-            if (HP > 1)
+            if (HP > 0)
             {
                 isHit = true;
                 StartCoroutine("invincibility");
             }
 
             //Debug.Log("cnt : " + PlayerHp.cnt);
-            Debug.Log("HP : " + HP);
+            //Debug.Log("HP : " + HP);
         }
         
     }

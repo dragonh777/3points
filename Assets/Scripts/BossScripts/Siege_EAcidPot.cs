@@ -9,6 +9,7 @@ public class Siege_EAcidPot : MonoBehaviour
     public Image HPBar;
     public Canvas HPCanvas;
     public GameObject bullet;
+    //public GameObject gameover;
     
     private Animator _animator;
     private BoxCollider2D _boxColl;
@@ -215,6 +216,7 @@ public class Siege_EAcidPot : MonoBehaviour
     void Die()
     {
         //Destroy(this.gameObject);
+        //gameover.SetActive(true);
         gameObject.SetActive(false);
     }
 

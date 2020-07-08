@@ -42,15 +42,17 @@ public class PlayerHp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (pHit)
         {
             pHit = false;
             cnt = Players.HP;
         }
+
         if (pHit2)
         {
-            cnt++;
             pHit2 = false;
+            cnt++;
             if (cnt % 2 == 0)
             {
                 skeletonAnimation[cnt].state.SetAnimation(0, rightDamage, false);
@@ -64,6 +66,7 @@ public class PlayerHp : MonoBehaviour
             }
             cnt--;
         }
+
         if (Players.HP == cnt && cnt >= 0)
         {
             if (cnt <= -1)
