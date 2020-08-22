@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 265697697822758968}
   - component: {fileID: 265697697822758969}
+  - component: {fileID: 7984856103977170440}
   m_Layer: 0
   m_Name: background_forest_3_C
   m_TagString: Untagged
@@ -81,6 +82,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7984856103977170440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265697697822758967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7462e7d2d91a4489f98a3be4ea3f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogSpeed: 2
 --- !u!1 &265697697903905367
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,6 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 265697697984524617}
   - component: {fileID: 265697697984524618}
+  - component: {fileID: 944229357391761469}
   m_Layer: 0
   m_Name: background_forest_1_C
   m_TagString: Untagged
@@ -243,6 +258,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &944229357391761469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265697697984524616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7462e7d2d91a4489f98a3be4ea3f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogSpeed: 1
 --- !u!1 &265697698126341538
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,6 +524,7 @@ GameObject:
   m_Component:
   - component: {fileID: 265697698298862138}
   - component: {fileID: 265697698298862139}
+  - component: {fileID: 610150231695900734}
   m_Layer: 0
   m_Name: background_forest_4_C
   m_TagString: Untagged
@@ -567,6 +596,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &610150231695900734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265697698298862137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7462e7d2d91a4489f98a3be4ea3f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogSpeed: -2.5
 --- !u!1 &265697698621307204
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,6 +943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 265697699946240997}
   - component: {fileID: 265697699946240998}
+  - component: {fileID: 1750807083934463858}
   m_Layer: 0
   m_Name: background_forest_2_C
   m_TagString: Untagged
@@ -972,6 +1015,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1750807083934463858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265697699946240996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7462e7d2d91a4489f98a3be4ea3f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogSpeed: -1.5
 --- !u!1 &8112724051897131115
 GameObject:
   m_ObjectHideFlags: 0

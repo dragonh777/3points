@@ -17,7 +17,7 @@ public class FogSummon : MonoBehaviour
     void Start()
     {
         offsetY = Random.Range(minYRange, maxYRange);
-        Instantiate(Fog, new Vector3(xRange, offsetY, 0), Quaternion.identity);
+        Instantiate(Fog, new Vector3(xRange, offsetY, -1), Quaternion.identity);
 
     }
 
@@ -28,7 +28,7 @@ public class FogSummon : MonoBehaviour
         fTime += Time.deltaTime;
         if (fTime > summonDelay)
         {
-            Instantiate(Fog, new Vector3(xRange, offsetY, 0), Quaternion.identity);
+            Instantiate(Fog, new Vector3(xRange, offsetY, -1), Quaternion.identity);
             fTime = 0f;
         }
     }
